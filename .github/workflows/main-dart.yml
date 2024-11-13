@@ -14,10 +14,7 @@ on:
 jobs:
   build:
     runs-on: macos-latest
-    defaults:
-      run:   
-        working-directory: crypto-donator-app
-
+    
     steps:
       - uses: actions/checkout@v4
 
