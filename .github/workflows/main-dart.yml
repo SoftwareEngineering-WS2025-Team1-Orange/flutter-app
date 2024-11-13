@@ -27,7 +27,7 @@ jobs:
 
       - name: Install dependencies
         run: flutter pub get
-        working-directory: crypto-donater-app/
+        working-directory: crypto_donater_app/
 
       # Uncomment this step to verify the use of 'dart format' on each commit.
       # - name: Verify formatting
@@ -38,8 +38,8 @@ jobs:
       # want to change this to 'flutter test'.
       - name: Run Tests
         run: flutter test
-        working-directory: crypto-donater-app/
+        working-directory: crypto_donater_app/
 
       - name: Build App
         run: flutter build appbundle
-        working-directory: crypto-donater-app/
+        working-directory: crypto_donater_app/
