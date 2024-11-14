@@ -110,15 +110,15 @@ jobs:
           echo "VERSION=$new_version" >> $GITHUB_ENV
 
       # 14. Create Release
-      - name: Create Release and Upload Artifacts
+     - name: Create Release and Upload Artifacts
         uses: ncipollo/release-action@v1
         with:
           tag: "v${{ env.VERSION }}"  # z.B., v1.0.0, falls zuvor extrahiert
-          release_name: "Pre-release ${{ env.VERSION }}"
+          release_name: "Release ${{ env.VERSION }}"
           draft: false
-          prerelease: true
+          prerelease: false
           token: ${{ secrets.GITHUB_TOKEN }}
           artifacts: |
-            crypto-donator-app/build/app/outputs/flutter-apk/app-release.apk
-            crypto-donator-app/build/app/outputs/bundle/release/app-release.aab
+            build/app/outputs/flutter-apk/app-release.apk
+            build/app/outputs/bundle/release/app-release.aab
 
