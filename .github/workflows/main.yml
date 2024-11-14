@@ -110,7 +110,7 @@ jobs:
           echo "VERSION=$new_version" >> $GITHUB_ENV
 
       # 14. Create Release
-     - name: Create Release and Upload Artifacts
+      - name: Create Release and Upload Artifacts
         uses: ncipollo/release-action@v1
         with:
           tag: "v${{ env.VERSION }}"  # z.B., v1.0.0, falls zuvor extrahiert
