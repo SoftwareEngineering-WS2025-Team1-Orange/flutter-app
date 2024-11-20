@@ -13,7 +13,7 @@ jobs:
     
     defaults:
         run: 
-          working-directory: crypto_donater_app
+          working-directory: brightimpact_user_app
 
     steps:
       # 1. Checkout Repository
@@ -37,7 +37,7 @@ jobs:
       # 4. Install Dependencies
       - name: Install Dependencies
         run: flutter pub get
-        working-directory: ./crypto_donater_app
+        working-directory: ./brightimpact_user_app
 
       # 5. Setup Keystore
       - name: Decode Keystore
@@ -54,17 +54,17 @@ jobs:
       # 6. Building APK
       - name: Build APK
         run: flutter build apk --release
-        working-directory: ./crypto_donater_app
+        working-directory: ./brightimpact_user_app
 
       # 7. Building App Bundle (AAB)
       - name: Build App Bundle
         run: flutter build appbundle
-        working-directory: ./crypto_donater_app
+        working-directory: ./brightimpact_user_app
 
       # 8. Build IPA (iOS Build)
      # - name: Build IPA
       #  run: flutter build ipa --no-codesign
-       # working-directory: ./crypto_donater_app
+       # working-directory: ./brightimpact_user_app
 
       # 9. Compress Archives and IPAs
      # - name: Compress Archives and IPAs
