@@ -1,12 +1,9 @@
-name: "Release"
+name: "Dev and Release"
 
 on:
-  #pull_request:
-  #  branches:
-   #   - dev
-   #   - test
-  tags:
-    - 'v*'
+  push:
+    branches:
+        - dev
 
 jobs:  
   build:      
