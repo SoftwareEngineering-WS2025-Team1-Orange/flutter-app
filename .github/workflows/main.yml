@@ -12,7 +12,10 @@ on:
       - dev
       - test
 
-jobs:  
+permissions:
+  contents: write
+
+jobs:
   build:      
     name: Build & Release 
     runs-on: ubuntu-latest
