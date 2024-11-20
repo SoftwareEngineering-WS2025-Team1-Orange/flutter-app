@@ -113,9 +113,8 @@ jobs:
       # 14. Create Release
       - name: Create Release
         uses: ncipollo/release-action@v1
-        working-directory: ./brightimpact_user_app
         with:
-          artifacts: "build/app/outputs/flutter-apk/app-release.apk,build/app/outputs/bundle/release/app-release.aab,build/ios_build.tar.gz"
+          artifacts: "build/app/outputs/flutter-apk/app-release.apk,build/app/outputs/bundle/release/app-release.aab"
           tag: v${{ env.VERSION }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
