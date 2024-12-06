@@ -1,8 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:openapi_generator_annotations/openapi_generator_annotations.dart';
 
 void main() {
+
+  //final instance = Openapi().getDonationboxApi();
+
+  //instance.donatorDonatorIdDonationboxGet(donatorId: "Blabla");
+
   runApp(const MyApp());
+
 }
+
+@Openapi(
+  additionalProperties: AdditionalProperties(
+    pubName: 'bright_impact_api',
+    pubAuthor: 'Your Name',
+  ),
+  inputSpec: InputSpec(path:'api-specification/specification-user-app.yaml'),
+  generatorName: Generator.dart,
+  outputDirectory: 'lib/api'
+)
+class Example {}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

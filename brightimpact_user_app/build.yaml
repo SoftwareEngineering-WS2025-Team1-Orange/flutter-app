@@ -1,0 +1,14 @@
+targets:
+  $default:
+    builders:
+      openapi_generator:openapi_generator:
+        generate_for:
+          - api-specification/specification-user-app.yaml
+        options:
+          generatorName: dart-dio
+          output: lib/api
+          additionalProperties:
+            modelNameSuffix: Dto
+            serializationLibrary: json_serializable
+      json_serializable:
+        enabled: true
