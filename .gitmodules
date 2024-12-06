@@ -1,0 +1,3 @@
+[submodule "brightimpact_user_app/api-specification"]
+	path = brightimpact_user_app/api-specification
+	url = git@github.com:SoftwareEngineering-WS2025-Team1-Orange/api-specification.git
