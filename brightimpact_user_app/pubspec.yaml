@@ -25,20 +25,23 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  camera: ^0.10.0+4
+  qr_code_scanner: ^1.0.1
   dio: ^5.7.0
   build_runner: ^2.4.5
   openapi_generator_annotations: ^6.0.0
   json_annotation: ^4.8.0
   cupertino_icons: ^1.0.8
+  openapi:
+    path: lib/api
+  provider: ^6.1.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
-  build_runner: ^2.4.5
   json_serializable: ^6.7.0
   openapi_generator: ^6.0.0
-  analyzer: ^6.7.0
 
 builders:
   openapi_generator: ^6.0.0
