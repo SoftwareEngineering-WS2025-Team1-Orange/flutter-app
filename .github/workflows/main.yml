@@ -4,6 +4,7 @@ on:
   push:
     branches:
         - dev
+        - *
     tags:
         - 'v*'
         
@@ -47,6 +48,17 @@ jobs:
       - name: Install Dependencies
         run: flutter pub get
         working-directory: ./brightimpact_user_app
+
+    # Install OpenAPI Generator
+      - name: Install OpenAPI Generator
+        run: |
+          curl -s https://api.github.com/repos/OpenAPITools/openapi-generator/releases/latest | jq -r .assets[0].browser_download_url | xargs wget -qO openapi-generator-cli.jar
+
+      # Run your Bash script (optional)
+      - name: Run custom bash script
+        run: |
+          chmod +x ./brightimpact_user_app/generate_api_code.sh
+          ./brightimpact_user_app/generate_api_code.sh
 
       # 5. Setup Keystore
       - name: Decode Keystore
