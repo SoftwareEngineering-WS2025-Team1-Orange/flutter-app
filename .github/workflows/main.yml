@@ -3,7 +3,6 @@ name: "Dev and Release"
 on:
   push:
     branches:
-        - dev
         - '*'
     tags:
         - 'v*'
