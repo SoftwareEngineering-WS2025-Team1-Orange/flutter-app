@@ -29,6 +29,8 @@ jobs:
       # 1. Checkout Repository
       - name: Checkout Repository
         uses: actions/checkout@v3
+        with:
+          submodules: recursive
 
       # 2. Setup Java
       - name: Set Up Java
@@ -45,16 +47,13 @@ jobs:
           channel: 'stable'
 
 
-    # Install OpenAPI Generator
-      - name: Install OpenAPI Generator
-        run: |
-          curl -s https://api.github.com/repos/OpenAPITools/openapi-generator/releases/latest | jq -r .assets[0].browser_download_url | xargs wget -qO openapi-generator-cli.jar
-
-      # Run your Bash script (optional)
-      - name: Generate OpenAPI code
-        run: |
-          chmod +x ./brightimpact_user_app/generate_api_code.sh
-          ./brightimpact_user_app/generate_api_code.sh
+      - name: Generate OpenAPI Client
+        uses: openapi-generators/openapitools-generator-action@v1
+        with:
+          generator: dart-dio
+          config-file: ./brightimpact_user_app/api-specification/specification-user-app.yaml
+          command-args:
+            - '-o lib/api --additional-properties=modelNameSuffix=Dto,serializationLibrary=json_serializable'
           
     
       # 4. Install Dependencies
