@@ -36,4 +36,10 @@ class AppState with ChangeNotifier {
       notifyListeners();
     }
   } 
+
+  void testLogIn() {
+     _isLoggedIn = true;
+    notifyListeners();
+  }
+
 }

@@ -175,9 +175,7 @@ class _InitPage extends State<InitPage> {
                       height: 60,
                       child: OutlinedButton(
                         onPressed: () {
-                          if (_state == InitPageState.boxFound) {
-                            appState.registerDonationbox(_donationBoxSN);
-                          }
+                          appState.testLogIn();
                         },
                         style: OutlinedButton.styleFrom(
                           side: BorderSide(color: Colors.white, width: 2),

@@ -42,6 +42,7 @@ Additional features vary based on the app version (see below).
 - First implementation of Login Page
 - Implements QR code scan and registration of Donationbox
 - Donationbox QR codes must represent a URL with Query parameter "sn" which contains an 8 digit serial number e.g. https://example.org/?sn=12345678
+- First implementation of Home Page with static content
 - Ready for demo
 
 ---
