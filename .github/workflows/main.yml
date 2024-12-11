@@ -3,8 +3,8 @@ name: "Dev and Release"
 on:
   push:
     branches:
-        - dev
         - '**'
+        
     tags:
         - 'v*'
         
@@ -29,8 +29,6 @@ jobs:
       # 1. Checkout Repository
       - name: Checkout Repository
         uses: actions/checkout@v3
-        with:
-          submodules: recursive
 
       # 2. Setup Java
       - name: Set Up Java
@@ -46,15 +44,6 @@ jobs:
           flutter-version: '3.24.4'
           channel: 'stable'
 
-
-      - name: Generate OpenAPI Client
-        uses: openapi-generators/openapitools-generator-action@v1
-        with:
-          generator: dart-dio
-          config-file: ./brightimpact_user_app/api-specification/specification-user-app.yaml
-          command-args: '-o lib/api --additional-properties=modelNameSuffix=Dto,serializationLibrary=json_serializable'
-          
-    
       # 4. Install Dependencies
       - name: Install Dependencies
         run: flutter pub get
