@@ -52,8 +52,7 @@ jobs:
         with:
           generator: dart-dio
           config-file: ./brightimpact_user_app/api-specification/specification-user-app.yaml
-          command-args:
-            - '-o lib/api --additional-properties=modelNameSuffix=Dto,serializationLibrary=json_serializable'
+          command-args: '-o lib/api --additional-properties=modelNameSuffix=Dto,serializationLibrary=json_serializable'
           
     
       # 4. Install Dependencies
