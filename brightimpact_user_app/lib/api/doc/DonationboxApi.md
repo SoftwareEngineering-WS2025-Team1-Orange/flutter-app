@@ -9,12 +9,12 @@ All URIs are relative to *https://localhost:9000/api/v1/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**donatorDonatorIdDonationboxGet**](DonationboxApi.md#donatordonatoriddonationboxget) | **GET** /donator/{donator_id}/donationbox | 
-[**donatorDonatorIdDonationboxPost**](DonationboxApi.md#donatordonatoriddonationboxpost) | **POST** /donator/{donator_id}/donationbox | 
+[**getDonationbox**](DonationboxApi.md#getdonationbox) | **GET** /donator/{donator_id}/donationbox | 
+[**registerDonationbox**](DonationboxApi.md#registerdonationbox) | **POST** /donator/{donator_id}/donationbox | 
 
 
-# **donatorDonatorIdDonationboxGet**
-> List<DonationboxDto> donatorDonatorIdDonationboxGet(donatorId)
+# **getDonationbox**
+> List<DonationboxDto> getDonationbox(donatorId)
 
 
 
@@ -28,10 +28,10 @@ final api = Openapi().getDonationboxApi();
 final int donatorId = 56; // int | 
 
 try {
-    final response = api.donatorDonatorIdDonationboxGet(donatorId);
+    final response = api.getDonationbox(donatorId);
     print(response);
 } catch on DioException (e) {
-    print('Exception when calling DonationboxApi->donatorDonatorIdDonationboxGet: $e\n');
+    print('Exception when calling DonationboxApi->getDonationbox: $e\n');
 }
 ```
 
@@ -56,8 +56,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **donatorDonatorIdDonationboxPost**
-> donatorDonatorIdDonationboxPost(donatorId, donationboxRegisterDto)
+# **registerDonationbox**
+> registerDonationbox(donatorId, donationboxRegisterDto)
 
 
 
@@ -72,9 +72,9 @@ final int donatorId = 56; // int |
 final DonationboxRegisterDto donationboxRegisterDto = ; // DonationboxRegisterDto | 
 
 try {
-    api.donatorDonatorIdDonationboxPost(donatorId, donationboxRegisterDto);
+    api.registerDonationbox(donatorId, donationboxRegisterDto);
 } catch on DioException (e) {
-    print('Exception when calling DonationboxApi->donatorDonatorIdDonationboxPost: $e\n');
+    print('Exception when calling DonationboxApi->registerDonationbox: $e\n');
 }
 ```
 

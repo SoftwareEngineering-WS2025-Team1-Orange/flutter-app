@@ -13,10 +13,11 @@ DonatorRegisterDto _$DonatorRegisterDtoFromJson(Map<String, dynamic> json) =>
       ($checkedConvert) {
         $checkKeys(
           json,
-          requiredKeys: const ['name', 'password', 'mail'],
+          requiredKeys: const ['firstname', 'lastname', 'password', 'mail'],
         );
         final val = DonatorRegisterDto(
-          name: $checkedConvert('name', (v) => v as String),
+          firstname: $checkedConvert('firstname', (v) => v as String),
+          lastname: $checkedConvert('lastname', (v) => v as String),
           password: $checkedConvert('password', (v) => v as String),
           mail: $checkedConvert('mail', (v) => v as String),
         );
@@ -26,7 +27,8 @@ DonatorRegisterDto _$DonatorRegisterDtoFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$DonatorRegisterDtoToJson(DonatorRegisterDto instance) =>
     <String, dynamic>{
-      'name': instance.name,
+      'firstname': instance.firstname,
+      'lastname': instance.lastname,
       'password': instance.password,
       'mail': instance.mail,
     };

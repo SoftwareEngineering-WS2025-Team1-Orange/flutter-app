@@ -15,51 +15,55 @@ PowerSupplyDto _$PowerSupplyDtoFromJson(Map<String, dynamic> json) =>
           json,
           requiredKeys: const [
             'id',
-            'supply_type',
-            'is_online',
+            'type',
+            'last_status',
             'power_surplus',
             'name',
-            'model_number'
+            'model_number',
+            'api_config'
           ],
         );
         final val = PowerSupplyDto(
           id: $checkedConvert('id', (v) => v as String),
-          supplyType: $checkedConvert('supply_type',
-              (v) => $enumDecode(_$PowerSupplyDtoSupplyTypeEnumEnumMap, v)),
-          isOnline: $checkedConvert('is_online', (v) => v as bool),
+          type: $checkedConvert(
+              'type', (v) => $enumDecode(_$PowerSupplyDtoTypeEnumEnumMap, v)),
+          lastStatus: $checkedConvert('last_status',
+              (v) => $enumDecode(_$PowerSupplyDtoLastStatusEnumEnumMap, v)),
           powerSurplus: $checkedConvert('power_surplus', (v) => v as num),
           name: $checkedConvert('name', (v) => v as String),
           modelNumber: $checkedConvert('model_number', (v) => v as String),
-          apiKey: $checkedConvert('api_key', (v) => v as String?),
-          ip: $checkedConvert('ip', (v) => v as String?),
-          password: $checkedConvert('password', (v) => v as String?),
+          apiConfig: $checkedConvert('api_config', (v) => v as String),
         );
         return val;
       },
       fieldKeyMap: const {
-        'supplyType': 'supply_type',
-        'isOnline': 'is_online',
+        'lastStatus': 'last_status',
         'powerSurplus': 'power_surplus',
         'modelNumber': 'model_number',
-        'apiKey': 'api_key'
+        'apiConfig': 'api_config'
       },
     );
 
 Map<String, dynamic> _$PowerSupplyDtoToJson(PowerSupplyDto instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'supply_type':
-          _$PowerSupplyDtoSupplyTypeEnumEnumMap[instance.supplyType]!,
-      'is_online': instance.isOnline,
+      'type': _$PowerSupplyDtoTypeEnumEnumMap[instance.type]!,
+      'last_status':
+          _$PowerSupplyDtoLastStatusEnumEnumMap[instance.lastStatus]!,
       'power_surplus': instance.powerSurplus,
       'name': instance.name,
       'model_number': instance.modelNumber,
-      if (instance.apiKey case final value?) 'api_key': value,
-      if (instance.ip case final value?) 'ip': value,
-      if (instance.password case final value?) 'password': value,
+      'api_config': instance.apiConfig,
     };
 
-const _$PowerSupplyDtoSupplyTypeEnumEnumMap = {
-  PowerSupplyDtoSupplyTypeEnum.solar: 'Solar',
-  PowerSupplyDtoSupplyTypeEnum.alternative: 'Alternative',
+const _$PowerSupplyDtoTypeEnumEnumMap = {
+  PowerSupplyDtoTypeEnum.solar: 'Solar',
+  PowerSupplyDtoTypeEnum.alternative: 'Alternative',
+};
+
+const _$PowerSupplyDtoLastStatusEnumEnumMap = {
+  PowerSupplyDtoLastStatusEnum.OFFLINE: 'OFFLINE',
+  PowerSupplyDtoLastStatusEnum.CONNECTED: 'CONNECTED',
+  PowerSupplyDtoLastStatusEnum.INVALID_AUTH: 'INVALID_AUTH',
+  PowerSupplyDtoLastStatusEnum.ERROR: 'ERROR',
 };

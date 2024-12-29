@@ -18,48 +18,20 @@ class DonationboxRegisterDto {
   /// Returns a new [DonationboxRegisterDto] instance.
   DonationboxRegisterDto({
 
-    required  this.id,
-
-     this.locLat,
-
-     this.locLgt,
+    required  this.cuid,
 
      this.powerSupplyId,
   });
 
   @JsonKey(
     
-    name: r'id',
+    name: r'cuid',
     required: true,
     includeIfNull: false,
   )
 
 
-  final String id;
-
-
-
-  @JsonKey(
-    
-    name: r'loc_lat',
-    required: false,
-    includeIfNull: false,
-  )
-
-
-  final num? locLat;
-
-
-
-  @JsonKey(
-    
-    name: r'loc_lgt',
-    required: false,
-    includeIfNull: false,
-  )
-
-
-  final num? locLgt;
+  final String cuid;
 
 
 
@@ -79,16 +51,12 @@ class DonationboxRegisterDto {
 
     @override
     bool operator ==(Object other) => identical(this, other) || other is DonationboxRegisterDto &&
-      other.id == id &&
-      other.locLat == locLat &&
-      other.locLgt == locLgt &&
+      other.cuid == cuid &&
       other.powerSupplyId == powerSupplyId;
 
     @override
     int get hashCode =>
-        id.hashCode +
-        locLat.hashCode +
-        locLgt.hashCode +
+        cuid.hashCode +
         powerSupplyId.hashCode;
 
   factory DonationboxRegisterDto.fromJson(Map<String, dynamic> json) => _$DonationboxRegisterDtoFromJson(json);

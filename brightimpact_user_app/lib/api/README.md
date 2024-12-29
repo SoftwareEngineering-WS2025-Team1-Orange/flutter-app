@@ -52,10 +52,10 @@ final api = Openapi().getDonationboxApi();
 final int donatorId = 56; // int | 
 
 try {
-    final response = await api.donatorDonatorIdDonationboxGet(donatorId);
+    final response = await api.getDonationbox(donatorId);
     print(response);
 } catch on DioException (e) {
-    print("Exception when calling DonationboxApi->donatorDonatorIdDonationboxGet: $e\n");
+    print("Exception when calling DonationboxApi->getDonationbox: $e\n");
 }
 
 ```
@@ -66,27 +66,41 @@ All URIs are relative to *https://localhost:9000/api/v1/api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-[*DonationboxApi*](doc/DonationboxApi.md) | [**donatorDonatorIdDonationboxGet**](doc/DonationboxApi.md#donatordonatoriddonationboxget) | **GET** /donator/{donator_id}/donationbox | 
-[*DonationboxApi*](doc/DonationboxApi.md) | [**donatorDonatorIdDonationboxPost**](doc/DonationboxApi.md#donatordonatoriddonationboxpost) | **POST** /donator/{donator_id}/donationbox | 
-[*DonatorApi*](doc/DonatorApi.md) | [**donatorDonatorIdGet**](doc/DonatorApi.md#donatordonatoridget) | **GET** /donator/{donator_id} | 
-[*DonatorApi*](doc/DonatorApi.md) | [**donatorMeGet**](doc/DonatorApi.md#donatormeget) | **GET** /donator/me | 
-[*DonatorApi*](doc/DonatorApi.md) | [**donatorPost**](doc/DonatorApi.md#donatorpost) | **POST** /donator | 
-[*PowerSupplyApi*](doc/PowerSupplyApi.md) | [**donatorDonatorIdPowersupplyGet**](doc/PowerSupplyApi.md#donatordonatoridpowersupplyget) | **GET** /donator/{donator_id}/powersupply | 
-[*PowerSupplyApi*](doc/PowerSupplyApi.md) | [**donatorDonatorIdPowersupplyPost**](doc/PowerSupplyApi.md#donatordonatoridpowersupplypost) | **POST** /donator/{donator_id}/powersupply | 
-[*TokenApi*](doc/TokenApi.md) | [**tokenPost**](doc/TokenApi.md#tokenpost) | **POST** /token | 
-[*WalletApi*](doc/WalletApi.md) | [**donatorDonatorIdWalletGet**](doc/WalletApi.md#donatordonatoridwalletget) | **GET** /donator/{donator_id}/wallet | 
+[*DonationboxApi*](doc/DonationboxApi.md) | [**getDonationbox**](doc/DonationboxApi.md#getdonationbox) | **GET** /donator/{donator_id}/donationbox | 
+[*DonationboxApi*](doc/DonationboxApi.md) | [**registerDonationbox**](doc/DonationboxApi.md#registerdonationbox) | **POST** /donator/{donator_id}/donationbox | 
+[*DonationsApi*](doc/DonationsApi.md) | [**getDonationList**](doc/DonationsApi.md#getdonationlist) | **GET** /donator/{donator_id}/donation | 
+[*DonatorApi*](doc/DonatorApi.md) | [**getDonator**](doc/DonatorApi.md#getdonator) | **GET** /donator/{donator_id} | 
+[*DonatorApi*](doc/DonatorApi.md) | [**login**](doc/DonatorApi.md#login) | **POST** /donator/login | 
+[*DonatorApi*](doc/DonatorApi.md) | [**registerDonator**](doc/DonatorApi.md#registerdonator) | **POST** /donator | 
+[*NGOApi*](doc/NGOApi.md) | [**getNgoList**](doc/NGOApi.md#getngolist) | **GET** /api-donator/ngo | 
+[*PowerSupplyApi*](doc/PowerSupplyApi.md) | [**addPowersupply**](doc/PowerSupplyApi.md#addpowersupply) | **POST** /donator/{donator_id}/powersupply | 
+[*PowerSupplyApi*](doc/PowerSupplyApi.md) | [**getPowersupply**](doc/PowerSupplyApi.md#getpowersupply) | **GET** /donator/{donator_id}/powersupply | 
+[*ProjectApi*](doc/ProjectApi.md) | [**getProjectList**](doc/ProjectApi.md#getprojectlist) | **GET** /project | 
+[*TokenApi*](doc/TokenApi.md) | [**getToken**](doc/TokenApi.md#gettoken) | **POST** /token | 
 
 
 ## Documentation For Models
 
+ - [DonationDto](doc/DonationDto.md)
+ - [DonationNgoDto](doc/DonationNgoDto.md)
+ - [DonationProjectDto](doc/DonationProjectDto.md)
  - [DonationboxDto](doc/DonationboxDto.md)
  - [DonationboxRegisterDto](doc/DonationboxRegisterDto.md)
  - [DonatorDto](doc/DonatorDto.md)
+ - [DonatorLoginDto](doc/DonatorLoginDto.md)
  - [DonatorRegisterDto](doc/DonatorRegisterDto.md)
+ - [GetDonationList200ResponseDto](doc/GetDonationList200ResponseDto.md)
+ - [GetNgoList200ResponseDto](doc/GetNgoList200ResponseDto.md)
+ - [GetProjectList200ResponseDto](doc/GetProjectList200ResponseDto.md)
+ - [Login200ResponseDto](doc/Login200ResponseDto.md)
+ - [NGODto](doc/NGODto.md)
+ - [PaginationDto](doc/PaginationDto.md)
  - [PowerSupplyDto](doc/PowerSupplyDto.md)
  - [PowerSupplyRegisterDto](doc/PowerSupplyRegisterDto.md)
+ - [ProjectCategoryDto](doc/ProjectCategoryDto.md)
+ - [ProjectDto](doc/ProjectDto.md)
  - [ResponseTokenDto](doc/ResponseTokenDto.md)
- - [WalletDto](doc/WalletDto.md)
+ - [SortTypeDto](doc/SortTypeDto.md)
 
 
 ## Documentation For Authorization

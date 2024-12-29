@@ -17,7 +17,7 @@ class TokenApi {
 
   const TokenApi(this._dio);
 
-  /// tokenPost
+  /// getToken
   /// 
   ///
   /// Parameters:
@@ -36,7 +36,7 @@ class TokenApi {
   ///
   /// Returns a [Future] containing a [Response] with a [ResponseTokenDto] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<ResponseTokenDto>> tokenPost({ 
+  Future<Response<ResponseTokenDto>> getToken({ 
     required String username,
     required String password,
     String? grantType,

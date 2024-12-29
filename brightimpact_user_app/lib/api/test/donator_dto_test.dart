@@ -7,8 +7,13 @@ void main() {
   // TODO add properties to the entity
 
   group(DonatorDto, () {
-    // String name
-    test('to test the property `name`', () async {
+    // String firstname
+    test('to test the property `firstname`', () async {
+      // TODO
+    });
+
+    // String lastname
+    test('to test the property `lastname`', () async {
       // TODO
     });
 
@@ -17,8 +22,13 @@ void main() {
       // TODO
     });
 
-    // int donatorId
-    test('to test the property `donatorId`', () async {
+    // num balance
+    test('to test the property `balance`', () async {
+      // TODO
+    });
+
+    // int id
+    test('to test the property `id`', () async {
       // TODO
     });
 

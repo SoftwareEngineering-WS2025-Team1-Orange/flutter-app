@@ -9,14 +9,12 @@ import 'package:openapi/api.dart';
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **String** |  | 
-**supplyType** | **String** |  | 
-**isOnline** | **bool** |  | 
+**type** | **String** |  | 
+**lastStatus** | **String** |  | 
 **powerSurplus** | **num** |  | 
 **name** | **String** |  | 
 **modelNumber** | **String** |  | 
-**apiKey** | **String** |  | [optional] 
-**ip** | **String** |  | [optional] 
-**password** | **String** |  | [optional] 
+**apiConfig** | **String** | Flexible JSON string that contains attributes depending on the model number | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

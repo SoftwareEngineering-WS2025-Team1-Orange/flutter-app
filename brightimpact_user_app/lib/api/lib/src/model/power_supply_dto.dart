@@ -20,9 +20,9 @@ class PowerSupplyDto {
 
     required  this.id,
 
-    required  this.supplyType,
+    required  this.type,
 
-    required  this.isOnline,
+    required  this.lastStatus,
 
     required  this.powerSurplus,
 
@@ -30,11 +30,7 @@ class PowerSupplyDto {
 
     required  this.modelNumber,
 
-     this.apiKey,
-
-     this.ip,
-
-     this.password,
+    required  this.apiConfig,
   });
 
   @JsonKey(
@@ -51,25 +47,25 @@ class PowerSupplyDto {
 
   @JsonKey(
     
-    name: r'supply_type',
+    name: r'type',
     required: true,
     includeIfNull: false,
   )
 
 
-  final PowerSupplyDtoSupplyTypeEnum supplyType;
+  final PowerSupplyDtoTypeEnum type;
 
 
 
   @JsonKey(
     
-    name: r'is_online',
+    name: r'last_status',
     required: true,
     includeIfNull: false,
   )
 
 
-  final bool isOnline;
+  final PowerSupplyDtoLastStatusEnum lastStatus;
 
 
 
@@ -109,39 +105,16 @@ class PowerSupplyDto {
 
 
 
+      /// Flexible JSON string that contains attributes depending on the model number
   @JsonKey(
     
-    name: r'api_key',
-    required: false,
+    name: r'api_config',
+    required: true,
     includeIfNull: false,
   )
 
 
-  final String? apiKey;
-
-
-
-  @JsonKey(
-    
-    name: r'ip',
-    required: false,
-    includeIfNull: false,
-  )
-
-
-  final String? ip;
-
-
-
-  @JsonKey(
-    
-    name: r'password',
-    required: false,
-    includeIfNull: false,
-  )
-
-
-  final String? password;
+  final String apiConfig;
 
 
 
@@ -150,26 +123,22 @@ class PowerSupplyDto {
     @override
     bool operator ==(Object other) => identical(this, other) || other is PowerSupplyDto &&
       other.id == id &&
-      other.supplyType == supplyType &&
-      other.isOnline == isOnline &&
+      other.type == type &&
+      other.lastStatus == lastStatus &&
       other.powerSurplus == powerSurplus &&
       other.name == name &&
       other.modelNumber == modelNumber &&
-      other.apiKey == apiKey &&
-      other.ip == ip &&
-      other.password == password;
+      other.apiConfig == apiConfig;
 
     @override
     int get hashCode =>
         id.hashCode +
-        supplyType.hashCode +
-        isOnline.hashCode +
+        type.hashCode +
+        lastStatus.hashCode +
         powerSurplus.hashCode +
         name.hashCode +
         modelNumber.hashCode +
-        apiKey.hashCode +
-        ip.hashCode +
-        password.hashCode;
+        apiConfig.hashCode;
 
   factory PowerSupplyDto.fromJson(Map<String, dynamic> json) => _$PowerSupplyDtoFromJson(json);
 
@@ -183,13 +152,33 @@ class PowerSupplyDto {
 }
 
 
-enum PowerSupplyDtoSupplyTypeEnum {
+enum PowerSupplyDtoTypeEnum {
 @JsonValue(r'Solar')
 solar(r'Solar'),
 @JsonValue(r'Alternative')
 alternative(r'Alternative');
 
-const PowerSupplyDtoSupplyTypeEnum(this.value);
+const PowerSupplyDtoTypeEnum(this.value);
+
+final String value;
+
+@override
+String toString() => value;
+}
+
+
+
+enum PowerSupplyDtoLastStatusEnum {
+@JsonValue(r'OFFLINE')
+OFFLINE(r'OFFLINE'),
+@JsonValue(r'CONNECTED')
+CONNECTED(r'CONNECTED'),
+@JsonValue(r'INVALID_AUTH')
+INVALID_AUTH(r'INVALID_AUTH'),
+@JsonValue(r'ERROR')
+ERROR(r'ERROR');
+
+const PowerSupplyDtoLastStatusEnum(this.value);
 
 final String value;
 

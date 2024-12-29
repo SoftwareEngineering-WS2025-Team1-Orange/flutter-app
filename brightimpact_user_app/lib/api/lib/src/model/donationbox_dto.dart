@@ -20,13 +20,11 @@ class DonationboxDto {
 
     required  this.id,
 
-    required  this.state,
+    required  this.cuid,
 
-    required  this.powerConsumption,
+    required  this.lastStatus,
 
-     this.locLat,
-
-     this.locLgt,
+     this.powerConsumption,
 
      this.powerSupplyId,
   });
@@ -39,61 +37,49 @@ class DonationboxDto {
   )
 
 
-  final String id;
+  final int id;
 
 
 
   @JsonKey(
     
-    name: r'state',
+    name: r'cuid',
     required: true,
     includeIfNull: false,
   )
 
 
-  final DonationboxDtoStateEnum state;
+  final String cuid;
+
+
+
+  @JsonKey(
+    
+    name: r'last_status',
+    required: true,
+    includeIfNull: false,
+  )
+
+
+  final DonationboxDtoLastStatusEnum lastStatus;
 
 
 
   @JsonKey(
     
     name: r'power_consumption',
-    required: true,
-    includeIfNull: false,
-  )
-
-
-  final num powerConsumption;
-
-
-
-  @JsonKey(
-    
-    name: r'loc_lat',
     required: false,
     includeIfNull: false,
   )
 
 
-  final num? locLat;
+  final num? powerConsumption;
 
 
 
   @JsonKey(
     
-    name: r'loc_lgt',
-    required: false,
-    includeIfNull: false,
-  )
-
-
-  final num? locLgt;
-
-
-
-  @JsonKey(
-    
-    name: r'power_supply_id',
+    name: r'powerSupplyId',
     required: false,
     includeIfNull: false,
   )
@@ -108,19 +94,17 @@ class DonationboxDto {
     @override
     bool operator ==(Object other) => identical(this, other) || other is DonationboxDto &&
       other.id == id &&
-      other.state == state &&
+      other.cuid == cuid &&
+      other.lastStatus == lastStatus &&
       other.powerConsumption == powerConsumption &&
-      other.locLat == locLat &&
-      other.locLgt == locLgt &&
       other.powerSupplyId == powerSupplyId;
 
     @override
     int get hashCode =>
         id.hashCode +
-        state.hashCode +
+        cuid.hashCode +
+        lastStatus.hashCode +
         powerConsumption.hashCode +
-        locLat.hashCode +
-        locLgt.hashCode +
         powerSupplyId.hashCode;
 
   factory DonationboxDto.fromJson(Map<String, dynamic> json) => _$DonationboxDtoFromJson(json);
@@ -135,19 +119,19 @@ class DonationboxDto {
 }
 
 
-enum DonationboxDtoStateEnum {
+enum DonationboxDtoLastStatusEnum {
 @JsonValue(r'OFFLINE')
 OFFLINE(r'OFFLINE'),
+@JsonValue(r'ERROR')
+ERROR(r'ERROR'),
 @JsonValue(r'CONNECTED')
 CONNECTED(r'CONNECTED'),
 @JsonValue(r'READY')
 READY(r'READY'),
-@JsonValue(r'RUNNING')
-RUNNING(r'RUNNING'),
-@JsonValue(r'ERROR')
-ERROR(r'ERROR');
+@JsonValue(r'WORKING')
+WORKING(r'WORKING');
 
-const DonationboxDtoStateEnum(this.value);
+const DonationboxDtoLastStatusEnum(this.value);
 
 final String value;
 

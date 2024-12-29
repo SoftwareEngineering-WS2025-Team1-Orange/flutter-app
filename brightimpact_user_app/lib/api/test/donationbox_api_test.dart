@@ -7,13 +7,13 @@ void main() {
   final instance = Openapi().getDonationboxApi();
 
   group(DonationboxApi, () {
-    //Future<List<DonationboxDto>> donatorDonatorIdDonationboxGet(int donatorId) async
-    test('test donatorDonatorIdDonationboxGet', () async {
+    //Future<List<DonationboxDto>> getDonationbox(int donatorId) async
+    test('test getDonationbox', () async {
       // TODO
     });
 
-    //Future donatorDonatorIdDonationboxPost(int donatorId, DonationboxRegisterDto donationboxRegisterDto) async
-    test('test donatorDonatorIdDonationboxPost', () async {
+    //Future registerDonationbox(int donatorId, DonationboxRegisterDto donationboxRegisterDto) async
+    test('test registerDonationbox', () async {
       // TODO
     });
 

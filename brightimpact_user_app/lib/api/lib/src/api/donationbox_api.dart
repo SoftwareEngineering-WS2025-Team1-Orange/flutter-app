@@ -18,7 +18,7 @@ class DonationboxApi {
 
   const DonationboxApi(this._dio);
 
-  /// donatorDonatorIdDonationboxGet
+  /// getDonationbox
   /// 
   ///
   /// Parameters:
@@ -32,7 +32,7 @@ class DonationboxApi {
   ///
   /// Returns a [Future] containing a [Response] with a [List<DonationboxDto>] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<List<DonationboxDto>>> donatorDonatorIdDonationboxGet({ 
+  Future<Response<List<DonationboxDto>>> getDonationbox({ 
     required int donatorId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -94,7 +94,7 @@ _responseData = rawData == null ? null : deserialize<List<DonationboxDto>, Donat
     );
   }
 
-  /// donatorDonatorIdDonationboxPost
+  /// registerDonationbox
   /// 
   ///
   /// Parameters:
@@ -109,7 +109,7 @@ _responseData = rawData == null ? null : deserialize<List<DonationboxDto>, Donat
   ///
   /// Returns a [Future]
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<void>> donatorDonatorIdDonationboxPost({ 
+  Future<Response<void>> registerDonationbox({ 
     required int donatorId,
     required DonationboxRegisterDto donationboxRegisterDto,
     CancelToken? cancelToken,

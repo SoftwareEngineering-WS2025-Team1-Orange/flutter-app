@@ -9,13 +9,13 @@ All URIs are relative to *https://localhost:9000/api/v1/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**donatorDonatorIdGet**](DonatorApi.md#donatordonatoridget) | **GET** /donator/{donator_id} | 
-[**donatorMeGet**](DonatorApi.md#donatormeget) | **GET** /donator/me | 
-[**donatorPost**](DonatorApi.md#donatorpost) | **POST** /donator | 
+[**getDonator**](DonatorApi.md#getdonator) | **GET** /donator/{donator_id} | 
+[**login**](DonatorApi.md#login) | **POST** /donator/login | 
+[**registerDonator**](DonatorApi.md#registerdonator) | **POST** /donator | 
 
 
-# **donatorDonatorIdGet**
-> DonatorDto donatorDonatorIdGet(donatorId)
+# **getDonator**
+> DonatorDto getDonator(donatorId)
 
 
 
@@ -29,10 +29,10 @@ final api = Openapi().getDonatorApi();
 final int donatorId = 56; // int | 
 
 try {
-    final response = api.donatorDonatorIdGet(donatorId);
+    final response = api.getDonator(donatorId);
     print(response);
 } catch on DioException (e) {
-    print('Exception when calling DonatorApi->donatorDonatorIdGet: $e\n');
+    print('Exception when calling DonatorApi->getDonator: $e\n');
 }
 ```
 
@@ -57,8 +57,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **donatorMeGet**
-> DonatorDto donatorMeGet()
+# **login**
+> Login200ResponseDto login(donatorLoginDto)
 
 
 
@@ -69,21 +69,25 @@ import 'package:openapi/api.dart';
 //defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
 
 final api = Openapi().getDonatorApi();
+final DonatorLoginDto donatorLoginDto = ; // DonatorLoginDto | 
 
 try {
-    final response = api.donatorMeGet();
+    final response = api.login(donatorLoginDto);
     print(response);
 } catch on DioException (e) {
-    print('Exception when calling DonatorApi->donatorMeGet: $e\n');
+    print('Exception when calling DonatorApi->login: $e\n');
 }
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **donatorLoginDto** | [**DonatorLoginDto**](DonatorLoginDto.md)|  | 
 
 ### Return type
 
-[**DonatorDto**](DonatorDto.md)
+[**Login200ResponseDto**](Login200ResponseDto.md)
 
 ### Authorization
 
@@ -91,13 +95,13 @@ This endpoint does not need any parameter.
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **donatorPost**
-> int donatorPost(donatorRegisterDto)
+# **registerDonator**
+> int registerDonator(donatorRegisterDto)
 
 
 
@@ -111,10 +115,10 @@ final api = Openapi().getDonatorApi();
 final DonatorRegisterDto donatorRegisterDto = ; // DonatorRegisterDto | 
 
 try {
-    final response = api.donatorPost(donatorRegisterDto);
+    final response = api.registerDonator(donatorRegisterDto);
     print(response);
 } catch on DioException (e) {
-    print('Exception when calling DonatorApi->donatorPost: $e\n');
+    print('Exception when calling DonatorApi->registerDonator: $e\n');
 }
 ```
 

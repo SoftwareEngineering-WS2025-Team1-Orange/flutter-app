@@ -18,7 +18,9 @@ class DonatorRegisterDto {
   /// Returns a new [DonatorRegisterDto] instance.
   DonatorRegisterDto({
 
-    required  this.name,
+    required  this.firstname,
+
+    required  this.lastname,
 
     required  this.password,
 
@@ -27,13 +29,25 @@ class DonatorRegisterDto {
 
   @JsonKey(
     
-    name: r'name',
+    name: r'firstname',
     required: true,
     includeIfNull: false,
   )
 
 
-  final String name;
+  final String firstname;
+
+
+
+  @JsonKey(
+    
+    name: r'lastname',
+    required: true,
+    includeIfNull: false,
+  )
+
+
+  final String lastname;
 
 
 
@@ -65,13 +79,15 @@ class DonatorRegisterDto {
 
     @override
     bool operator ==(Object other) => identical(this, other) || other is DonatorRegisterDto &&
-      other.name == name &&
+      other.firstname == firstname &&
+      other.lastname == lastname &&
       other.password == password &&
       other.mail == mail;
 
     @override
     int get hashCode =>
-        name.hashCode +
+        firstname.hashCode +
+        lastname.hashCode +
         password.hashCode +
         mail.hashCode;
 

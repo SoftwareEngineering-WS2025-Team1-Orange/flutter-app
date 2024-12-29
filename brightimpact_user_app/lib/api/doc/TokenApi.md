@@ -9,11 +9,11 @@ All URIs are relative to *https://localhost:9000/api/v1/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**tokenPost**](TokenApi.md#tokenpost) | **POST** /token | 
+[**getToken**](TokenApi.md#gettoken) | **POST** /token | 
 
 
-# **tokenPost**
-> ResponseTokenDto tokenPost(username, password, grantType, scope, clientId, clientSecret)
+# **getToken**
+> ResponseTokenDto getToken(username, password, grantType, scope, clientId, clientSecret)
 
 
 
@@ -32,10 +32,10 @@ final String clientId = clientId_example; // String |
 final String clientSecret = clientSecret_example; // String | 
 
 try {
-    final response = api.tokenPost(username, password, grantType, scope, clientId, clientSecret);
+    final response = api.getToken(username, password, grantType, scope, clientId, clientSecret);
     print(response);
 } catch on DioException (e) {
-    print('Exception when calling TokenApi->tokenPost: $e\n');
+    print('Exception when calling TokenApi->getToken: $e\n');
 }
 ```
 

@@ -18,22 +18,38 @@ class DonatorDto {
   /// Returns a new [DonatorDto] instance.
   DonatorDto({
 
-    required  this.name,
+    required  this.firstname,
+
+    required  this.lastname,
 
     required  this.mail,
 
-    required  this.donatorId,
+    required  this.balance,
+
+    required  this.id,
   });
 
   @JsonKey(
     
-    name: r'name',
+    name: r'firstname',
     required: true,
     includeIfNull: false,
   )
 
 
-  final String name;
+  final String firstname;
+
+
+
+  @JsonKey(
+    
+    name: r'lastname',
+    required: true,
+    includeIfNull: false,
+  )
+
+
+  final String lastname;
 
 
 
@@ -51,13 +67,25 @@ class DonatorDto {
 
   @JsonKey(
     
-    name: r'donator_id',
+    name: r'balance',
     required: true,
     includeIfNull: false,
   )
 
 
-  final int donatorId;
+  final num balance;
+
+
+
+  @JsonKey(
+    
+    name: r'id',
+    required: true,
+    includeIfNull: false,
+  )
+
+
+  final int id;
 
 
 
@@ -65,15 +93,19 @@ class DonatorDto {
 
     @override
     bool operator ==(Object other) => identical(this, other) || other is DonatorDto &&
-      other.name == name &&
+      other.firstname == firstname &&
+      other.lastname == lastname &&
       other.mail == mail &&
-      other.donatorId == donatorId;
+      other.balance == balance &&
+      other.id == id;
 
     @override
     int get hashCode =>
-        name.hashCode +
+        firstname.hashCode +
+        lastname.hashCode +
         mail.hashCode +
-        donatorId.hashCode;
+        balance.hashCode +
+        id.hashCode;
 
   factory DonatorDto.fromJson(Map<String, dynamic> json) => _$DonatorDtoFromJson(json);
 

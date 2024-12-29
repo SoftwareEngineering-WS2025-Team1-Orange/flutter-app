@@ -1,17 +1,9 @@
-import 'package:bright_impact/State/AppState.dart';
-import 'package:bright_impact/View/Pages/HomePage.dart';
-import 'package:bright_impact/View/Pages/InitPage.dart';
-import 'package:dio/dio.dart';
+import 'package:bright_impact/state/app_state.dart';
+import 'package:bright_impact/view/pages/init_page.dart';
+import 'package:bright_impact/view/pages/main_navigation_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-final Dio sharedDio = Dio(BaseOptions(
-  baseUrl: "https://preview-mainframe.sokutan.de/api/v1",
-  connectTimeout:
-      Duration(milliseconds: 5000),
-  receiveTimeout:
-      Duration(milliseconds: 3000),
-));
 
 void main() {
   runApp(
@@ -35,7 +27,7 @@ class _MyApp extends State<MyApp>{
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context);
-
+    const secondaryColor = const Color(0xFF1A2A39);
 
     return MaterialApp(
       title: 'Bright Impact',
@@ -43,7 +35,7 @@ class _MyApp extends State<MyApp>{
         scaffoldBackgroundColor:
             const Color(0xFF1A2A39), // Dunkelblauer Hintergrund
         primaryColor: const Color(0xFF38C776),
-        secondaryHeaderColor: const Color(0xFF1A2A39), // Grün für Buttons
+        secondaryHeaderColor: secondaryColor, // Grün für Buttons
         textTheme: const TextTheme(
           headlineLarge: TextStyle(
             fontSize: 40.0,
@@ -58,11 +50,16 @@ class _MyApp extends State<MyApp>{
           labelMedium: TextStyle(
             fontSize: 19.0,
             fontWeight: FontWeight.bold,
-            color: Colors.white,
+            color: secondaryColor,
           ),
+          titleMedium: TextStyle(
+            fontSize: 16.0,
+            fontWeight: FontWeight.w300,
+            color: Color.fromARGB(255, 80, 80, 80),
+          )
         ),
       ),
-      home: appState.isLoggedIn ? HomePage() : InitPage(),
+      home: appState.isLoggedIn ? MainNavigationPage() : InitPage(),
     );
   }
 }

@@ -13,43 +13,40 @@ DonationboxDto _$DonationboxDtoFromJson(Map<String, dynamic> json) =>
       ($checkedConvert) {
         $checkKeys(
           json,
-          requiredKeys: const ['id', 'state', 'power_consumption'],
+          requiredKeys: const ['id', 'cuid', 'last_status'],
         );
         final val = DonationboxDto(
-          id: $checkedConvert('id', (v) => v as String),
-          state: $checkedConvert(
-              'state', (v) => $enumDecode(_$DonationboxDtoStateEnumEnumMap, v)),
+          id: $checkedConvert('id', (v) => (v as num).toInt()),
+          cuid: $checkedConvert('cuid', (v) => v as String),
+          lastStatus: $checkedConvert('last_status',
+              (v) => $enumDecode(_$DonationboxDtoLastStatusEnumEnumMap, v)),
           powerConsumption:
-              $checkedConvert('power_consumption', (v) => v as num),
-          locLat: $checkedConvert('loc_lat', (v) => v as num?),
-          locLgt: $checkedConvert('loc_lgt', (v) => v as num?),
-          powerSupplyId:
-              $checkedConvert('power_supply_id', (v) => v as String?),
+              $checkedConvert('power_consumption', (v) => v as num?),
+          powerSupplyId: $checkedConvert('powerSupplyId', (v) => v as String?),
         );
         return val;
       },
       fieldKeyMap: const {
-        'powerConsumption': 'power_consumption',
-        'locLat': 'loc_lat',
-        'locLgt': 'loc_lgt',
-        'powerSupplyId': 'power_supply_id'
+        'lastStatus': 'last_status',
+        'powerConsumption': 'power_consumption'
       },
     );
 
 Map<String, dynamic> _$DonationboxDtoToJson(DonationboxDto instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'state': _$DonationboxDtoStateEnumEnumMap[instance.state]!,
-      'power_consumption': instance.powerConsumption,
-      if (instance.locLat case final value?) 'loc_lat': value,
-      if (instance.locLgt case final value?) 'loc_lgt': value,
-      if (instance.powerSupplyId case final value?) 'power_supply_id': value,
+      'cuid': instance.cuid,
+      'last_status':
+          _$DonationboxDtoLastStatusEnumEnumMap[instance.lastStatus]!,
+      if (instance.powerConsumption case final value?)
+        'power_consumption': value,
+      if (instance.powerSupplyId case final value?) 'powerSupplyId': value,
     };
 
-const _$DonationboxDtoStateEnumEnumMap = {
-  DonationboxDtoStateEnum.OFFLINE: 'OFFLINE',
-  DonationboxDtoStateEnum.CONNECTED: 'CONNECTED',
-  DonationboxDtoStateEnum.READY: 'READY',
-  DonationboxDtoStateEnum.RUNNING: 'RUNNING',
-  DonationboxDtoStateEnum.ERROR: 'ERROR',
+const _$DonationboxDtoLastStatusEnumEnumMap = {
+  DonationboxDtoLastStatusEnum.OFFLINE: 'OFFLINE',
+  DonationboxDtoLastStatusEnum.ERROR: 'ERROR',
+  DonationboxDtoLastStatusEnum.CONNECTED: 'CONNECTED',
+  DonationboxDtoLastStatusEnum.READY: 'READY',
+  DonationboxDtoLastStatusEnum.WORKING: 'WORKING',
 };

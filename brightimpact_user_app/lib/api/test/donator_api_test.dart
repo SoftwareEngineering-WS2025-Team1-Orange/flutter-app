@@ -7,18 +7,18 @@ void main() {
   final instance = Openapi().getDonatorApi();
 
   group(DonatorApi, () {
-    //Future<DonatorDto> donatorDonatorIdGet(int donatorId) async
-    test('test donatorDonatorIdGet', () async {
+    //Future<DonatorDto> getDonator(int donatorId) async
+    test('test getDonator', () async {
       // TODO
     });
 
-    //Future<DonatorDto> donatorMeGet() async
-    test('test donatorMeGet', () async {
+    //Future<Login200ResponseDto> login(DonatorLoginDto donatorLoginDto) async
+    test('test login', () async {
       // TODO
     });
 
-    //Future<int> donatorPost(DonatorRegisterDto donatorRegisterDto) async
-    test('test donatorPost', () async {
+    //Future<int> registerDonator(DonatorRegisterDto donatorRegisterDto) async
+    test('test registerDonator', () async {
       // TODO
     });
 

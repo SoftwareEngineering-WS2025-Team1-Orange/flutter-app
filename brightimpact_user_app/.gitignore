@@ -44,3 +44,8 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Added from Felix
+openapitools.json
+package.json
+package-lock.json

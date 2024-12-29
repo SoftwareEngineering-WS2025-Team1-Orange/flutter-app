@@ -10,7 +10,9 @@ import 'package:openapi/src/deserialize.dart';
 import 'package:dio/dio.dart';
 
 import 'package:openapi/src/model/donator_dto.dart';
+import 'package:openapi/src/model/donator_login_dto.dart';
 import 'package:openapi/src/model/donator_register_dto.dart';
+import 'package:openapi/src/model/login200_response_dto.dart';
 
 class DonatorApi {
 
@@ -18,7 +20,7 @@ class DonatorApi {
 
   const DonatorApi(this._dio);
 
-  /// donatorDonatorIdGet
+  /// getDonator
   /// 
   ///
   /// Parameters:
@@ -32,7 +34,7 @@ class DonatorApi {
   ///
   /// Returns a [Future] containing a [Response] with a [DonatorDto] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<DonatorDto>> donatorDonatorIdGet({ 
+  Future<Response<DonatorDto>> getDonator({ 
     required int donatorId,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -94,10 +96,11 @@ _responseData = rawData == null ? null : deserialize<DonatorDto, DonatorDto>(raw
     );
   }
 
-  /// donatorMeGet
+  /// login
   /// 
   ///
   /// Parameters:
+  /// * [donatorLoginDto] 
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -105,9 +108,10 @@ _responseData = rawData == null ? null : deserialize<DonatorDto, DonatorDto>(raw
   /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
   /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
   ///
-  /// Returns a [Future] containing a [Response] with a [DonatorDto] as data
+  /// Returns a [Future] containing a [Response] with a [Login200ResponseDto] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<DonatorDto>> donatorMeGet({ 
+  Future<Response<Login200ResponseDto>> login({ 
+    required DonatorLoginDto donatorLoginDto,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -115,9 +119,9 @@ _responseData = rawData == null ? null : deserialize<DonatorDto, DonatorDto>(raw
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/donator/me';
+    final _path = r'/donator/login';
     final _options = Options(
-      method: r'GET',
+      method: r'POST',
       headers: <String, dynamic>{
         ...?headers,
       },
@@ -130,22 +134,40 @@ _responseData = rawData == null ? null : deserialize<DonatorDto, DonatorDto>(raw
         ],
         ...?extra,
       },
+      contentType: 'application/json',
       validateStatus: validateStatus,
     );
 
+    dynamic _bodyData;
+
+    try {
+_bodyData=jsonEncode(donatorLoginDto);
+    } catch(error, stackTrace) {
+      throw DioException(
+         requestOptions: _options.compose(
+          _dio.options,
+          _path,
+        ),
+        type: DioExceptionType.unknown,
+        error: error,
+        stackTrace: stackTrace,
+      );
+    }
+
     final _response = await _dio.request<Object>(
       _path,
+      data: _bodyData,
       options: _options,
       cancelToken: cancelToken,
       onSendProgress: onSendProgress,
       onReceiveProgress: onReceiveProgress,
     );
 
-    DonatorDto? _responseData;
+    Login200ResponseDto? _responseData;
 
     try {
 final rawData = _response.data;
-_responseData = rawData == null ? null : deserialize<DonatorDto, DonatorDto>(rawData, 'DonatorDto', growable: true);
+_responseData = rawData == null ? null : deserialize<Login200ResponseDto, Login200ResponseDto>(rawData, 'Login200ResponseDto', growable: true);
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -156,7 +178,7 @@ _responseData = rawData == null ? null : deserialize<DonatorDto, DonatorDto>(raw
       );
     }
 
-    return Response<DonatorDto>(
+    return Response<Login200ResponseDto>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,
@@ -168,7 +190,7 @@ _responseData = rawData == null ? null : deserialize<DonatorDto, DonatorDto>(raw
     );
   }
 
-  /// donatorPost
+  /// registerDonator
   /// 
   ///
   /// Parameters:
@@ -182,7 +204,7 @@ _responseData = rawData == null ? null : deserialize<DonatorDto, DonatorDto>(raw
   ///
   /// Returns a [Future] containing a [Response] with a [int] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<int>> donatorPost({ 
+  Future<Response<int>> registerDonator({ 
     required DonatorRegisterDto donatorRegisterDto,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,

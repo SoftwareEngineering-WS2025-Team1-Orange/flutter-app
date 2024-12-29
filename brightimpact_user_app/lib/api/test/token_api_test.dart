@@ -7,8 +7,8 @@ void main() {
   final instance = Openapi().getTokenApi();
 
   group(TokenApi, () {
-    //Future<ResponseTokenDto> tokenPost(String username, String password, { String grantType, String scope, String clientId, String clientSecret }) async
-    test('test tokenPost', () async {
+    //Future<ResponseTokenDto> getToken(String username, String password, { String grantType, String scope, String clientId, String clientSecret }) async
+    test('test getToken', () async {
       // TODO
     });
 
