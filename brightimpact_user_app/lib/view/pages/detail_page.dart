@@ -31,7 +31,7 @@ abstract class DetailSheet<T, W extends EntityProvider<T>>
 class _DetailSheetState<T, W extends EntityProvider<T>>
     extends State<DetailSheet<T, W>> {
   final double initialExtent = 0.9;
-  final double minExtent = 0.7;
+  final double minExtent = 0.99;
   final double maxExtent = 1.0;
 
   @override

@@ -38,7 +38,7 @@ class DonationWalletWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'Your Donation Wallet',
+                'Dein Spendenguthaben',
                 style: Theme.of(context).textTheme.labelSmall?.copyWith(
                       color: Colors.grey.shade700,
                       fontWeight: FontWeight.w500,

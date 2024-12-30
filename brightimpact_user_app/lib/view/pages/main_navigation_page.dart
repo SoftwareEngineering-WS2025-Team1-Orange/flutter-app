@@ -12,8 +12,8 @@ class MainNavigationPage extends StatefulWidget {
 }
 
 class _MainNavigationPageState extends State<MainNavigationPage> {
-  int _selectedIndex = 1;
-  final PageController _pageController = PageController(initialPage: 1);
+  int _selectedIndex = 0;
+  final PageController _pageController = PageController(initialPage: 0);
 
   void _onItemTapped(int index) {
     setState(() {
@@ -35,9 +35,9 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
   @override
   Widget build(BuildContext context) {
     // Width and Height calculation of NavBar and single Tap
-    final double navBarWidth = MediaQuery.of(context).size.width * 0.6;
-    final double navBarHeight = navBarWidth * 0.25;
-    final double tabWidth = navBarWidth / 3; // 3 tabs
+    final double navBarWidth = MediaQuery.of(context).size.width * 0.7;
+    final double navBarHeight = navBarWidth * 0.24;
+    final double tabWidth = navBarWidth / 4; // 4 tabs
     final double tabHeight = navBarHeight * 0.8;
 
     return Scaffold(
@@ -52,9 +52,10 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
               });
             },
             children: [
-              ProjectListPage(),
               HomePage(),
               NGOListPage(),
+              ProjectListPage(),
+              Page1(),
             ],
           ),
           Align(
@@ -102,9 +103,10 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            _buildNavItem(icon: Icons.euro_symbol, index: 0),
-                            _buildNavItem(icon: Icons.home, index: 1),
-                            _buildNavItem(icon: Icons.group, index: 2),
+                            _buildNavItem(icon: Icons.home, index: 0),
+                            _buildNavItem(icon: Icons.group, index: 1),
+                            _buildNavItem(icon: Icons.volunteer_activism, index: 2),
+                            _buildNavItem(icon: Icons.euro_symbol, index: 3),
                           ],
                         ),
                       ],
@@ -195,30 +197,6 @@ class Page1 extends StatelessWidget {
     return Center(
       child: Text(
         'Page 1',
-        style: TextStyle(fontSize: 24),
-      ),
-    );
-  }
-}
-
-class Page2 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Page 2',
-        style: TextStyle(fontSize: 24),
-      ),
-    );
-  }
-}
-
-class Page3 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Page 3',
         style: TextStyle(fontSize: 24),
       ),
     );

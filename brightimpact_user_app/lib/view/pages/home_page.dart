@@ -6,11 +6,23 @@ import 'package:bright_impact/view/pages/project_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  State<StatefulWidget> createState() => _HomePage();
+}
+
+class _HomePage extends State<HomePage> with AutomaticKeepAliveClientMixin {
+
+  // Keeps page alive when not visible in PageView
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
+    
     final width = MediaQuery.of(context).size.width;
 
     return Scaffold(

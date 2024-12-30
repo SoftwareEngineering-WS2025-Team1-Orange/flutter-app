@@ -36,12 +36,19 @@ abstract class ListPage<T> extends StatefulWidget {
       void Function() onPressed});
 
   /// Override to receive tapped item events
-  Future<void> onItemPressed(BuildContext context, ListProvider<T> provider, int index);
+  Future<void> onItemPressed(
+      BuildContext context, ListProvider<T> provider, int index);
 }
 
-abstract class ListPageState<T, W extends ListPage<T>> extends State<W> {
+abstract class ListPageState<T, W extends ListPage<T>> extends State<W>
+    with AutomaticKeepAliveClientMixin {
+
   final ScrollController _scrollController = ScrollController();
   late final ListProvider<T> _provider;
+
+  // Prevents reloading of page when not visible 
+  @override
+  bool get wantKeepAlive => true;
 
   @override
   void initState() {
@@ -131,7 +138,8 @@ abstract class ListPageState<T, W extends ListPage<T>> extends State<W> {
                                   item: provider.entries[index],
                                   index: index,
                                   context: context,
-                                  onPressed: () => widget.onItemPressed(context, provider, index));
+                                  onPressed: () => widget.onItemPressed(
+                                      context, provider, index));
                             },
                           ),
                   )),
