@@ -31,4 +31,9 @@ class NgoProvider extends EntityProvider<NGO> {
         data: NGO.fromDto(list.first));
   }
 
+  // For test
+  void toggleFavorite() {
+    
+  }
+
 }

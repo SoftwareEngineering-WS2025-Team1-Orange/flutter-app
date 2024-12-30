@@ -35,20 +35,6 @@ abstract class ListPage<T> extends StatefulWidget {
       required BuildContext context,
       void Function() onPressed});
 
-
-
-  /// Opens detailPage using showModelBottomSheet
-  void openDetailSheet(BuildContext context, Widget detailSheet) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (context) {
-        return detailSheet;
-      },
-    );
-  }
-
   /// Override to receive tapped item events
   Future<void> onItemPressed(BuildContext context, ListProvider<T> provider, int index);
 }

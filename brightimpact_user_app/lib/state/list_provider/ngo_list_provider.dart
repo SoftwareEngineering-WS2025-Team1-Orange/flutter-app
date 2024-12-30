@@ -16,6 +16,9 @@ class NgoListProvider extends ListProvider<NGO> {
   bool get filterDonatedTo => _filterDonatedTo;
   bool get sortNewest => _sortNewest;
 
+  // CONSTRUCTOR
+  NgoListProvider({super.resultsPerPage});
+
   /// Sets the passed filter or sort arguments and then automatically fetched the list of NGOs
   Future<void> setFilterAndFetch(
       {bool? isFavorite, bool? donatedTo, bool? newest}) async {

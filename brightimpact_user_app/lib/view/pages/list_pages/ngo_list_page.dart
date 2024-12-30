@@ -2,6 +2,7 @@ import 'package:bright_impact/model/ngo.dart';
 import 'package:bright_impact/state/list_provider/list_provider.dart';
 import 'package:bright_impact/state/list_provider/ngo_list_provider.dart';
 import 'package:bright_impact/view/pages/list_pages/list_page.dart';
+import 'package:bright_impact/view/pages/ngo_detail_page.dart';
 import 'package:flutter/material.dart';
 
 class NGOListPage extends ListPage<NGO> {
@@ -43,7 +44,8 @@ class NGOListPage extends ListPage<NGO> {
 
   @override
   Future<void> onItemPressed(BuildContext context, ListProvider<NGO> provider, int index) async {
-    //openDetailSheet(context, detailPage)
+    final ngo = provider.entries[index];
+    NgoDetailSheet(id: ngo.id).openDetailSheet(context);
   }
 
   @override

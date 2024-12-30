@@ -25,6 +25,9 @@ class ProjectListProvider extends ListProvider<Project> {
   ProjectCategoryDto? get filterCategory => _filterCategory;
   bool get sortNewest => _sortNewest;
 
+  // CONSTRUCTOR
+  ProjectListProvider({super.resultsPerPage});
+
   /// Sets filters or sorting arguments and fetches the first page
   Future<void> setFilterAndFetch({
     String? nameContains,

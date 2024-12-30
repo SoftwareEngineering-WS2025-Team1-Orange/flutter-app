@@ -47,8 +47,7 @@ class ProjectListPage extends ListPage<Project> {
   @override
   Future<void> onItemPressed(
       BuildContext context, ListProvider<Project> provider, int index) async {
-    openDetailSheet(
-        context, ProjectDetailSheet(projectId: provider.entries[index].id));
+    ProjectDetailSheet(id: provider.entries[index].id).openDetailSheet(context);
   }
 
   @override
@@ -57,7 +56,7 @@ class ProjectListPage extends ListPage<Project> {
       required int index,
       required BuildContext context,
       void Function()? onPressed}) {
-    //final width = MediaQuery.of(context).size.width;
+    final width = MediaQuery.of(context).size.width;
     //final theme = Theme.of(context);
     /*return Padding(
         padding: EdgeInsets.all(width * 0.04),
@@ -82,10 +81,15 @@ class ProjectListPage extends ListPage<Project> {
 
     return GestureDetector(
         onTap: onPressed,
-        child: ProjectCardWidget(
-            title: item.name,
-            subtitle: item.ngoName,
-            imageUri: item.bannerUri));
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+          child:  SizedBox(
+            width: width,
+            height: width * 0.6,
+            child: ProjectCardWidget(
+                title: item.name,
+                subtitle: item.ngoName,
+                imageUri: item.bannerUri))));
   }
 }
 

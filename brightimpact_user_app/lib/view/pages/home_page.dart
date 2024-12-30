@@ -1,5 +1,10 @@
+import 'package:bright_impact/api/lib/openapi.dart';
+import 'package:bright_impact/state/list_provider/project_list_provider.dart';
+import 'package:bright_impact/view/custom_widgets/project_card_widget.dart';
 import 'package:bright_impact/view/custom_widgets/rotating_circle_widget.dart';
+import 'package:bright_impact/view/pages/project_detail_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -12,27 +17,25 @@ class HomePage extends StatelessWidget {
         backgroundColor: const Color.fromARGB(255, 228, 228, 228),
         body: Stack(children: [
           SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(height: width * 0.5),
                 _buildDonationBoxStatusSection(context),
-                _buildProjectSection('Recently Added Projects', [
-                  _buildProjectCard('Beach Cleaning', 'New Roots e.V.',
-                      'assets/images/samples/beach_clean.jpg'),
-                  _buildProjectCard('School Materials', 'New Roots e.V.',
-                      'assets/images/samples/school.jpg'),
-                  _buildProjectCard('Recycling Initiatives', 'EcoLife Org',
-                      'assets/images/samples/recycling.jpg'),
-                ]),
-                _buildProjectSection('Environment and Sustainability', [
-                  _buildProjectCard('Tree Planting', 'Green Future',
-                      'assets/images/samples/tree_planting.jpg'),
-                  _buildProjectCard('Recycling Initiatives', 'EcoLife Org',
-                      'assets/images/samples/recycling.jpg'),
-                  _buildProjectCard('Beach Cleaning', 'New Roots e.V.',
-                      'assets/images/samples/beach_clean.jpg'),
-                ]),
+                _buildProjectSection(
+                    context, "Kürzlich hinzugefügte Projekte", null,
+                    hideOnLoading: false),
+                _buildProjectSection(context, "Umwelt und Nachhaltigkeit",
+                    ProjectCategoryDto.environment),
+                _buildProjectSection(context, "Schule und Bildung",
+                    ProjectCategoryDto.education),
+                _buildProjectSection(
+                    context, "Menschenrechte", ProjectCategoryDto.humanRights),
+                _buildProjectSection(
+                    context, "Gesundheit", ProjectCategoryDto.health),
+                _buildProjectSection(
+                    context, "Tierwohl", ProjectCategoryDto.animalRights),
                 SizedBox(height: width * 0.25),
               ],
             ),
@@ -75,8 +78,9 @@ class HomePage extends StatelessWidget {
                       _buildStatusItem("27 Watt", null, Icons.bolt, context)),
               SizedBox(width: 10),
               Expanded(
-                  child:
-                      _buildStatusItem("0,05 €", "Ø/Tag", Icons.euro, context, animationReversed: true)),
+                  child: _buildStatusItem(
+                      "0,05 €", "Ø/Tag", Icons.euro, context,
+                      animationReversed: true)),
               SizedBox(width: 10),
               Expanded(
                   child: _buildStatusItem(
@@ -89,7 +93,8 @@ class HomePage extends StatelessWidget {
   }
 
   Widget _buildStatusItem(
-      String label, String? subtitle, IconData icon, BuildContext context, {bool animationReversed = false}) {
+      String label, String? subtitle, IconData icon, BuildContext context,
+      {bool animationReversed = false}) {
     final theme = Theme.of(context);
     return Stack(children: [
       AspectRatio(
@@ -120,80 +125,87 @@ class HomePage extends StatelessWidget {
                   )))),
       Padding(
           padding: EdgeInsets.all(5),
-          child: RotatingCircle(gaps: 3, color: theme.primaryColor, reversed: animationReversed,))
+          child: RotatingCircle(
+            gaps: 3,
+            color: theme.primaryColor,
+            reversed: animationReversed,
+          ))
     ]);
   }
 
-  Widget _buildProjectSection(String title, List<Widget> projects) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16),
-          child: Text(
-            title,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-        ),
-        SizedBox(height: 8),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: projects,
-          ),
-        ),
-        SizedBox(height: 16),
-      ],
-    );
+  Widget _buildProjectSection(
+      BuildContext context, String title, ProjectCategoryDto? filterCategory,
+      {bool hideOnLoading = true}) {
+    final width = MediaQuery.of(context).size.width;
+    final theme = Theme.of(context);
+
+    return ChangeNotifierProvider(
+        create: (context) => ProjectListProvider(resultsPerPage: 7)
+          ..setFilterAndFetch(category: filterCategory, newest: true),
+        child:
+            Consumer<ProjectListProvider>(builder: (context, provider, child) {
+          return hideOnLoading &&
+                  (provider.isLoading || provider.entries.isEmpty)
+              ? SizedBox()
+              : SizedBox(
+                  width: width,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        child: Text(
+                          title,
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      if (provider.isLoading)
+                        Center(
+                            child: CircularProgressIndicator(
+                          color: theme.primaryColor,
+                        )),
+                      if (provider.loadingError != null)
+                        Center(
+                            child: Text(
+                                "Hoppla! ${provider.loadingError!.message}")),
+                      if (!provider.isLoading && provider.loadingError == null)
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                              children: [
+                                    SizedBox(
+                                      width: width * 0.05,
+                                    )
+                                  ] +
+                                  _buildProjectCards(context, provider) +
+                                  [
+                                    SizedBox(
+                                      width: width * 0.05,
+                                    )
+                                  ]),
+                        ),
+                      SizedBox(height: 16),
+                    ],
+                  ));
+        }));
   }
 
-  Widget _buildProjectCard(String title, String subtitle, String imagePath) {
-    return Container(
-      width: 200,
-      margin: EdgeInsets.only(left: 16),
-      child: Card(
-        elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
-              child: Image.asset(
-                imagePath,
-                height: 120,
-                width: double.infinity,
-                fit: BoxFit.cover,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: 4),
-                  Text(
-                    subtitle,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+  List<SizedBox> _buildProjectCards(
+      BuildContext context, ProjectListProvider provider) {
+    final width = MediaQuery.of(context).size.width;
+    return provider.entries
+        .map((e) => SizedBox(
+            width: width * 0.7,
+            height: width * 0.55,
+            child: GestureDetector(
+                onTap: () => ProjectDetailSheet(id: e.id)
+                  ..openDetailSheet(context),
+                child: ProjectCardWidget(
+                    title: e.name,
+                    subtitle: e.ngoName,
+                    imageUri: e.bannerUri))))
+        .toList();
   }
 }

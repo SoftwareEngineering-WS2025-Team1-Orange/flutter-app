@@ -65,7 +65,7 @@ abstract class EntityProvider<T> extends ChangeNotifier{
         _loadingError = e.errorType;
       } else if (e is DioException) {
         _loadingError =
-        e.type == DioExceptionType.connectionError || e.type == DioExceptionType.connectionTimeout
+        e.type == DioExceptionType.connectionError || e.type == DioExceptionType.connectionTimeout || e.type == DioExceptionType.receiveTimeout
         ? ApiProviderError.connectionError
         : ApiProviderError.fromHttpCode(e.response?.statusCode ?? 0);
       } else {
