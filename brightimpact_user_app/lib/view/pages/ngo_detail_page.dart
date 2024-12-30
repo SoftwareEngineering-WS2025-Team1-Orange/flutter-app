@@ -1,4 +1,4 @@
-import 'package:bright_impact/State/ngo_provider.dart';
+import 'package:bright_impact/state/ngo_provider.dart';
 import 'package:bright_impact/model/ngo.dart';
 import 'package:bright_impact/view/pages/detail_page.dart';
 import 'package:flutter/material.dart';
@@ -67,7 +67,6 @@ class NgoDetailsPage extends DetailsPage<NGO, NgoProvider> {
   Widget buildMainContent(
       BuildContext context, NgoProvider provider, NGO entity) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final theme = Theme.of(context);
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 20),
