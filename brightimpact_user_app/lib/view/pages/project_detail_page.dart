@@ -1,5 +1,5 @@
 import 'package:bright_impact/model/project.dart';
-import 'package:bright_impact/state/project_provider.dart';
+import 'package:bright_impact/state/entity_provider/project_provider.dart';
 import 'package:bright_impact/view/pages/detail_page.dart';
 import 'package:flutter/material.dart';
 
@@ -58,15 +58,16 @@ class ProjectDetailsPage extends DetailsPage<Project, ProjectProvider> {
     final theme = Theme.of(context);
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 25),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             entity.name,
             style: TextStyle(
-              fontSize: screenWidth * 0.075,
+              fontSize: screenWidth * 0.073,
               fontWeight: FontWeight.w700,
+              height: 1
             ),
           ),
           const SizedBox(height: 4),

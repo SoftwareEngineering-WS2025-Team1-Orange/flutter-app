@@ -9,9 +9,9 @@ All URIs are relative to *https://localhost:9000/api/v1/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getDonator**](DonatorApi.md#getdonator) | **GET** /donator/{donator_id} | 
+[**getDonator**](DonatorApi.md#getdonator) | **GET** /api-donator/donator/{donator_id} | 
 [**login**](DonatorApi.md#login) | **POST** /donator/login | 
-[**registerDonator**](DonatorApi.md#registerdonator) | **POST** /donator | 
+[**registerDonator**](DonatorApi.md#registerdonator) | **POST** /api-donator/donator | 
 
 
 # **getDonator**
@@ -101,7 +101,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **registerDonator**
-> int registerDonator(donatorRegisterDto)
+> DonatorDto registerDonator(donatorRegisterDto)
 
 
 
@@ -130,7 +130,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**int**
+[**DonatorDto**](DonatorDto.md)
 
 ### Authorization
 

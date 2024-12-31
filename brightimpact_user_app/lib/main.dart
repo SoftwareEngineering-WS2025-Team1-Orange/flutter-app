@@ -28,13 +28,14 @@ class _MyApp extends State<MyApp>{
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context);
     const secondaryColor = const Color(0xFF1A2A39);
+    const primaryColor = const Color(0xFF38C776);
 
     return MaterialApp(
       title: 'Bright Impact',
       theme: ThemeData(
         scaffoldBackgroundColor:
             const Color(0xFF1A2A39), // Dunkelblauer Hintergrund
-        primaryColor: const Color(0xFF38C776),
+        primaryColor: primaryColor,
         secondaryHeaderColor: secondaryColor, // Grün für Buttons
         textTheme: const TextTheme(
           headlineLarge: TextStyle(
@@ -57,6 +58,11 @@ class _MyApp extends State<MyApp>{
             fontWeight: FontWeight.w300,
             color: Color.fromARGB(255, 80, 80, 80),
           )
+        ),
+        textSelectionTheme: const TextSelectionThemeData(
+          selectionColor: Color.fromARGB(121, 56, 199, 118), // Farbe der Markierung
+          cursorColor: primaryColor,      // Farbe des Cursors
+          selectionHandleColor: primaryColor, 
         ),
       ),
       home: appState.isLoggedIn ? MainNavigationPage() : InitPage(),

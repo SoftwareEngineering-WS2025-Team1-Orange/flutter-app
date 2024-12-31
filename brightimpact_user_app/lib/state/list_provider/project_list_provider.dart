@@ -1,7 +1,7 @@
 import 'package:bright_impact/model/project.dart';
 import 'package:bright_impact/state/api_service.dart';
 import 'package:bright_impact/api/lib/openapi.dart';
-import 'package:bright_impact/state/entity_provider.dart';
+import 'package:bright_impact/state/entity_provider/entity_provider.dart';
 import 'package:bright_impact/state/list_provider/list_provider.dart';
 import 'package:dio/dio.dart';
 

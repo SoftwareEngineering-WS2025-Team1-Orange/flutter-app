@@ -43,7 +43,7 @@ class DonatorApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/donator/{donator_id}'.replaceAll('{' r'donator_id' '}', donatorId.toString());
+    final _path = r'/api-donator/donator/{donator_id}'.replaceAll('{' r'donator_id' '}', donatorId.toString());
     final _options = Options(
       method: r'GET',
       headers: <String, dynamic>{
@@ -202,9 +202,9 @@ _responseData = rawData == null ? null : deserialize<Login200ResponseDto, Login2
   /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
   /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
   ///
-  /// Returns a [Future] containing a [Response] with a [int] as data
+  /// Returns a [Future] containing a [Response] with a [DonatorDto] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<int>> registerDonator({ 
+  Future<Response<DonatorDto>> registerDonator({ 
     required DonatorRegisterDto donatorRegisterDto,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
@@ -213,7 +213,7 @@ _responseData = rawData == null ? null : deserialize<Login200ResponseDto, Login2
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/donator';
+    final _path = r'/api-donator/donator';
     final _options = Options(
       method: r'POST',
       headers: <String, dynamic>{
@@ -257,11 +257,11 @@ _bodyData=jsonEncode(donatorRegisterDto);
       onReceiveProgress: onReceiveProgress,
     );
 
-    int? _responseData;
+    DonatorDto? _responseData;
 
     try {
 final rawData = _response.data;
-_responseData = rawData == null ? null : deserialize<int, int>(rawData, 'int', growable: true);
+_responseData = rawData == null ? null : deserialize<DonatorDto, DonatorDto>(rawData, 'DonatorDto', growable: true);
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -272,7 +272,7 @@ _responseData = rawData == null ? null : deserialize<int, int>(rawData, 'int', g
       );
     }
 
-    return Response<int>(
+    return Response<DonatorDto>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,

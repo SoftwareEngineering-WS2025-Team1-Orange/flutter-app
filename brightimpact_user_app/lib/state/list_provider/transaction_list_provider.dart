@@ -1,36 +1,15 @@
-import 'package:bright_impact/model/ngo.dart';
-import 'package:bright_impact/state/api_service.dart';
-import 'package:bright_impact/api/lib/openapi.dart';
+import 'package:bright_impact/model/transaction.dart';
 import 'package:bright_impact/state/entity_provider/entity_provider.dart';
 import 'package:bright_impact/state/list_provider/list_provider.dart';
-import 'package:dio/dio.dart';
 
-class NgoListProvider extends ListProvider<NGO> {
-  // PRIVATE ATTRIBUTES
-  bool _filterIsFavorite = false;
-  bool _filterDonatedTo = false;
-  bool _sortNewest = false;
-
-  // PUBLIC GETTER FOR PRIVATE ATTRIBUTES
-  bool get filterIsFavorite => _filterIsFavorite;
-  bool get filterDonatedTo => _filterDonatedTo;
-  bool get sortNewest => _sortNewest;
-
+class TransactionListProvider extends ListProvider<Transaction> {
   // CONSTRUCTOR
-  NgoListProvider({super.resultsPerPage});
-
-  /// Sets the passed filter or sort arguments and then automatically fetched the list of NGOs
-  Future<void> setFilterAndFetch(
-      {bool? isFavorite, bool? donatedTo, bool? newest}) async {
-    _filterIsFavorite = isFavorite ?? filterIsFavorite;
-    _filterDonatedTo = donatedTo ?? filterDonatedTo;
-    _sortNewest = newest ?? sortNewest;
-    await fetchFirstPage();
-  }
+  TransactionListProvider({super.resultsPerPage});
 
   @override
-  Future<ApiResponse<PaginatedList<NGO>>> getFromServer() async {
-    Response<GetNgoList200ResponseDto> response =
+  Future<ApiResponse<PaginatedList<Transaction>>> getFromServer() async {
+    // TODO: Implement
+    /*Response<GetNgoList200ResponseDto> response =
         await ApiService.shared.getNGOApi().getNgoList(
               donatorId: 1,
               paginationPage: currentPage,
@@ -56,6 +35,38 @@ class NgoListProvider extends ListProvider<NGO> {
     return ApiResponse(
         httpStatusCode: response.statusCode,
         httpStatusMessage: response.statusMessage,
-        data: list);
+        data: list);*/
+
+    return ApiResponse(
+        httpStatusCode: 200,
+        httpStatusMessage: "",
+        data: PaginatedList<Transaction>(
+            entries: [Donation(
+        DateTime.now(),
+        -2.00,
+        1,
+        101,
+        "New Roots e.V.",
+        201,
+        "Beach Cleaning in Kenia",
+      ),
+      Earning(
+        DateTime.now(),
+        0.14,
+        2,
+        301,
+        "Computing Box 1",
+        Duration(minutes: 35, seconds: 3),
+      ),
+      Donation(
+        DateTime.now(),
+        -0.50,
+        3,
+        102,
+        "New Roots e.V.",
+        202,
+        "School Material",
+      ),],
+            paginationData: Pagination(3, 3, 1, resultsPerPage, 1)));
   }
 }

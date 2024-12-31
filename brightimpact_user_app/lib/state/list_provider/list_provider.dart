@@ -1,7 +1,7 @@
 import 'package:bright_impact/state/api_provider_error.dart';
 import 'package:bright_impact/state/api_provider_exception.dart';
 import 'package:bright_impact/api/lib/openapi.dart';
-import 'package:bright_impact/state/entity_provider.dart';
+import 'package:bright_impact/state/entity_provider/entity_provider.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 

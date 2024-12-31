@@ -1,4 +1,4 @@
-import 'package:bright_impact/state/entity_provider.dart';
+import 'package:bright_impact/state/entity_provider/entity_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';

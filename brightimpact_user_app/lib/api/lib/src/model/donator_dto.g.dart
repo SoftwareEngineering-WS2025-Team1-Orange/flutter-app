@@ -13,17 +13,17 @@ DonatorDto _$DonatorDtoFromJson(Map<String, dynamic> json) => $checkedCreate(
         $checkKeys(
           json,
           requiredKeys: const [
-            'firstname',
-            'lastname',
-            'mail',
+            'firstName',
+            'lastName',
+            'email',
             'balance',
             'id'
           ],
         );
         final val = DonatorDto(
-          firstname: $checkedConvert('firstname', (v) => v as String),
-          lastname: $checkedConvert('lastname', (v) => v as String),
-          mail: $checkedConvert('mail', (v) => v as String),
+          firstName: $checkedConvert('firstName', (v) => v as String),
+          lastName: $checkedConvert('lastName', (v) => v as String),
+          email: $checkedConvert('email', (v) => v as String),
           balance: $checkedConvert('balance', (v) => v as num),
           id: $checkedConvert('id', (v) => (v as num).toInt()),
         );
@@ -33,9 +33,9 @@ DonatorDto _$DonatorDtoFromJson(Map<String, dynamic> json) => $checkedCreate(
 
 Map<String, dynamic> _$DonatorDtoToJson(DonatorDto instance) =>
     <String, dynamic>{
-      'firstname': instance.firstname,
-      'lastname': instance.lastname,
-      'mail': instance.mail,
+      'firstName': instance.firstName,
+      'lastName': instance.lastName,
+      'email': instance.email,
       'balance': instance.balance,
       'id': instance.id,
     };

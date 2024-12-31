@@ -1,12 +1,13 @@
-import 'package:bright_impact/model/ngo.dart';
+import 'package:bright_impact/model/project.dart';
 import 'package:bright_impact/state/api_service.dart';
-import 'package:bright_impact/state/entity_provider.dart';
+import 'package:bright_impact/state/entity_provider/entity_provider.dart';
 
 
-class NgoProvider extends EntityProvider<NGO> {
+
+class ProjectProvider extends EntityProvider<Project> {
   @override
-  Future<ApiResponse<NGO>> getFromServer({required int id}) async {
-    final response = await ApiService.shared.getNGOApi().getNgoList(donatorId: 1, filterNgoId: id);
+  Future<ApiResponse<Project>> getFromServer({required int id}) async {
+    final response = await ApiService.shared.getProjectApi().getProjectList(donatorId: 1, filterProjectId: id);
 
     if (response.data == null) {
       return ApiResponse(
@@ -15,7 +16,7 @@ class NgoProvider extends EntityProvider<NGO> {
           data: null);
     }
 
-    final list = response.data!.ngos;
+    final list = response.data!.projects;
 
     if (list.isEmpty) {
       return ApiResponse(
@@ -28,7 +29,7 @@ class NgoProvider extends EntityProvider<NGO> {
     return ApiResponse(
         httpStatusCode: response.statusCode,
         httpStatusMessage: response.statusMessage,
-        data: NGO.fromDto(list.first));
+        data: Project.fromDto(list.first));
   }
 
   // For test

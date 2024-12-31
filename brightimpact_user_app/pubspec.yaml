@@ -36,6 +36,9 @@ dependencies:
     path: lib/api
   provider: ^6.1.2
   url_launcher: ^6.1.7
+  shared_preferences: ^2.1.1
+  flutter_secure_storage: ^7.0.0
+  intl: ^0.18.0
 
 dev_dependencies:
   flutter_test:
@@ -61,10 +64,7 @@ flutter:
   uses-material-design: true
 
   assets:
-     - assets/images/samples/beach_clean.jpg
-     - assets/images/samples/recycling.jpg
-     - assets/images/samples/school.jpg
-     - assets/images/samples/tree_planting.jpg
+     #- assets/images/samples/beach_clean.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

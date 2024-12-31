@@ -18,11 +18,11 @@ class DonatorDto {
   /// Returns a new [DonatorDto] instance.
   DonatorDto({
 
-    required  this.firstname,
+    required  this.firstName,
 
-    required  this.lastname,
+    required  this.lastName,
 
-    required  this.mail,
+    required  this.email,
 
     required  this.balance,
 
@@ -31,37 +31,37 @@ class DonatorDto {
 
   @JsonKey(
     
-    name: r'firstname',
+    name: r'firstName',
     required: true,
     includeIfNull: false,
   )
 
 
-  final String firstname;
+  final String firstName;
 
 
 
   @JsonKey(
     
-    name: r'lastname',
+    name: r'lastName',
     required: true,
     includeIfNull: false,
   )
 
 
-  final String lastname;
+  final String lastName;
 
 
 
   @JsonKey(
     
-    name: r'mail',
+    name: r'email',
     required: true,
     includeIfNull: false,
   )
 
 
-  final String mail;
+  final String email;
 
 
 
@@ -93,17 +93,17 @@ class DonatorDto {
 
     @override
     bool operator ==(Object other) => identical(this, other) || other is DonatorDto &&
-      other.firstname == firstname &&
-      other.lastname == lastname &&
-      other.mail == mail &&
+      other.firstName == firstName &&
+      other.lastName == lastName &&
+      other.email == email &&
       other.balance == balance &&
       other.id == id;
 
     @override
     int get hashCode =>
-        firstname.hashCode +
-        lastname.hashCode +
-        mail.hashCode +
+        firstName.hashCode +
+        lastName.hashCode +
+        email.hashCode +
         balance.hashCode +
         id.hashCode;
 

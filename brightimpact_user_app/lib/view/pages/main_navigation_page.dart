@@ -1,8 +1,11 @@
+import 'package:bright_impact/state/app_state.dart';
 import 'package:bright_impact/view/custom_widgets/donation_wallet_widget.dart';
 import 'package:bright_impact/view/pages/home_page.dart';
 import 'package:bright_impact/view/pages/list_pages/ngo_list_page.dart';
 import 'package:bright_impact/view/pages/list_pages/project_list_page.dart';
+import 'package:bright_impact/view/pages/list_pages/transaction_list_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MainNavigationPage extends StatefulWidget {
   const MainNavigationPage({super.key});
@@ -40,6 +43,8 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
     final double tabWidth = navBarWidth / 4; // 4 tabs
     final double tabHeight = navBarHeight * 0.8;
 
+    final appState = Provider.of<AppState>(context);
+
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 228, 228, 228),
       body: Stack(
@@ -55,7 +60,7 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
               HomePage(),
               NGOListPage(),
               ProjectListPage(),
-              Page1(),
+              TransactionListPage()
             ],
           ),
           Align(
@@ -118,7 +123,7 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
           ),
           _buildTopBar(
               context: context,
-              onUserPressed: () => {},
+              onUserPressed: () => {appState.logout()},
           )
         ],
       ),
@@ -141,6 +146,7 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
 Widget _buildTopBar({required context, void Function()? onUserPressed}) {
   final theme = Theme.of(context);
   final width = MediaQuery.of(context).size.width;
+  final appState = Provider.of<AppState>(context);
 
   return Stack(
     children: [
@@ -161,7 +167,7 @@ Widget _buildTopBar({required context, void Function()? onUserPressed}) {
         Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: Row(children: [
-              Text("Hi Tom",
+              Text("Hi ${appState.donator?.firstname ?? ""}",
                   style: theme.textTheme.headlineLarge,
                   textAlign: TextAlign.left),
               Spacer(),
@@ -184,7 +190,7 @@ Widget _buildTopBar({required context, void Function()? onUserPressed}) {
             ])),
         SizedBox(height: width * 0.03),
         Center(
-          child: DonationWalletWidget(amount: 4.24),
+          child: DonationWalletWidget(amount: appState.donator?.balance.toDouble() ?? 0.0),
         )
       ])
     ],

@@ -17,7 +17,7 @@ void main() {
       // TODO
     });
 
-    //Future<int> registerDonator(DonatorRegisterDto donatorRegisterDto) async
+    //Future<DonatorDto> registerDonator(DonatorRegisterDto donatorRegisterDto) async
     test('test registerDonator', () async {
       // TODO
     });

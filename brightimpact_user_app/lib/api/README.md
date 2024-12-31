@@ -69,9 +69,9 @@ Class | Method | HTTP request | Description
 [*DonationboxApi*](doc/DonationboxApi.md) | [**getDonationbox**](doc/DonationboxApi.md#getdonationbox) | **GET** /donator/{donator_id}/donationbox | 
 [*DonationboxApi*](doc/DonationboxApi.md) | [**registerDonationbox**](doc/DonationboxApi.md#registerdonationbox) | **POST** /donator/{donator_id}/donationbox | 
 [*DonationsApi*](doc/DonationsApi.md) | [**getDonationList**](doc/DonationsApi.md#getdonationlist) | **GET** /donator/{donator_id}/donation | 
-[*DonatorApi*](doc/DonatorApi.md) | [**getDonator**](doc/DonatorApi.md#getdonator) | **GET** /donator/{donator_id} | 
+[*DonatorApi*](doc/DonatorApi.md) | [**getDonator**](doc/DonatorApi.md#getdonator) | **GET** /api-donator/donator/{donator_id} | 
 [*DonatorApi*](doc/DonatorApi.md) | [**login**](doc/DonatorApi.md#login) | **POST** /donator/login | 
-[*DonatorApi*](doc/DonatorApi.md) | [**registerDonator**](doc/DonatorApi.md#registerdonator) | **POST** /donator | 
+[*DonatorApi*](doc/DonatorApi.md) | [**registerDonator**](doc/DonatorApi.md#registerdonator) | **POST** /api-donator/donator | 
 [*NGOApi*](doc/NGOApi.md) | [**getNgoList**](doc/NGOApi.md#getngolist) | **GET** /api-donator/ngo | 
 [*PowerSupplyApi*](doc/PowerSupplyApi.md) | [**addPowersupply**](doc/PowerSupplyApi.md#addpowersupply) | **POST** /donator/{donator_id}/powersupply | 
 [*PowerSupplyApi*](doc/PowerSupplyApi.md) | [**getPowersupply**](doc/PowerSupplyApi.md#getpowersupply) | **GET** /donator/{donator_id}/powersupply | 

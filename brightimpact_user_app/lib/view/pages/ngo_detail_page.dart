@@ -1,5 +1,6 @@
-import 'package:bright_impact/state/ngo_provider.dart';
+import 'package:bright_impact/state/entity_provider/ngo_provider.dart';
 import 'package:bright_impact/model/ngo.dart';
+import 'package:bright_impact/view/custom_widgets/button_widget.dart';
 import 'package:bright_impact/view/pages/detail_page.dart';
 import 'package:flutter/material.dart';
 
@@ -28,25 +29,11 @@ class NgoDetailsPage extends DetailsPage<NGO, NgoProvider> {
     final theme = Theme.of(context);
 
     return [
-      SizedBox(
-          width: screenWidth * 0.55,
-          child: ElevatedButton(
-            onPressed: () {
-              // Navigation zu Spenden-Seite
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: theme.primaryColor,
-            ),
-            child: Center(
-                child: Text(
-              "Donate",
-              style: TextStyle(
-                fontSize: screenWidth * 0.045,
-                fontWeight: FontWeight.w600,
-                color: theme.secondaryHeaderColor,
-              ),
-            )),
-          )),
+      ButtonWidget(
+          labelText: "Spenden",
+          onPressed: () {
+                return Future.value(true);
+              }),
       if (provider.entity?.websiteUrl != null)
         ElevatedButton(
           onPressed: () => openWebsite(provider.entity!.websiteUrl!),
@@ -69,16 +56,16 @@ class NgoDetailsPage extends DetailsPage<NGO, NgoProvider> {
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 25),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             entity.name,
             style: TextStyle(
-              fontSize: screenWidth * 0.075,
-              fontWeight: FontWeight.w700,
-            ),
+                fontSize: screenWidth * 0.073,
+                fontWeight: FontWeight.w700,
+                height: 1),
           ),
           SizedBox(height: screenWidth * 0.1),
           Text(entity.description),
@@ -114,19 +101,19 @@ class NgoDetailsPage extends DetailsPage<NGO, NgoProvider> {
           top: 16,
           right: 16,
           child: ElevatedButton(
-          onPressed: () => provider.toggleFavorite(),
-          style: ElevatedButton.styleFrom(
-            shape: CircleBorder(),
-            backgroundColor: const Color.fromARGB(255, 238, 236, 236),
-            padding: EdgeInsets.all(16),
-          ),
-          child: Icon(
-            entity?.isFavorite ?? false
+            onPressed: () => provider.toggleFavorite(),
+            style: ElevatedButton.styleFrom(
+              shape: CircleBorder(),
+              backgroundColor: const Color.fromARGB(255, 238, 236, 236),
+              padding: EdgeInsets.all(16),
+            ),
+            child: Icon(
+              entity?.isFavorite ?? false
                   ? Icons.favorite
                   : Icons.favorite_border,
-            color: theme.primaryColor,
+              color: theme.primaryColor,
+            ),
           ),
-        ),
         ),
       ],
     );
