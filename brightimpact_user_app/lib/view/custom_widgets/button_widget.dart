@@ -5,15 +5,16 @@ class ButtonWidget extends StatefulWidget {
   final String labelText;
   final Future<bool> Function()? onPressed;
 
-  bool _isLoading = false;
 
-  ButtonWidget({super.key, required this.labelText, this.onPressed});
+  const ButtonWidget({super.key, required this.labelText, this.onPressed});
 
   @override
   State<StatefulWidget> createState() => _ButtonWidgetState();
 }
 
 class _ButtonWidgetState extends State<ButtonWidget> {
+  bool _isLoading = false;
+  
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -24,13 +25,13 @@ class _ButtonWidgetState extends State<ButtonWidget> {
         height: screenWidth * 0.13,
         child: ElevatedButton(
           onPressed: () {
-            if (widget.onPressed != null && !widget._isLoading) {
+            if (widget.onPressed != null && !_isLoading) {
               setState(() {
-                widget._isLoading = true;
+                _isLoading = true;
               });
               widget.onPressed!().whenComplete(() {
                 setState(() {
-                  widget._isLoading = false;
+                  _isLoading = false;
                 });
               });
             }
@@ -39,7 +40,7 @@ class _ButtonWidgetState extends State<ButtonWidget> {
             backgroundColor: theme.primaryColor,
           ),
           child: Center(
-              child: widget._isLoading
+              child: _isLoading
                   ? SizedBox(
                       height: screenWidth * 0.05,
                       child: AspectRatio(

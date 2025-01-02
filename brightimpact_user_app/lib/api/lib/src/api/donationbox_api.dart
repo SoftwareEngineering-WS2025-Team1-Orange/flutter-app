@@ -41,7 +41,7 @@ class DonationboxApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/donator/{donator_id}/donationbox'.replaceAll('{' r'donator_id' '}', donatorId.toString());
+    final _path = r'/api-donator/donationbox/donator/{donator_id}'.replaceAll('{' r'donator_id' '}', donatorId.toString());
     final _options = Options(
       method: r'GET',
       headers: <String, dynamic>{
@@ -119,7 +119,7 @@ _responseData = rawData == null ? null : deserialize<List<DonationboxDto>, Donat
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/donator/{donator_id}/donationbox'.replaceAll('{' r'donator_id' '}', donatorId.toString());
+    final _path = r'/api-donator/donationbox/donator/{donator_id}'.replaceAll('{' r'donator_id' '}', donatorId.toString());
     final _options = Options(
       method: r'POST',
       headers: <String, dynamic>{

@@ -13,10 +13,10 @@ DonatorLoginDto _$DonatorLoginDtoFromJson(Map<String, dynamic> json) =>
       ($checkedConvert) {
         $checkKeys(
           json,
-          requiredKeys: const ['mail', 'password'],
+          requiredKeys: const ['email', 'password'],
         );
         final val = DonatorLoginDto(
-          mail: $checkedConvert('mail', (v) => v as String),
+          email: $checkedConvert('email', (v) => v as String),
           password: $checkedConvert('password', (v) => v as String),
         );
         return val;
@@ -25,6 +25,6 @@ DonatorLoginDto _$DonatorLoginDtoFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$DonatorLoginDtoToJson(DonatorLoginDto instance) =>
     <String, dynamic>{
-      'mail': instance.mail,
+      'email': instance.email,
       'password': instance.password,
     };

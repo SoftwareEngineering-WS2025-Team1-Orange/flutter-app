@@ -9,7 +9,7 @@ All URIs are relative to *https://localhost:9000/api/v1/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getNgoList**](NGOApi.md#getngolist) | **GET** /api-donator/ngo | 
+[**getNgoList**](NGOApi.md#getngolist) | **GET** /api-donator/ngo/donator/{donator_id} | 
 
 
 # **getNgoList**

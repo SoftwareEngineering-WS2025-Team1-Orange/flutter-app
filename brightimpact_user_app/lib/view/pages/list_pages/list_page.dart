@@ -42,11 +42,10 @@ abstract class ListPage<T> extends StatefulWidget {
 
 abstract class ListPageState<T, W extends ListPage<T>> extends State<W>
     with AutomaticKeepAliveClientMixin {
-
   final ScrollController _scrollController = ScrollController();
   late final ListProvider<T> _provider;
 
-  // Prevents reloading of page when not visible 
+  // Prevents reloading of page when not visible
   @override
   bool get wantKeepAlive => true;
 
@@ -67,8 +66,11 @@ abstract class ListPageState<T, W extends ListPage<T>> extends State<W>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
+
     final theme = Theme.of(context);
     final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
 
     return ChangeNotifierProvider(
         create: (context) => _provider,
@@ -108,16 +110,19 @@ abstract class ListPageState<T, W extends ListPage<T>> extends State<W>
                       child: RefreshIndicator(
                     color: theme.primaryColor,
                     onRefresh: () =>
-                        provider.fetchFirstPage(), // Pull-to-Refresh auslösen
+                        provider.fetchFirstPage(), // Pull-to-Refresh
                     child: provider.loadingError != null ||
                             provider.entries.isEmpty
-                        ? Center(
-                            child: !provider.isLoading
-                                ? Text(provider.loadingError != null
-                                    ? "Hoppla! ${provider.loadingError!.message}"
-                                    : "Keine Einträge gefunden.")
-                                : CircularProgressIndicator(
-                                    color: theme.primaryColor))
+                        ? SingleChildScrollView(
+                            physics: const BouncingScrollPhysics(),
+                            padding: EdgeInsets.only(top: height * 0.25, bottom: height * 0.45),
+                            child: Center(
+                                child: !provider.isLoading
+                                    ? Text(provider.loadingError != null
+                                        ? "Hoppla! ${provider.loadingError!.message}"
+                                        : "Keine Einträge gefunden.")
+                                    : CircularProgressIndicator(
+                                        color: theme.primaryColor)))
                         : ListView.builder(
                             physics: const AlwaysScrollableScrollPhysics(),
                             padding: EdgeInsets.only(bottom: width * 0.25),

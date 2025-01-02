@@ -20,6 +20,8 @@ class DonationboxRegisterDto {
 
     required  this.cuid,
 
+    required  this.name,
+
      this.powerSupplyId,
   });
 
@@ -32,6 +34,18 @@ class DonationboxRegisterDto {
 
 
   final String cuid;
+
+
+
+  @JsonKey(
+    
+    name: r'name',
+    required: true,
+    includeIfNull: false,
+  )
+
+
+  final String name;
 
 
 
@@ -52,11 +66,13 @@ class DonationboxRegisterDto {
     @override
     bool operator ==(Object other) => identical(this, other) || other is DonationboxRegisterDto &&
       other.cuid == cuid &&
+      other.name == name &&
       other.powerSupplyId == powerSupplyId;
 
     @override
     int get hashCode =>
         cuid.hashCode +
+        name.hashCode +
         powerSupplyId.hashCode;
 
   factory DonationboxRegisterDto.fromJson(Map<String, dynamic> json) => _$DonationboxRegisterDtoFromJson(json);

@@ -6,7 +6,7 @@ class ApiLogin {
   Future<Token?> login(String email, String password) async {
     try {
       DonatorLoginDto credentials =
-          DonatorLoginDto(mail: email, password: password);
+          DonatorLoginDto(email: email, password: password);
       await ApiService.shared
           .getDonatorApi()
           .login(donatorLoginDto: credentials);

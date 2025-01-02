@@ -7,8 +7,8 @@ void main() {
   final instance = Openapi().getDonationsApi();
 
   group(DonationsApi, () {
-    //Future<GetDonationList200ResponseDto> getDonationList(int donatorId, { int filterId, int filterNgoId, String filterNgoName, int filterProjectId, String filterProjectName, DateTime filterCreatedFrom, DateTime filterCreatedTo, num filterAmountFrom, num filterAmountTo, String sortFor, SortTypeDto sortType, int paginationPage, int paginationPageSize }) async
-    test('test getDonationList', () async {
+    //Future<GetTransactionList200ResponseDto> getTransactionList(int donatorId, { int filterDonationNgoId, String filterDonationNgoName, int filterDonationProjectId, String filterDonationProjectName, int filterEarningDonationboxId, DateTime filterCreatedFrom, DateTime filterCreatedTo, num filterAmountFrom, num filterAmountTo, String sortFor, SortTypeDto sortType, int paginationPage, int paginationPageSize }) async
+    test('test getTransactionList', () async {
       // TODO
     });
 

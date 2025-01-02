@@ -25,7 +25,6 @@ class NgoDetailsPage extends DetailsPage<NGO, NgoProvider> {
 
   @override
   List<Widget> buildBottomButtons(BuildContext context, NgoProvider provider) {
-    final screenWidth = MediaQuery.of(context).size.width;
     final theme = Theme.of(context);
 
     return [

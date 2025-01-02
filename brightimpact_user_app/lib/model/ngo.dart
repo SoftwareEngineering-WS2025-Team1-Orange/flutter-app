@@ -22,6 +22,6 @@ class NGO {
         address = dto.address,
         description = dto.description,
         bannerUri = dto.bannerUri ??
-            "https://lirp.cdn-website.com/58002456/dms3rep/multi/opt/Logo_w_150ppi-134w.png",
+           "https://lirp.cdn-website.com/58002456/dms3rep/multi/opt/Logo_w_150ppi-134w.png",
         isFavorite = dto.isFavorite ?? false;
 }

@@ -137,7 +137,7 @@ class AppState with ChangeNotifier {
           .getDonationboxApi()
           .registerDonationbox(
               donatorId: 1,
-              donationboxRegisterDto: DonationboxRegisterDto(cuid: id));
+              donationboxRegisterDto: DonationboxRegisterDto(cuid: id, name: "Meine Donationbox"));
 
       if ((response.statusCode ?? 0) >= 200 &&
           (response.statusCode ?? 0) < 300) {

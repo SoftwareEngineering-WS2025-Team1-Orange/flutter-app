@@ -12,8 +12,6 @@ Name | Type | Description | Notes
 **name** | **String** |  | 
 **description** | **String** |  | 
 **bannerUri** | **String** |  | [optional] 
-**ngoId** | **int** |  | [optional] 
-**ngoName** | **String** |  | [optional] 
 **isFavorite** | **bool** |  | [optional] 
 **fundraisingGoal** | **num** |  | 
 **fundraisingCurrent** | **num** |  | 
@@ -21,7 +19,8 @@ Name | Type | Description | Notes
 **createdAt** | [**DateTime**](DateTime.md) |  | [optional] 
 **fundraisingClosed** | **bool** |  | 
 **progress** | **num** |  | 
-**isArchived** | **bool** |  | [optional] 
+**category** | [**ProjectCategoryDto**](ProjectCategoryDto.md) |  | 
+**ngo** | [**NGOBasicDto**](NGOBasicDto.md) |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

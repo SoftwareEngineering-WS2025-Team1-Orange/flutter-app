@@ -4,10 +4,11 @@
 
 // ignore_for_file: unused_element
 import 'package:openapi/src/model/donation_dto.dart';
+import 'package:openapi/src/model/earning_dto.dart';
 import 'package:openapi/src/model/pagination_dto.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'get_donation_list200_response_dto.g.dart';
+part 'get_transaction_list200_response_dto.g.dart';
 
 
 @JsonSerializable(
@@ -16,11 +17,13 @@ part 'get_donation_list200_response_dto.g.dart';
   disallowUnrecognizedKeys: false,
   explicitToJson: true,
 )
-class GetDonationList200ResponseDto {
-  /// Returns a new [GetDonationList200ResponseDto] instance.
-  GetDonationList200ResponseDto({
+class GetTransactionList200ResponseDto {
+  /// Returns a new [GetTransactionList200ResponseDto] instance.
+  GetTransactionList200ResponseDto({
 
     required  this.donations,
+
+     this.earnings,
 
     required  this.pagination,
   });
@@ -39,6 +42,18 @@ class GetDonationList200ResponseDto {
 
   @JsonKey(
     
+    name: r'earnings',
+    required: false,
+    includeIfNull: false,
+  )
+
+
+  final List<EarningDto>? earnings;
+
+
+
+  @JsonKey(
+    
     name: r'pagination',
     required: true,
     includeIfNull: false,
@@ -52,18 +67,20 @@ class GetDonationList200ResponseDto {
 
 
     @override
-    bool operator ==(Object other) => identical(this, other) || other is GetDonationList200ResponseDto &&
+    bool operator ==(Object other) => identical(this, other) || other is GetTransactionList200ResponseDto &&
       other.donations == donations &&
+      other.earnings == earnings &&
       other.pagination == pagination;
 
     @override
     int get hashCode =>
         donations.hashCode +
+        earnings.hashCode +
         pagination.hashCode;
 
-  factory GetDonationList200ResponseDto.fromJson(Map<String, dynamic> json) => _$GetDonationList200ResponseDtoFromJson(json);
+  factory GetTransactionList200ResponseDto.fromJson(Map<String, dynamic> json) => _$GetTransactionList200ResponseDtoFromJson(json);
 
-  Map<String, dynamic> toJson() => _$GetDonationList200ResponseDtoToJson(this);
+  Map<String, dynamic> toJson() => _$GetTransactionList200ResponseDtoToJson(this);
 
   @override
   String toString() {

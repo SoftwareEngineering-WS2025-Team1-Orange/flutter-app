@@ -9,8 +9,8 @@ All URIs are relative to *https://localhost:9000/api/v1/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getDonationbox**](DonationboxApi.md#getdonationbox) | **GET** /donator/{donator_id}/donationbox | 
-[**registerDonationbox**](DonationboxApi.md#registerdonationbox) | **POST** /donator/{donator_id}/donationbox | 
+[**getDonationbox**](DonationboxApi.md#getdonationbox) | **GET** /api-donator/donationbox/donator/{donator_id} | 
+[**registerDonationbox**](DonationboxApi.md#registerdonationbox) | **POST** /api-donator/donationbox/donator/{donator_id} | 
 
 
 # **getDonationbox**

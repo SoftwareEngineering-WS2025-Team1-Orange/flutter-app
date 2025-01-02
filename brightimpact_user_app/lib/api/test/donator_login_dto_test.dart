@@ -7,8 +7,8 @@ void main() {
   // TODO add properties to the entity
 
   group(DonatorLoginDto, () {
-    // String mail
-    test('to test the property `mail`', () async {
+    // String email
+    test('to test the property `email`', () async {
       // TODO
     });
 

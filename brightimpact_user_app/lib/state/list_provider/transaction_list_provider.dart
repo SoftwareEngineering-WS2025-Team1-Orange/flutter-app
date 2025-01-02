@@ -1,6 +1,9 @@
+import 'package:bright_impact/api/lib/openapi.dart';
 import 'package:bright_impact/model/transaction.dart';
+import 'package:bright_impact/state/api_service.dart';
 import 'package:bright_impact/state/entity_provider/entity_provider.dart';
 import 'package:bright_impact/state/list_provider/list_provider.dart';
+import 'package:dio/dio.dart';
 
 class TransactionListProvider extends ListProvider<Transaction> {
   // CONSTRUCTOR
@@ -8,16 +11,13 @@ class TransactionListProvider extends ListProvider<Transaction> {
 
   @override
   Future<ApiResponse<PaginatedList<Transaction>>> getFromServer() async {
-    // TODO: Implement
-    /*Response<GetNgoList200ResponseDto> response =
-        await ApiService.shared.getNGOApi().getNgoList(
+    Response<GetTransactionList200ResponseDto> response =
+        await ApiService.shared.getDonationsApi().getTransactionList (
               donatorId: 1,
               paginationPage: currentPage,
               paginationPageSize: resultsPerPage,
-              filterIsFavorite: _filterIsFavorite,
-              filterDonatedTo: _filterDonatedTo,
-              sortFor: _sortNewest ? "created_at" : "name",
-              sortType: _sortNewest ? SortTypeDto.desc : SortTypeDto.asc,
+              sortFor: "created_at",
+              sortType: SortTypeDto.desc,
             );
 
     if (response.data == null) {
@@ -28,45 +28,23 @@ class TransactionListProvider extends ListProvider<Transaction> {
     }
 
     final data = response.data!;
-    final list = PaginatedList<NGO>(
-        entries: data.ngos.map((dto) => NGO.fromDto(dto)).toList(),
+    // Earnings and Donations are received seperately
+    final earnings = data.earnings?.map((dto) => Earning.fromDto(dto)).toList() ?? [];
+    final donations = data.donations.map((dto) => Donation.fromDto(dto)).toList();
+
+    // Earnings and Donations are merges as List of Transactions and then sorted by created_at desc
+    List<Transaction> entries = [];
+    entries.addAll(earnings);
+    entries.addAll(donations);
+    entries.sort((b,a) => a.datetime.compareTo(b.datetime));
+
+    final list = PaginatedList<Transaction>(
+        entries: entries,
         paginationData: Pagination.fromDto(data.pagination));
 
     return ApiResponse(
         httpStatusCode: response.statusCode,
         httpStatusMessage: response.statusMessage,
-        data: list);*/
-
-    return ApiResponse(
-        httpStatusCode: 200,
-        httpStatusMessage: "",
-        data: PaginatedList<Transaction>(
-            entries: [Donation(
-        DateTime.now(),
-        -2.00,
-        1,
-        101,
-        "New Roots e.V.",
-        201,
-        "Beach Cleaning in Kenia",
-      ),
-      Earning(
-        DateTime.now(),
-        0.14,
-        2,
-        301,
-        "Computing Box 1",
-        Duration(minutes: 35, seconds: 3),
-      ),
-      Donation(
-        DateTime.now(),
-        -0.50,
-        3,
-        102,
-        "New Roots e.V.",
-        202,
-        "School Material",
-      ),],
-            paginationData: Pagination(3, 3, 1, resultsPerPage, 1)));
+        data: list);
   }
 }

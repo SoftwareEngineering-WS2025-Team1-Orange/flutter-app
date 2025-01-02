@@ -15,7 +15,6 @@ class Project {
   final DateTime createdAt;
   final bool fundraisingClosed;
   final num progress;
-  final bool isArchived;
   final List<ProjectCategoryDto> category;
 
   Project({
@@ -32,7 +31,6 @@ class Project {
     required this.createdAt,
     required this.fundraisingClosed,
     required this.progress,
-    required this.isArchived,
     required this.category,
   });
 
@@ -43,8 +41,8 @@ class Project {
         description = dto.description,
         bannerUri = dto.bannerUri ??
             "https://lirp.cdn-website.com/58002456/dms3rep/multi/opt/IMG_8142-1920w.jpg",
-        ngoId = dto.ngoId ?? 0,
-        ngoName = dto.ngoName ?? "Die NGO",
+        ngoId = dto.ngo.id,
+        ngoName = dto.ngo.name,
         isFavorite = dto.isFavorite ?? false,
         fundraisingGoal = dto.fundraisingGoal,
         fundraisingCurrent = dto.fundraisingCurrent,
@@ -52,6 +50,5 @@ class Project {
         createdAt = dto.createdAt ?? DateTime.now(),
         fundraisingClosed = dto.fundraisingClosed,
         progress = dto.progress,
-        isArchived = dto.isArchived ?? false,
         category = List.empty(); //dto.category;
 }

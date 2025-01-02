@@ -3,6 +3,8 @@
 //
 
 // ignore_for_file: unused_element
+import 'package:openapi/src/model/ngo_basic_dto.dart';
+import 'package:openapi/src/model/project_category_dto.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'project_dto.g.dart';
@@ -26,10 +28,6 @@ class ProjectDto {
 
      this.bannerUri,
 
-     this.ngoId,
-
-     this.ngoName,
-
      this.isFavorite,
 
     required  this.fundraisingGoal,
@@ -44,7 +42,9 @@ class ProjectDto {
 
     required  this.progress,
 
-     this.isArchived,
+    required  this.category,
+
+    required  this.ngo,
   });
 
   @JsonKey(
@@ -92,30 +92,6 @@ class ProjectDto {
 
 
   final String? bannerUri;
-
-
-
-  @JsonKey(
-    
-    name: r'ngo_id',
-    required: false,
-    includeIfNull: false,
-  )
-
-
-  final int? ngoId;
-
-
-
-  @JsonKey(
-    
-    name: r'ngo_name',
-    required: false,
-    includeIfNull: false,
-  )
-
-
-  final String? ngoName;
 
 
 
@@ -205,13 +181,25 @@ class ProjectDto {
 
   @JsonKey(
     
-    name: r'is_archived',
-    required: false,
+    name: r'category',
+    required: true,
     includeIfNull: false,
   )
 
 
-  final bool? isArchived;
+  final ProjectCategoryDto category;
+
+
+
+  @JsonKey(
+    
+    name: r'ngo',
+    required: true,
+    includeIfNull: false,
+  )
+
+
+  final NGOBasicDto ngo;
 
 
 
@@ -223,8 +211,6 @@ class ProjectDto {
       other.name == name &&
       other.description == description &&
       other.bannerUri == bannerUri &&
-      other.ngoId == ngoId &&
-      other.ngoName == ngoName &&
       other.isFavorite == isFavorite &&
       other.fundraisingGoal == fundraisingGoal &&
       other.fundraisingCurrent == fundraisingCurrent &&
@@ -232,7 +218,8 @@ class ProjectDto {
       other.createdAt == createdAt &&
       other.fundraisingClosed == fundraisingClosed &&
       other.progress == progress &&
-      other.isArchived == isArchived;
+      other.category == category &&
+      other.ngo == ngo;
 
     @override
     int get hashCode =>
@@ -240,8 +227,6 @@ class ProjectDto {
         name.hashCode +
         description.hashCode +
         bannerUri.hashCode +
-        ngoId.hashCode +
-        ngoName.hashCode +
         isFavorite.hashCode +
         fundraisingGoal.hashCode +
         fundraisingCurrent.hashCode +
@@ -249,7 +234,8 @@ class ProjectDto {
         createdAt.hashCode +
         fundraisingClosed.hashCode +
         progress.hashCode +
-        isArchived.hashCode;
+        category.hashCode +
+        ngo.hashCode;
 
   factory ProjectDto.fromJson(Map<String, dynamic> json) => _$ProjectDtoFromJson(json);
 

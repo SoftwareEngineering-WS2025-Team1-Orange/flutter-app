@@ -32,8 +32,7 @@ class ProjectListPage extends ListPage<Project> {
         label: "Gespendet",
         isActive: projectProvider.filterDonatedTo,
         onTap: () => projectProvider.setFilterAndFetch(
-            donatedTo: !projectProvider.filterDonatedTo,
-            includeArchived: !projectProvider.filterDonatedTo),
+            donatedTo: !projectProvider.filterDonatedTo),
       ),
       FilterButtonConfig(
         label: "Neuste ↑",

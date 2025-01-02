@@ -27,16 +27,6 @@ void main() {
       // TODO
     });
 
-    // int ngoId
-    test('to test the property `ngoId`', () async {
-      // TODO
-    });
-
-    // String ngoName
-    test('to test the property `ngoName`', () async {
-      // TODO
-    });
-
     // bool isFavorite
     test('to test the property `isFavorite`', () async {
       // TODO
@@ -72,8 +62,13 @@ void main() {
       // TODO
     });
 
-    // bool isArchived
-    test('to test the property `isArchived`', () async {
+    // ProjectCategoryDto category
+    test('to test the property `category`', () async {
+      // TODO
+    });
+
+    // NGOBasicDto ngo
+    test('to test the property `ngo`', () async {
       // TODO
     });
 

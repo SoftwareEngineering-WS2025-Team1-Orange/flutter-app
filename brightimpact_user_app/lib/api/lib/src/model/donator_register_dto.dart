@@ -18,36 +18,36 @@ class DonatorRegisterDto {
   /// Returns a new [DonatorRegisterDto] instance.
   DonatorRegisterDto({
 
-     this.firstName,
+    required  this.firstName,
 
-     this.lastName,
+    required  this.lastName,
 
     required  this.password,
 
-     this.email,
+    required  this.email,
   });
 
   @JsonKey(
     
     name: r'firstName',
-    required: false,
+    required: true,
     includeIfNull: false,
   )
 
 
-  final String? firstName;
+  final String firstName;
 
 
 
   @JsonKey(
     
     name: r'lastName',
-    required: false,
+    required: true,
     includeIfNull: false,
   )
 
 
-  final String? lastName;
+  final String lastName;
 
 
 
@@ -66,12 +66,12 @@ class DonatorRegisterDto {
   @JsonKey(
     
     name: r'email',
-    required: false,
+    required: true,
     includeIfNull: false,
   )
 
 
-  final String? email;
+  final String email;
 
 
 

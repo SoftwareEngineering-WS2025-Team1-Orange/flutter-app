@@ -17,12 +17,12 @@ void main() {
       // TODO
     });
 
-    // DonationProjectDto project
+    // ProjectBasicDto project
     test('to test the property `project`', () async {
       // TODO
     });
 
-    // DonationNgoDto ngo
+    // NGOBasicDto ngo
     test('to test the property `ngo`', () async {
       // TODO
     });

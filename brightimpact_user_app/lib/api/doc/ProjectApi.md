@@ -9,11 +9,11 @@ All URIs are relative to *https://localhost:9000/api/v1/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getProjectList**](ProjectApi.md#getprojectlist) | **GET** /project | 
+[**getProjectList**](ProjectApi.md#getprojectlist) | **GET** /api-donator/project/donator/{donator_id} | 
 
 
 # **getProjectList**
-> GetProjectList200ResponseDto getProjectList(donatorId, filterProjectId, filterCategory, filterIsFavorite, filterNameContains, filterIncludeArchived, filterDonatedTo, paginationPage, paginationPageSize, filterNgoId, filterNgoNameContains, sortFor, sortType)
+> GetProjectList200ResponseDto getProjectList(donatorId, filterProjectId, filterCategory, filterIsFavorite, filterNameContains, filterDonatedTo, paginationPage, paginationPageSize, filterNgoId, filterNgoNameContains, sortFor, sortType)
 
 
 
@@ -29,7 +29,6 @@ final int filterProjectId = 56; // int |
 final ProjectCategoryDto filterCategory = ; // ProjectCategoryDto | 
 final bool filterIsFavorite = true; // bool | 
 final String filterNameContains = filterNameContains_example; // String | 
-final bool filterIncludeArchived = true; // bool | 
 final bool filterDonatedTo = true; // bool | 
 final int paginationPage = 56; // int | 
 final int paginationPageSize = 56; // int | 
@@ -39,7 +38,7 @@ final String sortFor = sortFor_example; // String | The field to sort by
 final SortTypeDto sortType = ; // SortTypeDto | 
 
 try {
-    final response = api.getProjectList(donatorId, filterProjectId, filterCategory, filterIsFavorite, filterNameContains, filterIncludeArchived, filterDonatedTo, paginationPage, paginationPageSize, filterNgoId, filterNgoNameContains, sortFor, sortType);
+    final response = api.getProjectList(donatorId, filterProjectId, filterCategory, filterIsFavorite, filterNameContains, filterDonatedTo, paginationPage, paginationPageSize, filterNgoId, filterNgoNameContains, sortFor, sortType);
     print(response);
 } catch on DioException (e) {
     print('Exception when calling ProjectApi->getProjectList: $e\n');
@@ -55,7 +54,6 @@ Name | Type | Description  | Notes
  **filterCategory** | [**ProjectCategoryDto**](.md)|  | [optional] 
  **filterIsFavorite** | **bool**|  | [optional] 
  **filterNameContains** | **String**|  | [optional] 
- **filterIncludeArchived** | **bool**|  | [optional] 
  **filterDonatedTo** | **bool**|  | [optional] 
  **paginationPage** | **int**|  | [optional] [default to 1]
  **paginationPageSize** | **int**|  | [optional] [default to 20]

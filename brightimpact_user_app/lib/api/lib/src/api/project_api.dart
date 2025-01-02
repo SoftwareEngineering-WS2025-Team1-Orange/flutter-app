@@ -28,7 +28,6 @@ class ProjectApi {
   /// * [filterCategory] 
   /// * [filterIsFavorite] 
   /// * [filterNameContains] 
-  /// * [filterIncludeArchived] 
   /// * [filterDonatedTo] 
   /// * [paginationPage] 
   /// * [paginationPageSize] 
@@ -51,7 +50,6 @@ class ProjectApi {
     ProjectCategoryDto? filterCategory,
     bool? filterIsFavorite,
     String? filterNameContains,
-    bool? filterIncludeArchived,
     bool? filterDonatedTo,
     int? paginationPage = 1,
     int? paginationPageSize = 20,
@@ -66,7 +64,7 @@ class ProjectApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/project'.replaceAll('{' r'donator_id' '}', donatorId.toString());
+    final _path = r'/api-donator/project/donator/{donator_id}'.replaceAll('{' r'donator_id' '}', donatorId.toString());
     final _options = Options(
       method: r'GET',
       headers: <String, dynamic>{
@@ -89,7 +87,6 @@ class ProjectApi {
       if (filterCategory != null) r'filter_category': filterCategory,
       if (filterIsFavorite != null) r'filter_is_favorite': filterIsFavorite,
       if (filterNameContains != null) r'filter_name_contains': filterNameContains,
-      if (filterIncludeArchived != null) r'filter_include_archived': filterIncludeArchived,
       if (filterDonatedTo != null) r'filter_donated_to': filterDonatedTo,
       if (paginationPage != null) r'pagination_page': paginationPage,
       if (paginationPageSize != null) r'pagination_page_size': paginationPageSize,

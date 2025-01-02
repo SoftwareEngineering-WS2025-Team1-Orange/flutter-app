@@ -20,10 +20,10 @@ class Donation extends Transaction {
 
   Donation.fromDto(DonationDto dto)
       : id = dto.id,
-        ngoId = dto.ngo.id ?? 0,
-        ngoName = dto.ngo.name ?? "FEHLT",
-        projectId = dto.project.id ?? 0,
-        projectName = dto.project.name ?? "FEHLT",
+        ngoId = dto.ngo.id,
+        ngoName = dto.ngo.name,
+        projectId = dto.project?.id ?? 0,
+        projectName = dto.project?.name ?? "FEHLT",
         super(dto.createdAt, dto.amount.toDouble());
 }
 
@@ -42,5 +42,10 @@ class Earning extends Transaction {
     this.calcDuration,
   );
 
-  // TODO: Earning.fromDto() ...
+  Earning.fromDto(EarningDto dto)
+      : id = dto.id,
+        donationboxId = dto.donationBoxId.toInt(),
+        donationboxName = "Donationbox",
+        calcDuration = Duration(seconds: dto.activeTimeInPeriod.toInt()),
+        super(dto.createdAt, dto.amount.toDouble());
 }

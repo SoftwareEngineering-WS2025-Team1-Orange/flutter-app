@@ -3,8 +3,8 @@
 //
 
 // ignore_for_file: unused_element
-import 'package:openapi/src/model/donation_ngo_dto.dart';
-import 'package:openapi/src/model/donation_project_dto.dart';
+import 'package:openapi/src/model/project_basic_dto.dart';
+import 'package:openapi/src/model/ngo_basic_dto.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'donation_dto.g.dart';
@@ -24,7 +24,7 @@ class DonationDto {
 
     required  this.amount,
 
-    required  this.project,
+     this.project,
 
     required  this.ngo,
 
@@ -58,12 +58,12 @@ class DonationDto {
   @JsonKey(
     
     name: r'project',
-    required: true,
+    required: false,
     includeIfNull: false,
   )
 
 
-  final DonationProjectDto project;
+  final ProjectBasicDto? project;
 
 
 
@@ -75,7 +75,7 @@ class DonationDto {
   )
 
 
-  final DonationNgoDto ngo;
+  final NGOBasicDto ngo;
 
 
 

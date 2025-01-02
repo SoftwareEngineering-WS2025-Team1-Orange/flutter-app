@@ -9,7 +9,7 @@ import 'dart:convert';
 import 'package:openapi/src/deserialize.dart';
 import 'package:dio/dio.dart';
 
-import 'package:openapi/src/model/get_donation_list200_response_dto.dart';
+import 'package:openapi/src/model/get_transaction_list200_response_dto.dart';
 import 'package:openapi/src/model/sort_type_dto.dart';
 
 class DonationsApi {
@@ -18,16 +18,16 @@ class DonationsApi {
 
   const DonationsApi(this._dio);
 
-  /// getDonationList
+  /// getTransactionList
   /// 
   ///
   /// Parameters:
   /// * [donatorId] 
-  /// * [filterId] 
-  /// * [filterNgoId] 
-  /// * [filterNgoName] 
-  /// * [filterProjectId] 
-  /// * [filterProjectName] 
+  /// * [filterDonationNgoId] 
+  /// * [filterDonationNgoName] 
+  /// * [filterDonationProjectId] 
+  /// * [filterDonationProjectName] 
+  /// * [filterEarningDonationboxId] 
   /// * [filterCreatedFrom] 
   /// * [filterCreatedTo] 
   /// * [filterAmountFrom] 
@@ -43,15 +43,15 @@ class DonationsApi {
   /// * [onSendProgress] - A [ProgressCallback] that can be used to get the send progress
   /// * [onReceiveProgress] - A [ProgressCallback] that can be used to get the receive progress
   ///
-  /// Returns a [Future] containing a [Response] with a [GetDonationList200ResponseDto] as data
+  /// Returns a [Future] containing a [Response] with a [GetTransactionList200ResponseDto] as data
   /// Throws [DioException] if API call or serialization fails
-  Future<Response<GetDonationList200ResponseDto>> getDonationList({ 
+  Future<Response<GetTransactionList200ResponseDto>> getTransactionList({ 
     required int donatorId,
-    int? filterId,
-    int? filterNgoId,
-    String? filterNgoName,
-    int? filterProjectId,
-    String? filterProjectName,
+    int? filterDonationNgoId,
+    String? filterDonationNgoName,
+    int? filterDonationProjectId,
+    String? filterDonationProjectName,
+    int? filterEarningDonationboxId,
     DateTime? filterCreatedFrom,
     DateTime? filterCreatedTo,
     num? filterAmountFrom,
@@ -67,7 +67,7 @@ class DonationsApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/donator/{donator_id}/donation'.replaceAll('{' r'donator_id' '}', donatorId.toString());
+    final _path = r'/api-donator/transaction/donator/{donator_id}'.replaceAll('{' r'donator_id' '}', donatorId.toString());
     final _options = Options(
       method: r'GET',
       headers: <String, dynamic>{
@@ -86,11 +86,11 @@ class DonationsApi {
     );
 
     final _queryParameters = <String, dynamic>{
-      if (filterId != null) r'filter_id': filterId,
-      if (filterNgoId != null) r'filter_ngo_id': filterNgoId,
-      if (filterNgoName != null) r'filter_ngo_name': filterNgoName,
-      if (filterProjectId != null) r'filter_project_id': filterProjectId,
-      if (filterProjectName != null) r'filter_project_name': filterProjectName,
+      if (filterDonationNgoId != null) r'filter_donation_ngo_id': filterDonationNgoId,
+      if (filterDonationNgoName != null) r'filter_donation_ngo_name': filterDonationNgoName,
+      if (filterDonationProjectId != null) r'filter_donation_project_id': filterDonationProjectId,
+      if (filterDonationProjectName != null) r'filter_donation_project_name': filterDonationProjectName,
+      if (filterEarningDonationboxId != null) r'filter_earning_donationbox_id': filterEarningDonationboxId,
       if (filterCreatedFrom != null) r'filter_created_from': filterCreatedFrom,
       if (filterCreatedTo != null) r'filter_created_to': filterCreatedTo,
       if (filterAmountFrom != null) r'filter_amount_from': filterAmountFrom,
@@ -110,11 +110,11 @@ class DonationsApi {
       onReceiveProgress: onReceiveProgress,
     );
 
-    GetDonationList200ResponseDto? _responseData;
+    GetTransactionList200ResponseDto? _responseData;
 
     try {
 final rawData = _response.data;
-_responseData = rawData == null ? null : deserialize<GetDonationList200ResponseDto, GetDonationList200ResponseDto>(rawData, 'GetDonationList200ResponseDto', growable: true);
+_responseData = rawData == null ? null : deserialize<GetTransactionList200ResponseDto, GetTransactionList200ResponseDto>(rawData, 'GetTransactionList200ResponseDto', growable: true);
     } catch (error, stackTrace) {
       throw DioException(
         requestOptions: _response.requestOptions,
@@ -125,7 +125,7 @@ _responseData = rawData == null ? null : deserialize<GetDonationList200ResponseD
       );
     }
 
-    return Response<GetDonationList200ResponseDto>(
+    return Response<GetTransactionList200ResponseDto>(
       data: _responseData,
       headers: _response.headers,
       isRedirect: _response.isRedirect,

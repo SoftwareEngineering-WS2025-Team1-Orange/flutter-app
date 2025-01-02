@@ -9,11 +9,11 @@ All URIs are relative to *https://localhost:9000/api/v1/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getDonationList**](DonationsApi.md#getdonationlist) | **GET** /donator/{donator_id}/donation | 
+[**getTransactionList**](DonationsApi.md#gettransactionlist) | **GET** /api-donator/transaction/donator/{donator_id} | 
 
 
-# **getDonationList**
-> GetDonationList200ResponseDto getDonationList(donatorId, filterId, filterNgoId, filterNgoName, filterProjectId, filterProjectName, filterCreatedFrom, filterCreatedTo, filterAmountFrom, filterAmountTo, sortFor, sortType, paginationPage, paginationPageSize)
+# **getTransactionList**
+> GetTransactionList200ResponseDto getTransactionList(donatorId, filterDonationNgoId, filterDonationNgoName, filterDonationProjectId, filterDonationProjectName, filterEarningDonationboxId, filterCreatedFrom, filterCreatedTo, filterAmountFrom, filterAmountTo, sortFor, sortType, paginationPage, paginationPageSize)
 
 
 
@@ -25,11 +25,11 @@ import 'package:openapi/api.dart';
 
 final api = Openapi().getDonationsApi();
 final int donatorId = 56; // int | 
-final int filterId = 56; // int | 
-final int filterNgoId = 56; // int | 
-final String filterNgoName = filterNgoName_example; // String | 
-final int filterProjectId = 56; // int | 
-final String filterProjectName = filterProjectName_example; // String | 
+final int filterDonationNgoId = 56; // int | 
+final String filterDonationNgoName = filterDonationNgoName_example; // String | 
+final int filterDonationProjectId = 56; // int | 
+final String filterDonationProjectName = filterDonationProjectName_example; // String | 
+final int filterEarningDonationboxId = 56; // int | 
 final DateTime filterCreatedFrom = 2013-10-20T19:20:30+01:00; // DateTime | 
 final DateTime filterCreatedTo = 2013-10-20T19:20:30+01:00; // DateTime | 
 final num filterAmountFrom = 8.14; // num | 
@@ -40,10 +40,10 @@ final int paginationPage = 56; // int |
 final int paginationPageSize = 56; // int | 
 
 try {
-    final response = api.getDonationList(donatorId, filterId, filterNgoId, filterNgoName, filterProjectId, filterProjectName, filterCreatedFrom, filterCreatedTo, filterAmountFrom, filterAmountTo, sortFor, sortType, paginationPage, paginationPageSize);
+    final response = api.getTransactionList(donatorId, filterDonationNgoId, filterDonationNgoName, filterDonationProjectId, filterDonationProjectName, filterEarningDonationboxId, filterCreatedFrom, filterCreatedTo, filterAmountFrom, filterAmountTo, sortFor, sortType, paginationPage, paginationPageSize);
     print(response);
 } catch on DioException (e) {
-    print('Exception when calling DonationsApi->getDonationList: $e\n');
+    print('Exception when calling DonationsApi->getTransactionList: $e\n');
 }
 ```
 
@@ -52,11 +52,11 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **donatorId** | **int**|  | 
- **filterId** | **int**|  | [optional] 
- **filterNgoId** | **int**|  | [optional] 
- **filterNgoName** | **String**|  | [optional] 
- **filterProjectId** | **int**|  | [optional] 
- **filterProjectName** | **String**|  | [optional] 
+ **filterDonationNgoId** | **int**|  | [optional] 
+ **filterDonationNgoName** | **String**|  | [optional] 
+ **filterDonationProjectId** | **int**|  | [optional] 
+ **filterDonationProjectName** | **String**|  | [optional] 
+ **filterEarningDonationboxId** | **int**|  | [optional] 
  **filterCreatedFrom** | **DateTime**|  | [optional] 
  **filterCreatedTo** | **DateTime**|  | [optional] 
  **filterAmountFrom** | **num**|  | [optional] 
@@ -68,7 +68,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetDonationList200ResponseDto**](GetDonationList200ResponseDto.md)
+[**GetTransactionList200ResponseDto**](GetTransactionList200ResponseDto.md)
 
 ### Authorization
 

@@ -43,7 +43,7 @@ class PowerSupplyApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/donator/{donator_id}/powersupply'.replaceAll('{' r'donator_id' '}', donatorId.toString());
+    final _path = r'/api-donator/powersupply/donator/{donator_id}'.replaceAll('{' r'donator_id' '}', donatorId.toString());
     final _options = Options(
       method: r'POST',
       headers: <String, dynamic>{
@@ -113,7 +113,7 @@ _bodyData=jsonEncode(powerSupplyRegisterDto);
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/donator/{donator_id}/powersupply'.replaceAll('{' r'donator_id' '}', donatorId.toString());
+    final _path = r'/api-donator/powersupply/donator/{donator_id}'.replaceAll('{' r'donator_id' '}', donatorId.toString());
     final _options = Options(
       method: r'GET',
       headers: <String, dynamic>{

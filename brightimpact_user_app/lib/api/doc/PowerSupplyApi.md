@@ -9,8 +9,8 @@ All URIs are relative to *https://localhost:9000/api/v1/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**addPowersupply**](PowerSupplyApi.md#addpowersupply) | **POST** /donator/{donator_id}/powersupply | 
-[**getPowersupply**](PowerSupplyApi.md#getpowersupply) | **GET** /donator/{donator_id}/powersupply | 
+[**addPowersupply**](PowerSupplyApi.md#addpowersupply) | **POST** /api-donator/powersupply/donator/{donator_id} | 
+[**getPowersupply**](PowerSupplyApi.md#getpowersupply) | **GET** /api-donator/powersupply/donator/{donator_id} | 
 
 
 # **addPowersupply**

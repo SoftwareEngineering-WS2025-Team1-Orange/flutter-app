@@ -14,10 +14,11 @@ DonationboxRegisterDto _$DonationboxRegisterDtoFromJson(
       ($checkedConvert) {
         $checkKeys(
           json,
-          requiredKeys: const ['cuid'],
+          requiredKeys: const ['cuid', 'name'],
         );
         final val = DonationboxRegisterDto(
           cuid: $checkedConvert('cuid', (v) => v as String),
+          name: $checkedConvert('name', (v) => v as String),
           powerSupplyId:
               $checkedConvert('power_supply_id', (v) => v as String?),
         );
@@ -30,5 +31,6 @@ Map<String, dynamic> _$DonationboxRegisterDtoToJson(
         DonationboxRegisterDto instance) =>
     <String, dynamic>{
       'cuid': instance.cuid,
+      'name': instance.name,
       if (instance.powerSupplyId case final value?) 'power_supply_id': value,
     };

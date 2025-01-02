@@ -66,37 +66,40 @@ All URIs are relative to *https://localhost:9000/api/v1/api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-[*DonationboxApi*](doc/DonationboxApi.md) | [**getDonationbox**](doc/DonationboxApi.md#getdonationbox) | **GET** /donator/{donator_id}/donationbox | 
-[*DonationboxApi*](doc/DonationboxApi.md) | [**registerDonationbox**](doc/DonationboxApi.md#registerdonationbox) | **POST** /donator/{donator_id}/donationbox | 
-[*DonationsApi*](doc/DonationsApi.md) | [**getDonationList**](doc/DonationsApi.md#getdonationlist) | **GET** /donator/{donator_id}/donation | 
+[*DonationboxApi*](doc/DonationboxApi.md) | [**getDonationbox**](doc/DonationboxApi.md#getdonationbox) | **GET** /api-donator/donationbox/donator/{donator_id} | 
+[*DonationboxApi*](doc/DonationboxApi.md) | [**registerDonationbox**](doc/DonationboxApi.md#registerdonationbox) | **POST** /api-donator/donationbox/donator/{donator_id} | 
+[*DonationsApi*](doc/DonationsApi.md) | [**getTransactionList**](doc/DonationsApi.md#gettransactionlist) | **GET** /api-donator/transaction/donator/{donator_id} | 
 [*DonatorApi*](doc/DonatorApi.md) | [**getDonator**](doc/DonatorApi.md#getdonator) | **GET** /api-donator/donator/{donator_id} | 
-[*DonatorApi*](doc/DonatorApi.md) | [**login**](doc/DonatorApi.md#login) | **POST** /donator/login | 
+[*DonatorApi*](doc/DonatorApi.md) | [**login**](doc/DonatorApi.md#login) | **POST** /api-donator/auth/token | 
 [*DonatorApi*](doc/DonatorApi.md) | [**registerDonator**](doc/DonatorApi.md#registerdonator) | **POST** /api-donator/donator | 
-[*NGOApi*](doc/NGOApi.md) | [**getNgoList**](doc/NGOApi.md#getngolist) | **GET** /api-donator/ngo | 
-[*PowerSupplyApi*](doc/PowerSupplyApi.md) | [**addPowersupply**](doc/PowerSupplyApi.md#addpowersupply) | **POST** /donator/{donator_id}/powersupply | 
-[*PowerSupplyApi*](doc/PowerSupplyApi.md) | [**getPowersupply**](doc/PowerSupplyApi.md#getpowersupply) | **GET** /donator/{donator_id}/powersupply | 
-[*ProjectApi*](doc/ProjectApi.md) | [**getProjectList**](doc/ProjectApi.md#getprojectlist) | **GET** /project | 
+[*NGOApi*](doc/NGOApi.md) | [**getNgoList**](doc/NGOApi.md#getngolist) | **GET** /api-donator/ngo/donator/{donator_id} | 
+[*PowerSupplyApi*](doc/PowerSupplyApi.md) | [**addPowersupply**](doc/PowerSupplyApi.md#addpowersupply) | **POST** /api-donator/powersupply/donator/{donator_id} | 
+[*PowerSupplyApi*](doc/PowerSupplyApi.md) | [**getPowersupply**](doc/PowerSupplyApi.md#getpowersupply) | **GET** /api-donator/powersupply/donator/{donator_id} | 
+[*ProjectApi*](doc/ProjectApi.md) | [**getProjectList**](doc/ProjectApi.md#getprojectlist) | **GET** /api-donator/project/donator/{donator_id} | 
 [*TokenApi*](doc/TokenApi.md) | [**getToken**](doc/TokenApi.md#gettoken) | **POST** /token | 
 
 
 ## Documentation For Models
 
  - [DonationDto](doc/DonationDto.md)
- - [DonationNgoDto](doc/DonationNgoDto.md)
- - [DonationProjectDto](doc/DonationProjectDto.md)
+ - [DonationboxBasicDto](doc/DonationboxBasicDto.md)
  - [DonationboxDto](doc/DonationboxDto.md)
  - [DonationboxRegisterDto](doc/DonationboxRegisterDto.md)
  - [DonatorDto](doc/DonatorDto.md)
  - [DonatorLoginDto](doc/DonatorLoginDto.md)
  - [DonatorRegisterDto](doc/DonatorRegisterDto.md)
- - [GetDonationList200ResponseDto](doc/GetDonationList200ResponseDto.md)
+ - [EarningDto](doc/EarningDto.md)
  - [GetNgoList200ResponseDto](doc/GetNgoList200ResponseDto.md)
  - [GetProjectList200ResponseDto](doc/GetProjectList200ResponseDto.md)
+ - [GetTransactionList200ResponseDto](doc/GetTransactionList200ResponseDto.md)
  - [Login200ResponseDto](doc/Login200ResponseDto.md)
+ - [NGOBasicDto](doc/NGOBasicDto.md)
  - [NGODto](doc/NGODto.md)
  - [PaginationDto](doc/PaginationDto.md)
+ - [PayoutDto](doc/PayoutDto.md)
  - [PowerSupplyDto](doc/PowerSupplyDto.md)
  - [PowerSupplyRegisterDto](doc/PowerSupplyRegisterDto.md)
+ - [ProjectBasicDto](doc/ProjectBasicDto.md)
  - [ProjectCategoryDto](doc/ProjectCategoryDto.md)
  - [ProjectDto](doc/ProjectDto.md)
  - [ResponseTokenDto](doc/ResponseTokenDto.md)

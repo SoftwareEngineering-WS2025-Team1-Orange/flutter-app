@@ -11,7 +11,6 @@ class ProjectListProvider extends ListProvider<Project> {
   String? _filterNameContains;
   bool _filterIsFavorite = false;
   bool _filterDonatedTo = false;
-  bool _filterIncludeArchived = false;
   String? _filterNgoNameContains;
   ProjectCategoryDto? _filterCategory;
   bool _sortNewest = false;
@@ -20,7 +19,6 @@ class ProjectListProvider extends ListProvider<Project> {
   String? get filterNameContains => _filterNameContains;
   bool get filterIsFavorite => _filterIsFavorite;
   bool get filterDonatedTo => _filterDonatedTo;
-  bool get filterIncludeArchived => _filterIncludeArchived;
   String? get filterNgoNameContains => _filterNgoNameContains;
   ProjectCategoryDto? get filterCategory => _filterCategory;
   bool get sortNewest => _sortNewest;
@@ -33,7 +31,6 @@ class ProjectListProvider extends ListProvider<Project> {
     String? nameContains,
     bool? isFavorite,
     bool? donatedTo,
-    bool? includeArchived,
     String? ngoNameContains,
     ProjectCategoryDto? category,
     bool? newest,
@@ -41,7 +38,6 @@ class ProjectListProvider extends ListProvider<Project> {
     _filterNameContains = nameContains ?? _filterNameContains;
     _filterIsFavorite = isFavorite ?? _filterIsFavorite;
     _filterDonatedTo = donatedTo ?? _filterDonatedTo;
-    _filterIncludeArchived = includeArchived ?? _filterIncludeArchived;
     _filterNgoNameContains = ngoNameContains ?? _filterNgoNameContains;
     _filterCategory = category ?? _filterCategory;
     _sortNewest = newest ?? _sortNewest;
@@ -58,7 +54,6 @@ class ProjectListProvider extends ListProvider<Project> {
               filterNameContains: _filterNameContains,
               filterIsFavorite: _filterIsFavorite,
               filterDonatedTo: _filterDonatedTo,
-              filterIncludeArchived: _filterIncludeArchived,
               filterNgoNameContains: _filterNgoNameContains,
               filterCategory: _filterCategory,
               sortFor: _sortNewest ? "created_at" : "name",

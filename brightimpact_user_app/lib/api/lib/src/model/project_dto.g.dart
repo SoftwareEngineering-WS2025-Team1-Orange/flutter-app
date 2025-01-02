@@ -20,7 +20,9 @@ ProjectDto _$ProjectDtoFromJson(Map<String, dynamic> json) => $checkedCreate(
             'fundraising_current',
             'target_date',
             'fundraising_closed',
-            'progress'
+            'progress',
+            'category',
+            'ngo'
           ],
         );
         final val = ProjectDto(
@@ -28,8 +30,6 @@ ProjectDto _$ProjectDtoFromJson(Map<String, dynamic> json) => $checkedCreate(
           name: $checkedConvert('name', (v) => v as String),
           description: $checkedConvert('description', (v) => v as String),
           bannerUri: $checkedConvert('banner_uri', (v) => v as String?),
-          ngoId: $checkedConvert('ngo_id', (v) => (v as num?)?.toInt()),
-          ngoName: $checkedConvert('ngo_name', (v) => v as String?),
           isFavorite: $checkedConvert('is_favorite', (v) => v as bool?),
           fundraisingGoal: $checkedConvert('fundraising_goal', (v) => v as num),
           fundraisingCurrent:
@@ -41,21 +41,21 @@ ProjectDto _$ProjectDtoFromJson(Map<String, dynamic> json) => $checkedCreate(
           fundraisingClosed:
               $checkedConvert('fundraising_closed', (v) => v as bool),
           progress: $checkedConvert('progress', (v) => v as num),
-          isArchived: $checkedConvert('is_archived', (v) => v as bool?),
+          category: $checkedConvert(
+              'category', (v) => $enumDecode(_$ProjectCategoryDtoEnumMap, v)),
+          ngo: $checkedConvert(
+              'ngo', (v) => NGOBasicDto.fromJson(v as Map<String, dynamic>)),
         );
         return val;
       },
       fieldKeyMap: const {
         'bannerUri': 'banner_uri',
-        'ngoId': 'ngo_id',
-        'ngoName': 'ngo_name',
         'isFavorite': 'is_favorite',
         'fundraisingGoal': 'fundraising_goal',
         'fundraisingCurrent': 'fundraising_current',
         'targetDate': 'target_date',
         'createdAt': 'created_at',
-        'fundraisingClosed': 'fundraising_closed',
-        'isArchived': 'is_archived'
+        'fundraisingClosed': 'fundraising_closed'
       },
     );
 
@@ -65,8 +65,6 @@ Map<String, dynamic> _$ProjectDtoToJson(ProjectDto instance) =>
       'name': instance.name,
       'description': instance.description,
       if (instance.bannerUri case final value?) 'banner_uri': value,
-      if (instance.ngoId case final value?) 'ngo_id': value,
-      if (instance.ngoName case final value?) 'ngo_name': value,
       if (instance.isFavorite case final value?) 'is_favorite': value,
       'fundraising_goal': instance.fundraisingGoal,
       'fundraising_current': instance.fundraisingCurrent,
@@ -75,5 +73,16 @@ Map<String, dynamic> _$ProjectDtoToJson(ProjectDto instance) =>
         'created_at': value,
       'fundraising_closed': instance.fundraisingClosed,
       'progress': instance.progress,
-      if (instance.isArchived case final value?) 'is_archived': value,
+      'category': _$ProjectCategoryDtoEnumMap[instance.category]!,
+      'ngo': instance.ngo.toJson(),
     };
+
+const _$ProjectCategoryDtoEnumMap = {
+  ProjectCategoryDto.education: 'Education',
+  ProjectCategoryDto.health: 'Health',
+  ProjectCategoryDto.environment: 'Environment',
+  ProjectCategoryDto.humanRights: 'Human_Rights',
+  ProjectCategoryDto.animalRights: 'Animal_Rights',
+  ProjectCategoryDto.social: 'Social',
+  ProjectCategoryDto.other: 'Other',
+};

@@ -57,7 +57,7 @@ class NGOApi {
     ProgressCallback? onSendProgress,
     ProgressCallback? onReceiveProgress,
   }) async {
-    final _path = r'/api-donator/ngo'.replaceAll('{' r'donator_id' '}', donatorId.toString());
+    final _path = r'/api-donator/ngo/donator/{donator_id}'.replaceAll('{' r'donator_id' '}', donatorId.toString());
     final _options = Options(
       method: r'GET',
       headers: <String, dynamic>{
