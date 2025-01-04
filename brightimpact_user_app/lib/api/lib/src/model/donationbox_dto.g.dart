@@ -13,11 +13,12 @@ DonationboxDto _$DonationboxDtoFromJson(Map<String, dynamic> json) =>
       ($checkedConvert) {
         $checkKeys(
           json,
-          requiredKeys: const ['id', 'cuid', 'last_status'],
+          requiredKeys: const ['id', 'cuid', 'name', 'last_status'],
         );
         final val = DonationboxDto(
           id: $checkedConvert('id', (v) => (v as num).toInt()),
           cuid: $checkedConvert('cuid', (v) => v as String),
+          name: $checkedConvert('name', (v) => v as String),
           lastStatus: $checkedConvert('last_status',
               (v) => $enumDecode(_$DonationboxDtoLastStatusEnumEnumMap, v)),
           powerConsumption:
@@ -36,6 +37,7 @@ Map<String, dynamic> _$DonationboxDtoToJson(DonationboxDto instance) =>
     <String, dynamic>{
       'id': instance.id,
       'cuid': instance.cuid,
+      'name': instance.name,
       'last_status':
           _$DonationboxDtoLastStatusEnumEnumMap[instance.lastStatus]!,
       if (instance.powerConsumption case final value?)

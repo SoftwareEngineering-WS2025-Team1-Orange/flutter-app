@@ -14,7 +14,7 @@ GetTransactionList200ResponseDto _$GetTransactionList200ResponseDtoFromJson(
       ($checkedConvert) {
         $checkKeys(
           json,
-          requiredKeys: const ['donations', 'pagination'],
+          requiredKeys: const ['donations', 'earnings', 'pagination'],
         );
         final val = GetTransactionList200ResponseDto(
           donations: $checkedConvert(
@@ -24,8 +24,8 @@ GetTransactionList200ResponseDto _$GetTransactionList200ResponseDtoFromJson(
                   .toList()),
           earnings: $checkedConvert(
               'earnings',
-              (v) => (v as List<dynamic>?)
-                  ?.map((e) => EarningDto.fromJson(e as Map<String, dynamic>))
+              (v) => (v as List<dynamic>)
+                  .map((e) => EarningDto.fromJson(e as Map<String, dynamic>))
                   .toList()),
           pagination: $checkedConvert('pagination',
               (v) => PaginationDto.fromJson(v as Map<String, dynamic>)),
@@ -38,7 +38,6 @@ Map<String, dynamic> _$GetTransactionList200ResponseDtoToJson(
         GetTransactionList200ResponseDto instance) =>
     <String, dynamic>{
       'donations': instance.donations.map((e) => e.toJson()).toList(),
-      if (instance.earnings?.map((e) => e.toJson()).toList() case final value?)
-        'earnings': value,
+      'earnings': instance.earnings.map((e) => e.toJson()).toList(),
       'pagination': instance.pagination.toJson(),
     };

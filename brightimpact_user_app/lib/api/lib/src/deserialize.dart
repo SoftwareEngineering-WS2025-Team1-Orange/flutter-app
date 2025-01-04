@@ -3,13 +3,11 @@ import 'package:openapi/src/model/donationbox_basic_dto.dart';
 import 'package:openapi/src/model/donationbox_dto.dart';
 import 'package:openapi/src/model/donationbox_register_dto.dart';
 import 'package:openapi/src/model/donator_dto.dart';
-import 'package:openapi/src/model/donator_login_dto.dart';
 import 'package:openapi/src/model/donator_register_dto.dart';
 import 'package:openapi/src/model/earning_dto.dart';
 import 'package:openapi/src/model/get_ngo_list200_response_dto.dart';
 import 'package:openapi/src/model/get_project_list200_response_dto.dart';
 import 'package:openapi/src/model/get_transaction_list200_response_dto.dart';
-import 'package:openapi/src/model/login200_response_dto.dart';
 import 'package:openapi/src/model/ngo_basic_dto.dart';
 import 'package:openapi/src/model/ngo_dto.dart';
 import 'package:openapi/src/model/pagination_dto.dart';
@@ -18,6 +16,7 @@ import 'package:openapi/src/model/power_supply_dto.dart';
 import 'package:openapi/src/model/power_supply_register_dto.dart';
 import 'package:openapi/src/model/project_basic_dto.dart';
 import 'package:openapi/src/model/project_dto.dart';
+import 'package:openapi/src/model/request_token_dto.dart';
 import 'package:openapi/src/model/response_token_dto.dart';
 
 final _regList = RegExp(r'^List<(.*)>$');
@@ -48,8 +47,6 @@ final _regMap = RegExp(r'^Map<String,(.*)>$');
           return DonationboxRegisterDto.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'DonatorDto':
           return DonatorDto.fromJson(value as Map<String, dynamic>) as ReturnType;
-        case 'DonatorLoginDto':
-          return DonatorLoginDto.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'DonatorRegisterDto':
           return DonatorRegisterDto.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'EarningDto':
@@ -60,8 +57,6 @@ final _regMap = RegExp(r'^Map<String,(.*)>$');
           return GetProjectList200ResponseDto.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'GetTransactionList200ResponseDto':
           return GetTransactionList200ResponseDto.fromJson(value as Map<String, dynamic>) as ReturnType;
-        case 'Login200ResponseDto':
-          return Login200ResponseDto.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'NGOBasicDto':
           return NGOBasicDto.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'NGODto':
@@ -81,6 +76,8 @@ final _regMap = RegExp(r'^Map<String,(.*)>$');
           
         case 'ProjectDto':
           return ProjectDto.fromJson(value as Map<String, dynamic>) as ReturnType;
+        case 'RequestTokenDto':
+          return RequestTokenDto.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'ResponseTokenDto':
           return ResponseTokenDto.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'SortTypeDto':

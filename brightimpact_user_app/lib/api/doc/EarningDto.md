@@ -12,8 +12,8 @@ Name | Type | Description | Notes
 **amount** | **num** |  | 
 **createdAt** | [**DateTime**](DateTime.md) |  | 
 **activeTimeInPeriod** | **num** |  | 
-**donationBoxId** | **num** |  | 
 **payout** | [**PayoutDto**](PayoutDto.md) |  | 
+**donationBox** | [**DonationboxBasicDto**](DonationboxBasicDto.md) |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

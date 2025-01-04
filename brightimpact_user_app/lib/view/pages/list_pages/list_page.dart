@@ -1,3 +1,4 @@
+import 'package:bright_impact/state/app_state.dart';
 import 'package:bright_impact/state/list_provider/list_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -21,7 +22,7 @@ abstract class ListPage<T> extends StatefulWidget {
   List<FilterButtonConfig> filterConfig(ListProvider<T> provider);
 
   /// Override to provide an instance of a subclass of ListProvider
-  ListProvider<T> createProvider();
+  ListProvider<T> createProvider({required int donatorId});
 
   /// Override to set a title for the page
   String pageTitle() {
@@ -49,10 +50,8 @@ abstract class ListPageState<T, W extends ListPage<T>> extends State<W>
   @override
   bool get wantKeepAlive => true;
 
-  @override
-  void initState() {
-    super.initState();
-    _provider = widget.createProvider();
+  ListProvider<T> createProvider({required int donatorId}) {
+    _provider = widget.createProvider(donatorId: donatorId);
     _provider.fetchFirstPage();
     _scrollController.addListener(() {
       if (_scrollController.position.pixels + 60 >=
@@ -62,6 +61,8 @@ abstract class ListPageState<T, W extends ListPage<T>> extends State<W>
         _provider.fetchNextPage();
       }
     });
+
+    return _provider;
   }
 
   @override
@@ -71,9 +72,10 @@ abstract class ListPageState<T, W extends ListPage<T>> extends State<W>
     final theme = Theme.of(context);
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
+    final appState = Provider.of<AppState>(context);
 
     return ChangeNotifierProvider(
-        create: (context) => _provider,
+        create: (context) => createProvider(donatorId: appState.donator?.id ?? 0),
         child: Scaffold(
             backgroundColor: const Color.fromARGB(255, 228, 228, 228),
             body:

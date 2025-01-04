@@ -1,5 +1,6 @@
 import 'package:bright_impact/state/app_state.dart';
 import 'package:bright_impact/view/custom_widgets/qr_scanner_widget.dart';
+import 'package:bright_impact/view/pages/login_page.dart';
 import 'package:bright_impact/view/pages/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -27,6 +28,30 @@ class _InitPage extends State<InitPage> {
     setState(() {
       _state = InitPageState.qrScanning;
     });
+  }
+
+  void _openRegisterPage(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true, // Ermöglicht volle Höhe
+      backgroundColor: Colors.transparent,
+      builder: (context) => FractionallySizedBox(
+        heightFactor: 0.9, // Sheet only takes 90% of screen height
+        child: RegisterPage(),
+      ),
+    );
+  }
+
+  void _openLoginPage(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true, // Ermöglicht volle Höhe
+      backgroundColor: Colors.transparent,
+      builder: (context) => FractionallySizedBox(
+        heightFactor: 0.9, // Sheet only takes 90% of screen height
+        child: LoginPage(),
+      ),
+    );
   }
 
   bool _qrCodeDetected(String data) {
@@ -179,7 +204,8 @@ class _InitPage extends State<InitPage> {
                           height: 60,
                           child: OutlinedButton(
                             onPressed: () {
-                              appState.testLogIn();
+                              //appState.testLogIn();
+                              _openLoginPage(context);
                             },
                             style: OutlinedButton.styleFrom(
                               side: BorderSide(color: Colors.white, width: 2),
@@ -188,7 +214,7 @@ class _InitPage extends State<InitPage> {
                               ),
                             ),
                             child: Text(
-                              'Login',
+                              "Anmelden",
                               style: theme.textTheme.labelMedium!.copyWith(
                                 color: Colors.white,
                               ),
@@ -209,17 +235,8 @@ class _InitPage extends State<InitPage> {
                                 appState.registerDonationbox(_donationBoxSN);
                               }
 
-                              showModalBottomSheet(
-                                context: context,
-                                isScrollControlled:
-                                    true, // Ermöglicht volle Höhe
-                                backgroundColor: Colors.transparent,
-                                builder: (context) => FractionallySizedBox(
-                                  heightFactor:
-                                      0.9, // Sheet only takes 90% of screen height
-                                  child: RegistrationScreen(),
-                                ),
-                              );
+                              _openRegisterPage(context);
+
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: theme.primaryColor,
@@ -228,7 +245,7 @@ class _InitPage extends State<InitPage> {
                               ),
                             ),
                             child: Text(
-                              'Register',
+                              'Registrieren',
                               style: theme.textTheme.labelMedium!
                                   .copyWith(color: theme.secondaryHeaderColor),
                             ),

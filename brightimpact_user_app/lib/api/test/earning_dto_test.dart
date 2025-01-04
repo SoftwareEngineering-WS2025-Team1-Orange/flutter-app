@@ -27,13 +27,13 @@ void main() {
       // TODO
     });
 
-    // num donationBoxId
-    test('to test the property `donationBoxId`', () async {
+    // PayoutDto payout
+    test('to test the property `payout`', () async {
       // TODO
     });
 
-    // PayoutDto payout
-    test('to test the property `payout`', () async {
+    // DonationboxBasicDto donationBox
+    test('to test the property `donationBox`', () async {
       // TODO
     });
 

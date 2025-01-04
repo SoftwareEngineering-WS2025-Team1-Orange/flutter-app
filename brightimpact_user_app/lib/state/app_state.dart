@@ -97,11 +97,19 @@ class AppState with ChangeNotifier {
       return false;
     }
 
-    await _donatorProvider.setIdAndFetch(1);
+    // Token will be used for all future requests
+    ApiService.shared.setToken(token);
+
+    // Explicity set id to -1 to use request ressource /donator/me
+    await _donatorProvider.setIdAndFetch(-1);
 
     if (_donatorProvider.entity == null) {
+      ApiService.shared.setToken(null);
       return false;
     }
+
+    // Now set id explicitly
+    _donatorProvider.setId(_donatorProvider.entity!.id);
 
     await _saveDonator();
     await _saveAuthToken(token);
@@ -116,6 +124,8 @@ class AppState with ChangeNotifier {
   void logout() async {
     _initialDiskDonator = null;
     _isLoggedIn = false;
+
+    ApiService.shared.setToken(null);
     
     await _deleteDonator();
     await _deleteAuthToken();
@@ -133,7 +143,7 @@ class AppState with ChangeNotifier {
     notifyListeners();
 
     try {
-      final response = await ApiService.shared
+      final response = await ApiService.shared.api
           .getDonationboxApi()
           .registerDonationbox(
               donatorId: 1,

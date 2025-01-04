@@ -6,7 +6,8 @@ import 'package:bright_impact/state/entity_provider/entity_provider.dart';
 class DonatorProvider extends EntityProvider<Donator> {
   @override
   Future<ApiResponse<Donator>> getFromServer({required int id}) async {
-    final response = await ApiService.shared.getDonatorApi().getDonator(donatorId: id); 
+    final api = ApiService.shared.api.getDonatorApi();
+    final response = id <= 0 ? await api.getDonatorByToken() : await api.getDonator(donatorId: id); 
 
     if (response.data == null) {
       return ApiResponse(

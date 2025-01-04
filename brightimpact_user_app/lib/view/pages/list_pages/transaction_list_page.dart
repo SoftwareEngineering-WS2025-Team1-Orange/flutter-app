@@ -12,7 +12,7 @@ class TransactionListPage extends ListPage<Transaction> {
   State<StatefulWidget> createState() => _TransactionListPageState();
 
   @override
-  ListProvider<Transaction> createProvider() => TransactionListProvider(resultsPerPage: 10);
+  ListProvider<Transaction> createProvider({required int donatorId}) => TransactionListProvider(resultsPerPage: 10, donatorId: donatorId);
 
   @override
   String pageTitle() => "Einnahmen und Spenden";

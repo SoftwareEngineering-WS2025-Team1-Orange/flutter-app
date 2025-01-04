@@ -1,6 +1,6 @@
 import 'package:bright_impact/model/project.dart';
 import 'package:bright_impact/state/entity_provider/project_provider.dart';
-import 'package:bright_impact/view/pages/detail_page.dart';
+import 'package:bright_impact/view/pages/detail_pages/detail_page.dart';
 import 'package:flutter/material.dart';
 
 class ProjectDetailSheet extends DetailSheet<Project, ProjectProvider> {
@@ -20,7 +20,7 @@ class ProjectDetailsPage extends DetailsPage<Project, ProjectProvider> {
   });
 
   @override
-  ProjectProvider createProvider() => ProjectProvider();
+  ProjectProvider createProvider({required int donatorId}) => ProjectProvider(donatorId: donatorId);
 
   @override
   List<Widget> buildBottomButtons(

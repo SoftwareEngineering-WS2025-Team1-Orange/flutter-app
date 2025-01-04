@@ -53,7 +53,8 @@ abstract class ListProvider<T> with ChangeNotifier {
   List<T> get entries => _entries;
 
   // CONSTRUCTOR
-  ListProvider({int resultsPerPage = 3}) : _resultsPerPage = resultsPerPage;
+  ListProvider({int resultsPerPage = 3})
+      : _resultsPerPage = resultsPerPage;
 
   /// Deletes all fetched NGOs
   void _reset() {
@@ -114,16 +115,16 @@ abstract class ListProvider<T> with ChangeNotifier {
       if (e is ApiProviderException) {
         _loadingError = e.errorType;
       } else if (e is DioException) {
-        _loadingError =
-        e.type == DioExceptionType.connectionError || e.type == DioExceptionType.connectionTimeout || e.type == DioExceptionType.receiveTimeout
-        ? ApiProviderError.connectionError
-        : ApiProviderError.fromHttpCode(e.response?.statusCode ?? 0);
+        _loadingError = e.type == DioExceptionType.connectionError ||
+                e.type == DioExceptionType.connectionTimeout ||
+                e.type == DioExceptionType.receiveTimeout
+            ? ApiProviderError.connectionError
+            : ApiProviderError.fromHttpCode(e.response?.statusCode ?? 0);
       } else {
         _loadingError = ApiProviderError.unknownError;
       }
-      
+
       print("Error fetching entity: $e");
-      
     } finally {
       _isLoading = false;
       notifyListeners();

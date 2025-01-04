@@ -1,4 +1,4 @@
-# openapi.api.DonationboxApi
+# openapi.api.AuthApi
 
 ## Load the API package
 ```dart
@@ -9,12 +9,12 @@ All URIs are relative to *https://localhost:9000/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**getDonationbox**](DonationboxApi.md#getdonationbox) | **GET** /api-donator/donationbox/donator/{donator_id} | 
-[**registerDonationbox**](DonationboxApi.md#registerdonationbox) | **POST** /api-donator/donationbox/donator/{donator_id} | 
+[**getToken**](AuthApi.md#gettoken) | **POST** /api-donator/auth/token | 
+[**logout**](AuthApi.md#logout) | **POST** /api-donator/auth/logout | 
 
 
-# **getDonationbox**
-> List<DonationboxDto> getDonationbox(donatorId)
+# **getToken**
+> ResponseTokenDto getToken(requestTokenDto)
 
 
 
@@ -24,14 +24,14 @@ import 'package:openapi/api.dart';
 // TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
 //defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
 
-final api = Openapi().getDonationboxApi();
-final int donatorId = 56; // int | 
+final api = Openapi().getAuthApi();
+final RequestTokenDto requestTokenDto = ; // RequestTokenDto | 
 
 try {
-    final response = api.getDonationbox(donatorId);
+    final response = api.getToken(requestTokenDto);
     print(response);
 } catch on DioException (e) {
-    print('Exception when calling DonationboxApi->getDonationbox: $e\n');
+    print('Exception when calling AuthApi->getToken: $e\n');
 }
 ```
 
@@ -39,11 +39,11 @@ try {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **donatorId** | **int**|  | 
+ **requestTokenDto** | [**RequestTokenDto**](RequestTokenDto.md)|  | 
 
 ### Return type
 
-[**List&lt;DonationboxDto&gt;**](DonationboxDto.md)
+[**ResponseTokenDto**](ResponseTokenDto.md)
 
 ### Authorization
 
@@ -51,13 +51,13 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: Not defined
+ - **Content-Type**: application/json
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **registerDonationbox**
-> registerDonationbox(donatorId, donationboxRegisterDto)
+# **logout**
+> logout()
 
 
 
@@ -67,23 +67,17 @@ import 'package:openapi/api.dart';
 // TODO Configure OAuth2 access token for authorization: OAuth2PasswordBearer
 //defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
 
-final api = Openapi().getDonationboxApi();
-final int donatorId = 56; // int | 
-final DonationboxRegisterDto donationboxRegisterDto = ; // DonationboxRegisterDto | 
+final api = Openapi().getAuthApi();
 
 try {
-    api.registerDonationbox(donatorId, donationboxRegisterDto);
+    api.logout();
 } catch on DioException (e) {
-    print('Exception when calling DonationboxApi->registerDonationbox: $e\n');
+    print('Exception when calling AuthApi->logout: $e\n');
 }
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **donatorId** | **int**|  | 
- **donationboxRegisterDto** | [**DonationboxRegisterDto**](DonationboxRegisterDto.md)|  | 
+This endpoint does not need any parameter.
 
 ### Return type
 
@@ -95,7 +89,7 @@ void (empty response body)
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: Not defined
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

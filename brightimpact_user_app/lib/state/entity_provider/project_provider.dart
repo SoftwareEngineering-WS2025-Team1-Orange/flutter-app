@@ -5,9 +5,14 @@ import 'package:bright_impact/state/entity_provider/entity_provider.dart';
 
 
 class ProjectProvider extends EntityProvider<Project> {
+  final int _donatorId;
+  int get donatorId => _donatorId;
+
+  ProjectProvider({required donatorId}): _donatorId = donatorId;
+
   @override
   Future<ApiResponse<Project>> getFromServer({required int id}) async {
-    final response = await ApiService.shared.getProjectApi().getProjectList(donatorId: 1, filterProjectId: id);
+    final response = await ApiService.shared.api.getProjectApi().getProjectList(donatorId: 1, filterProjectId: id);
 
     if (response.data == null) {
       return ApiResponse(

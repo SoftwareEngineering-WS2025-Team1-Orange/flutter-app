@@ -5,7 +5,6 @@ import 'package:bright_impact/state/entity_provider/entity_provider.dart';
 import 'package:bright_impact/state/list_provider/list_provider.dart';
 import 'package:dio/dio.dart';
 
-
 class ProjectListProvider extends ListProvider<Project> {
   // PRIVATE ATTRIBUTES
   String? _filterNameContains;
@@ -14,6 +13,7 @@ class ProjectListProvider extends ListProvider<Project> {
   String? _filterNgoNameContains;
   ProjectCategoryDto? _filterCategory;
   bool _sortNewest = false;
+  final int _donatorId;
 
   // PUBLIC GETTERS
   String? get filterNameContains => _filterNameContains;
@@ -22,9 +22,11 @@ class ProjectListProvider extends ListProvider<Project> {
   String? get filterNgoNameContains => _filterNgoNameContains;
   ProjectCategoryDto? get filterCategory => _filterCategory;
   bool get sortNewest => _sortNewest;
+  int get donatorId => _donatorId;
 
   // CONSTRUCTOR
-  ProjectListProvider({super.resultsPerPage});
+  ProjectListProvider({super.resultsPerPage, required donatorId})
+      : _donatorId = donatorId;
 
   /// Sets filters or sorting arguments and fetches the first page
   Future<void> setFilterAndFetch({
@@ -47,13 +49,13 @@ class ProjectListProvider extends ListProvider<Project> {
   @override
   Future<ApiResponse<PaginatedList<Project>>> getFromServer() async {
     Response<GetProjectList200ResponseDto> response =
-        await ApiService.shared.getProjectApi().getProjectList(
-              donatorId: 1,
+        await ApiService.shared.api.getProjectApi().getProjectList(
+              donatorId: donatorId,
               paginationPage: currentPage,
               paginationPageSize: resultsPerPage,
               filterNameContains: _filterNameContains,
-              filterIsFavorite: _filterIsFavorite,
-              filterDonatedTo: _filterDonatedTo,
+              filterIsFavorite: _filterIsFavorite ? true : null,
+              filterDonatedTo: _filterDonatedTo ? true : null,
               filterNgoNameContains: _filterNgoNameContains,
               filterCategory: _filterCategory,
               sortFor: _sortNewest ? "created_at" : "name",

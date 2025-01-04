@@ -3,7 +3,7 @@ import 'package:bright_impact/state/list_provider/list_provider.dart';
 import 'package:bright_impact/state/list_provider/project_list_provider.dart';
 import 'package:bright_impact/view/custom_widgets/project_card_widget.dart';
 import 'package:bright_impact/view/pages/list_pages/list_page.dart';
-import 'package:bright_impact/view/pages/project_detail_page.dart';
+import 'package:bright_impact/view/pages/detail_pages/project_detail_page.dart';
 import 'package:flutter/material.dart';
 
 class ProjectListPage extends ListPage<Project> {
@@ -13,7 +13,7 @@ class ProjectListPage extends ListPage<Project> {
   State<StatefulWidget> createState() => _ProjectListPageState();
 
   @override
-  ListProvider<Project> createProvider() => ProjectListProvider();
+  ListProvider<Project> createProvider({required int donatorId}) => ProjectListProvider(donatorId: donatorId);
 
   @override
   String pageTitle() => "Unsere Projekte";

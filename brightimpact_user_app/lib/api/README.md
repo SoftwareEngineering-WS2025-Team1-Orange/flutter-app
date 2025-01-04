@@ -48,35 +48,36 @@ Please follow the [installation procedure](#installation--usage) and then run th
 import 'package:openapi/openapi.dart';
 
 
-final api = Openapi().getDonationboxApi();
-final int donatorId = 56; // int | 
+final api = Openapi().getAuthApi();
+final RequestTokenDto requestTokenDto = ; // RequestTokenDto | 
 
 try {
-    final response = await api.getDonationbox(donatorId);
+    final response = await api.getToken(requestTokenDto);
     print(response);
 } catch on DioException (e) {
-    print("Exception when calling DonationboxApi->getDonationbox: $e\n");
+    print("Exception when calling AuthApi->getToken: $e\n");
 }
 
 ```
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://localhost:9000/api/v1/api/v1*
+All URIs are relative to *https://localhost:9000/api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+[*AuthApi*](doc/AuthApi.md) | [**getToken**](doc/AuthApi.md#gettoken) | **POST** /api-donator/auth/token | 
+[*AuthApi*](doc/AuthApi.md) | [**logout**](doc/AuthApi.md#logout) | **POST** /api-donator/auth/logout | 
 [*DonationboxApi*](doc/DonationboxApi.md) | [**getDonationbox**](doc/DonationboxApi.md#getdonationbox) | **GET** /api-donator/donationbox/donator/{donator_id} | 
 [*DonationboxApi*](doc/DonationboxApi.md) | [**registerDonationbox**](doc/DonationboxApi.md#registerdonationbox) | **POST** /api-donator/donationbox/donator/{donator_id} | 
 [*DonationsApi*](doc/DonationsApi.md) | [**getTransactionList**](doc/DonationsApi.md#gettransactionlist) | **GET** /api-donator/transaction/donator/{donator_id} | 
 [*DonatorApi*](doc/DonatorApi.md) | [**getDonator**](doc/DonatorApi.md#getdonator) | **GET** /api-donator/donator/{donator_id} | 
-[*DonatorApi*](doc/DonatorApi.md) | [**login**](doc/DonatorApi.md#login) | **POST** /api-donator/auth/token | 
+[*DonatorApi*](doc/DonatorApi.md) | [**getDonatorByToken**](doc/DonatorApi.md#getdonatorbytoken) | **GET** /api-donator/donator/me | 
 [*DonatorApi*](doc/DonatorApi.md) | [**registerDonator**](doc/DonatorApi.md#registerdonator) | **POST** /api-donator/donator | 
 [*NGOApi*](doc/NGOApi.md) | [**getNgoList**](doc/NGOApi.md#getngolist) | **GET** /api-donator/ngo/donator/{donator_id} | 
 [*PowerSupplyApi*](doc/PowerSupplyApi.md) | [**addPowersupply**](doc/PowerSupplyApi.md#addpowersupply) | **POST** /api-donator/powersupply/donator/{donator_id} | 
 [*PowerSupplyApi*](doc/PowerSupplyApi.md) | [**getPowersupply**](doc/PowerSupplyApi.md#getpowersupply) | **GET** /api-donator/powersupply/donator/{donator_id} | 
 [*ProjectApi*](doc/ProjectApi.md) | [**getProjectList**](doc/ProjectApi.md#getprojectlist) | **GET** /api-donator/project/donator/{donator_id} | 
-[*TokenApi*](doc/TokenApi.md) | [**getToken**](doc/TokenApi.md#gettoken) | **POST** /token | 
 
 
 ## Documentation For Models
@@ -86,13 +87,11 @@ Class | Method | HTTP request | Description
  - [DonationboxDto](doc/DonationboxDto.md)
  - [DonationboxRegisterDto](doc/DonationboxRegisterDto.md)
  - [DonatorDto](doc/DonatorDto.md)
- - [DonatorLoginDto](doc/DonatorLoginDto.md)
  - [DonatorRegisterDto](doc/DonatorRegisterDto.md)
  - [EarningDto](doc/EarningDto.md)
  - [GetNgoList200ResponseDto](doc/GetNgoList200ResponseDto.md)
  - [GetProjectList200ResponseDto](doc/GetProjectList200ResponseDto.md)
  - [GetTransactionList200ResponseDto](doc/GetTransactionList200ResponseDto.md)
- - [Login200ResponseDto](doc/Login200ResponseDto.md)
  - [NGOBasicDto](doc/NGOBasicDto.md)
  - [NGODto](doc/NGODto.md)
  - [PaginationDto](doc/PaginationDto.md)
@@ -102,6 +101,7 @@ Class | Method | HTTP request | Description
  - [ProjectBasicDto](doc/ProjectBasicDto.md)
  - [ProjectCategoryDto](doc/ProjectCategoryDto.md)
  - [ProjectDto](doc/ProjectDto.md)
+ - [RequestTokenDto](doc/RequestTokenDto.md)
  - [ResponseTokenDto](doc/ResponseTokenDto.md)
  - [SortTypeDto](doc/SortTypeDto.md)
 

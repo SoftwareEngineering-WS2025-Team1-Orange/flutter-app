@@ -5,12 +5,12 @@
 import 'package:openapi/api.dart';
 ```
 
-All URIs are relative to *https://localhost:9000/api/v1/api/v1*
+All URIs are relative to *https://localhost:9000/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**getDonator**](DonatorApi.md#getdonator) | **GET** /api-donator/donator/{donator_id} | 
-[**login**](DonatorApi.md#login) | **POST** /api-donator/auth/token | 
+[**getDonatorByToken**](DonatorApi.md#getdonatorbytoken) | **GET** /api-donator/donator/me | 
 [**registerDonator**](DonatorApi.md#registerdonator) | **POST** /api-donator/donator | 
 
 
@@ -57,8 +57,8 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **login**
-> Login200ResponseDto login(donatorLoginDto)
+# **getDonatorByToken**
+> DonatorDto getDonatorByToken()
 
 
 
@@ -69,25 +69,21 @@ import 'package:openapi/api.dart';
 //defaultApiClient.getAuthentication<OAuth>('OAuth2PasswordBearer').accessToken = 'YOUR_ACCESS_TOKEN';
 
 final api = Openapi().getDonatorApi();
-final DonatorLoginDto donatorLoginDto = ; // DonatorLoginDto | 
 
 try {
-    final response = api.login(donatorLoginDto);
+    final response = api.getDonatorByToken();
     print(response);
 } catch on DioException (e) {
-    print('Exception when calling DonatorApi->login: $e\n');
+    print('Exception when calling DonatorApi->getDonatorByToken: $e\n');
 }
 ```
 
 ### Parameters
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **donatorLoginDto** | [**DonatorLoginDto**](DonatorLoginDto.md)|  | 
+This endpoint does not need any parameter.
 
 ### Return type
 
-[**Login200ResponseDto**](Login200ResponseDto.md)
+[**DonatorDto**](DonatorDto.md)
 
 ### Authorization
 
@@ -95,13 +91,13 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **registerDonator**
-> int registerDonator(donatorRegisterDto)
+> DonatorDto registerDonator(donatorRegisterDto)
 
 
 
@@ -130,7 +126,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**int**
+[**DonatorDto**](DonatorDto.md)
 
 ### Authorization
 

@@ -6,14 +6,18 @@ import 'package:bright_impact/state/list_provider/list_provider.dart';
 import 'package:dio/dio.dart';
 
 class TransactionListProvider extends ListProvider<Transaction> {
+  final int _donatorId;
+  int get donatorId => _donatorId;
+
   // CONSTRUCTOR
-  TransactionListProvider({super.resultsPerPage});
+  TransactionListProvider({super.resultsPerPage, required donatorId})
+      : _donatorId = donatorId;
 
   @override
   Future<ApiResponse<PaginatedList<Transaction>>> getFromServer() async {
     Response<GetTransactionList200ResponseDto> response =
-        await ApiService.shared.getDonationsApi().getTransactionList (
-              donatorId: 1,
+        await ApiService.shared.api.getDonationsApi().getTransactionList(
+              donatorId: donatorId,
               paginationPage: currentPage,
               paginationPageSize: resultsPerPage,
               sortFor: "created_at",
@@ -29,18 +33,18 @@ class TransactionListProvider extends ListProvider<Transaction> {
 
     final data = response.data!;
     // Earnings and Donations are received seperately
-    final earnings = data.earnings?.map((dto) => Earning.fromDto(dto)).toList() ?? [];
-    final donations = data.donations.map((dto) => Donation.fromDto(dto)).toList();
+    final earnings = data.earnings.map((dto) => Earning.fromDto(dto)).toList();
+    final donations =
+        data.donations.map((dto) => Donation.fromDto(dto)).toList();
 
     // Earnings and Donations are merges as List of Transactions and then sorted by created_at desc
     List<Transaction> entries = [];
     entries.addAll(earnings);
     entries.addAll(donations);
-    entries.sort((b,a) => a.datetime.compareTo(b.datetime));
+    entries.sort((b, a) => a.datetime.compareTo(b.datetime));
 
     final list = PaginatedList<Transaction>(
-        entries: entries,
-        paginationData: Pagination.fromDto(data.pagination));
+        entries: entries, paginationData: Pagination.fromDto(data.pagination));
 
     return ApiResponse(
         httpStatusCode: response.statusCode,

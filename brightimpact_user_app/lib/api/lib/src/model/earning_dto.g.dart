@@ -17,8 +17,8 @@ EarningDto _$EarningDtoFromJson(Map<String, dynamic> json) => $checkedCreate(
             'amount',
             'createdAt',
             'activeTimeInPeriod',
-            'donationBoxId',
-            'payout'
+            'payout',
+            'donationBox'
           ],
         );
         final val = EarningDto(
@@ -28,9 +28,10 @@ EarningDto _$EarningDtoFromJson(Map<String, dynamic> json) => $checkedCreate(
               $checkedConvert('createdAt', (v) => DateTime.parse(v as String)),
           activeTimeInPeriod:
               $checkedConvert('activeTimeInPeriod', (v) => v as num),
-          donationBoxId: $checkedConvert('donationBoxId', (v) => v as num),
           payout: $checkedConvert(
               'payout', (v) => PayoutDto.fromJson(v as Map<String, dynamic>)),
+          donationBox: $checkedConvert('donationBox',
+              (v) => DonationboxBasicDto.fromJson(v as Map<String, dynamic>)),
         );
         return val;
       },
@@ -42,6 +43,6 @@ Map<String, dynamic> _$EarningDtoToJson(EarningDto instance) =>
       'amount': instance.amount,
       'createdAt': instance.createdAt.toIso8601String(),
       'activeTimeInPeriod': instance.activeTimeInPeriod,
-      'donationBoxId': instance.donationBoxId,
       'payout': instance.payout.toJson(),
+      'donationBox': instance.donationBox.toJson(),
     };

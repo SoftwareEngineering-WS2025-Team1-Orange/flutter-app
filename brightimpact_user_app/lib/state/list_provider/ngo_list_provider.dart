@@ -10,14 +10,17 @@ class NgoListProvider extends ListProvider<NGO> {
   bool _filterIsFavorite = false;
   bool _filterDonatedTo = false;
   bool _sortNewest = false;
+  final int _donatorId;
 
   // PUBLIC GETTER FOR PRIVATE ATTRIBUTES
   bool get filterIsFavorite => _filterIsFavorite;
   bool get filterDonatedTo => _filterDonatedTo;
   bool get sortNewest => _sortNewest;
+  int get donatorId => _donatorId;
 
   // CONSTRUCTOR
-  NgoListProvider({super.resultsPerPage});
+  NgoListProvider({super.resultsPerPage, required donatorId})
+      : _donatorId = donatorId;
 
   /// Sets the passed filter or sort arguments and then automatically fetched the list of NGOs
   Future<void> setFilterAndFetch(
@@ -31,12 +34,12 @@ class NgoListProvider extends ListProvider<NGO> {
   @override
   Future<ApiResponse<PaginatedList<NGO>>> getFromServer() async {
     Response<GetNgoList200ResponseDto> response =
-        await ApiService.shared.getNGOApi().getNgoList(
-              donatorId: 1,
+        await ApiService.shared.api.getNGOApi().getNgoList(
+              donatorId: donatorId,
               paginationPage: currentPage,
               paginationPageSize: resultsPerPage,
-              filterIsFavorite: _filterIsFavorite,
-              filterDonatedTo: _filterDonatedTo,
+              filterIsFavorite: _filterIsFavorite ? true : null,
+              filterDonatedTo: _filterDonatedTo ? true : null,
               sortFor: _sortNewest ? "created_at" : "name",
               sortType: _sortNewest ? SortTypeDto.desc : SortTypeDto.asc,
             );

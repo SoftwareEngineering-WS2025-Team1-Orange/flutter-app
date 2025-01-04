@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  | 
 **cuid** | **String** |  | 
+**name** | **String** |  | 
 **lastStatus** | **String** |  | 
 **powerConsumption** | **num** |  | [optional] 
 **powerSupplyId** | **String** |  | [optional] 

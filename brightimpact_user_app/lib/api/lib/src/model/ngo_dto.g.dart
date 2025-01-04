@@ -17,7 +17,8 @@ NGODto _$NGODtoFromJson(Map<String, dynamic> json) => $checkedCreate(
             'id',
             'contact',
             'address',
-            'description'
+            'description',
+            'is_favorite'
           ],
         );
         final val = NGODto(
@@ -28,7 +29,7 @@ NGODto _$NGODtoFromJson(Map<String, dynamic> json) => $checkedCreate(
           address: $checkedConvert('address', (v) => v as String),
           description: $checkedConvert('description', (v) => v as String),
           bannerUri: $checkedConvert('banner_uri', (v) => v as String?),
-          isFavorite: $checkedConvert('is_favorite', (v) => v as bool?),
+          isFavorite: $checkedConvert('is_favorite', (v) => v as bool),
         );
         return val;
       },
@@ -47,5 +48,5 @@ Map<String, dynamic> _$NGODtoToJson(NGODto instance) => <String, dynamic>{
       'address': instance.address,
       'description': instance.description,
       if (instance.bannerUri case final value?) 'banner_uri': value,
-      if (instance.isFavorite case final value?) 'is_favorite': value,
+      'is_favorite': instance.isFavorite,
     };

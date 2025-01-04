@@ -12,11 +12,11 @@ Name | Type | Description | Notes
 **name** | **String** |  | 
 **description** | **String** |  | 
 **bannerUri** | **String** |  | [optional] 
-**isFavorite** | **bool** |  | [optional] 
+**isFavorite** | **bool** |  | 
 **fundraisingGoal** | **num** |  | 
 **fundraisingCurrent** | **num** |  | 
 **targetDate** | [**DateTime**](DateTime.md) |  | 
-**createdAt** | [**DateTime**](DateTime.md) |  | [optional] 
+**createdAt** | [**DateTime**](DateTime.md) |  | 
 **fundraisingClosed** | **bool** |  | 
 **progress** | **num** |  | 
 **category** | [**ProjectCategoryDto**](ProjectCategoryDto.md) |  | 

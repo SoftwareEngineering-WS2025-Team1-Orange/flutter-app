@@ -28,7 +28,7 @@ class ProjectDto {
 
      this.bannerUri,
 
-     this.isFavorite,
+    required  this.isFavorite,
 
     required  this.fundraisingGoal,
 
@@ -36,7 +36,7 @@ class ProjectDto {
 
     required  this.targetDate,
 
-     this.createdAt,
+    required  this.createdAt,
 
     required  this.fundraisingClosed,
 
@@ -98,12 +98,12 @@ class ProjectDto {
   @JsonKey(
     
     name: r'is_favorite',
-    required: false,
+    required: true,
     includeIfNull: false,
   )
 
 
-  final bool? isFavorite;
+  final bool isFavorite;
 
 
 
@@ -145,13 +145,13 @@ class ProjectDto {
 
   @JsonKey(
     
-    name: r'created_at',
-    required: false,
+    name: r'createdAt',
+    required: true,
     includeIfNull: false,
   )
 
 
-  final DateTime? createdAt;
+  final DateTime createdAt;
 
 
 

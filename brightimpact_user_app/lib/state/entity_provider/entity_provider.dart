@@ -27,6 +27,10 @@ abstract class EntityProvider<T> extends ChangeNotifier{
   /// Override to fetch entity from server
   Future<ApiResponse<T>> getFromServer({required int id});
 
+  void setId(int id) {
+    this._id = id;
+  }
+
   Future<void> setIdAndFetch(int id) async {
     this._id = id;
     await _fetch();

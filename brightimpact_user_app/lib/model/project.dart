@@ -43,11 +43,11 @@ class Project {
             "https://lirp.cdn-website.com/58002456/dms3rep/multi/opt/IMG_8142-1920w.jpg",
         ngoId = dto.ngo.id,
         ngoName = dto.ngo.name,
-        isFavorite = dto.isFavorite ?? false,
+        isFavorite = dto.isFavorite,
         fundraisingGoal = dto.fundraisingGoal,
         fundraisingCurrent = dto.fundraisingCurrent,
         targetDate = dto.targetDate,
-        createdAt = dto.createdAt ?? DateTime.now(),
+        createdAt = dto.createdAt,
         fundraisingClosed = dto.fundraisingClosed,
         progress = dto.progress,
         category = List.empty(); //dto.category;

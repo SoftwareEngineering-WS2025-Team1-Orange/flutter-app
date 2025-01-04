@@ -32,7 +32,7 @@ class NGODto {
 
      this.bannerUri,
 
-     this.isFavorite,
+    required  this.isFavorite,
   });
 
   @JsonKey(
@@ -122,12 +122,12 @@ class NGODto {
   @JsonKey(
     
     name: r'is_favorite',
-    required: false,
+    required: true,
     includeIfNull: false,
   )
 
 
-  final bool? isFavorite;
+  final bool isFavorite;
 
 
 

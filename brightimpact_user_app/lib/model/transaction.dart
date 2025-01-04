@@ -44,8 +44,8 @@ class Earning extends Transaction {
 
   Earning.fromDto(EarningDto dto)
       : id = dto.id,
-        donationboxId = dto.donationBoxId.toInt(),
-        donationboxName = "Donationbox",
+        donationboxId = dto.donationBox.id,
+        donationboxName = dto.donationBox.name ?? "Donationbox",
         calcDuration = Duration(seconds: dto.activeTimeInPeriod.toInt()),
         super(dto.createdAt, dto.amount.toDouble());
 }

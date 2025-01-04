@@ -23,7 +23,7 @@ class GetTransactionList200ResponseDto {
 
     required  this.donations,
 
-     this.earnings,
+    required  this.earnings,
 
     required  this.pagination,
   });
@@ -43,12 +43,12 @@ class GetTransactionList200ResponseDto {
   @JsonKey(
     
     name: r'earnings',
-    required: false,
+    required: true,
     includeIfNull: false,
   )
 
 
-  final List<EarningDto>? earnings;
+  final List<EarningDto> earnings;
 
 
 

@@ -1,7 +1,7 @@
 import 'package:bright_impact/state/entity_provider/ngo_provider.dart';
 import 'package:bright_impact/model/ngo.dart';
 import 'package:bright_impact/view/custom_widgets/button_widget.dart';
-import 'package:bright_impact/view/pages/detail_page.dart';
+import 'package:bright_impact/view/pages/detail_pages/detail_page.dart';
 import 'package:flutter/material.dart';
 
 class NgoDetailSheet extends DetailSheet<NGO, NgoProvider> {
@@ -21,7 +21,7 @@ class NgoDetailsPage extends DetailsPage<NGO, NgoProvider> {
   });
 
   @override
-  NgoProvider createProvider() => NgoProvider();
+  NgoProvider createProvider({required int donatorId}) => NgoProvider(donatorId: donatorId);
 
   @override
   List<Widget> buildBottomButtons(BuildContext context, NgoProvider provider) {

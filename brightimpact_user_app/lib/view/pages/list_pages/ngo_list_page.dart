@@ -2,7 +2,7 @@ import 'package:bright_impact/model/ngo.dart';
 import 'package:bright_impact/state/list_provider/list_provider.dart';
 import 'package:bright_impact/state/list_provider/ngo_list_provider.dart';
 import 'package:bright_impact/view/pages/list_pages/list_page.dart';
-import 'package:bright_impact/view/pages/ngo_detail_page.dart';
+import 'package:bright_impact/view/pages/detail_pages/ngo_detail_page.dart';
 import 'package:flutter/material.dart';
 
 class NGOListPage extends ListPage<NGO> {
@@ -12,7 +12,7 @@ class NGOListPage extends ListPage<NGO> {
   State<StatefulWidget> createState() => _NGOListPageState();
 
   @override
-  ListProvider<NGO> createProvider() => NgoListProvider();
+  ListProvider<NGO> createProvider({required int donatorId}) => NgoListProvider(donatorId: donatorId);
 
   @override
   String pageTitle() => "Gemeinnützige Organisationen";

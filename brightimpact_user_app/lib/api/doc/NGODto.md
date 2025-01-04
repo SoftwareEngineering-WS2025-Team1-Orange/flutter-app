@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 **address** | **String** |  | 
 **description** | **String** |  | 
 **bannerUri** | **String** |  | [optional] 
-**isFavorite** | **bool** |  | [optional] 
+**isFavorite** | **bool** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

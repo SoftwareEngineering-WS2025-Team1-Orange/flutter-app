@@ -22,6 +22,8 @@ class DonationboxDto {
 
     required  this.cuid,
 
+    required  this.name,
+
     required  this.lastStatus,
 
      this.powerConsumption,
@@ -50,6 +52,18 @@ class DonationboxDto {
 
 
   final String cuid;
+
+
+
+  @JsonKey(
+    
+    name: r'name',
+    required: true,
+    includeIfNull: false,
+  )
+
+
+  final String name;
 
 
 
@@ -95,6 +109,7 @@ class DonationboxDto {
     bool operator ==(Object other) => identical(this, other) || other is DonationboxDto &&
       other.id == id &&
       other.cuid == cuid &&
+      other.name == name &&
       other.lastStatus == lastStatus &&
       other.powerConsumption == powerConsumption &&
       other.powerSupplyId == powerSupplyId;
@@ -103,6 +118,7 @@ class DonationboxDto {
     int get hashCode =>
         id.hashCode +
         cuid.hashCode +
+        name.hashCode +
         lastStatus.hashCode +
         powerConsumption.hashCode +
         powerSupplyId.hashCode;

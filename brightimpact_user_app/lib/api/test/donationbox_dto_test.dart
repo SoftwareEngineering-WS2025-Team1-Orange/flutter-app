@@ -17,6 +17,11 @@ void main() {
       // TODO
     });
 
+    // String name
+    test('to test the property `name`', () async {
+      // TODO
+    });
+
     // String lastStatus
     test('to test the property `lastStatus`', () async {
       // TODO

@@ -1,3 +1,4 @@
+import 'package:bright_impact/state/app_state.dart';
 import 'package:bright_impact/state/entity_provider/entity_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -79,7 +80,7 @@ abstract class DetailsPage<T, W extends EntityProvider<T>>
   }
 
   /// Override to provide an instance of a subclass of EntityProvider
-  W createProvider();
+  W createProvider({required int donatorId});
 
   /// Override to build top image widget. This widget will be displayed independed of the laoding state of the providers
   Widget buildTopImageWidget(BuildContext context, W provider);
@@ -94,9 +95,10 @@ abstract class DetailsPage<T, W extends EntityProvider<T>>
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+    final appState = Provider.of<AppState>(context);
 
     return ChangeNotifierProvider<W>(
-      create: (_) => createProvider()..setIdAndFetch(id),
+      create: (_) => createProvider(donatorId: appState.donator?.id ?? 0)..setIdAndFetch(id),
       child: Consumer<W>(
         builder: (context, provider, child) {
           return Stack(children: [

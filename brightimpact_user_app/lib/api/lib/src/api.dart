@@ -7,16 +7,16 @@ import 'package:openapi/src/auth/api_key_auth.dart';
 import 'package:openapi/src/auth/basic_auth.dart';
 import 'package:openapi/src/auth/bearer_auth.dart';
 import 'package:openapi/src/auth/oauth.dart';
+import 'package:openapi/src/api/auth_api.dart';
 import 'package:openapi/src/api/donationbox_api.dart';
 import 'package:openapi/src/api/donations_api.dart';
 import 'package:openapi/src/api/donator_api.dart';
 import 'package:openapi/src/api/ngo_api.dart';
 import 'package:openapi/src/api/power_supply_api.dart';
 import 'package:openapi/src/api/project_api.dart';
-import 'package:openapi/src/api/token_api.dart';
 
 class Openapi {
-  static const String basePath = r'https://localhost:9000/api/v1/api/v1';
+  static const String basePath = r'https://localhost:9000/api/v1';
 
   final Dio dio;
   Openapi({
@@ -66,6 +66,12 @@ class Openapi {
     }
   }
 
+  /// Get AuthApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  AuthApi getAuthApi() {
+    return AuthApi(dio);
+  }
+
   /// Get DonationboxApi instance, base route and serializer can be overridden by a given but be careful,
   /// by doing that all interceptors will not be executed
   DonationboxApi getDonationboxApi() {
@@ -100,11 +106,5 @@ class Openapi {
   /// by doing that all interceptors will not be executed
   ProjectApi getProjectApi() {
     return ProjectApi(dio);
-  }
-
-  /// Get TokenApi instance, base route and serializer can be overridden by a given but be careful,
-  /// by doing that all interceptors will not be executed
-  TokenApi getTokenApi() {
-    return TokenApi(dio);
   }
 }

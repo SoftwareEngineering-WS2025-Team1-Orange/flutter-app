@@ -3,6 +3,7 @@
 //
 
 // ignore_for_file: unused_element
+import 'package:openapi/src/model/donationbox_basic_dto.dart';
 import 'package:openapi/src/model/payout_dto.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -27,9 +28,9 @@ class EarningDto {
 
     required  this.activeTimeInPeriod,
 
-    required  this.donationBoxId,
-
     required  this.payout,
+
+    required  this.donationBox,
   });
 
   @JsonKey(
@@ -82,18 +83,6 @@ class EarningDto {
 
   @JsonKey(
     
-    name: r'donationBoxId',
-    required: true,
-    includeIfNull: false,
-  )
-
-
-  final num donationBoxId;
-
-
-
-  @JsonKey(
-    
     name: r'payout',
     required: true,
     includeIfNull: false,
@@ -101,6 +90,18 @@ class EarningDto {
 
 
   final PayoutDto payout;
+
+
+
+  @JsonKey(
+    
+    name: r'donationBox',
+    required: true,
+    includeIfNull: false,
+  )
+
+
+  final DonationboxBasicDto donationBox;
 
 
 
@@ -112,8 +113,8 @@ class EarningDto {
       other.amount == amount &&
       other.createdAt == createdAt &&
       other.activeTimeInPeriod == activeTimeInPeriod &&
-      other.donationBoxId == donationBoxId &&
-      other.payout == payout;
+      other.payout == payout &&
+      other.donationBox == donationBox;
 
     @override
     int get hashCode =>
@@ -121,8 +122,8 @@ class EarningDto {
         amount.hashCode +
         createdAt.hashCode +
         activeTimeInPeriod.hashCode +
-        donationBoxId.hashCode +
-        payout.hashCode;
+        payout.hashCode +
+        donationBox.hashCode;
 
   factory EarningDto.fromJson(Map<String, dynamic> json) => _$EarningDtoFromJson(json);
 

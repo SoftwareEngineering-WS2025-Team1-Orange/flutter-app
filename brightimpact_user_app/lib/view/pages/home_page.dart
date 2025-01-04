@@ -1,8 +1,9 @@
 import 'package:bright_impact/api/lib/openapi.dart';
+import 'package:bright_impact/state/app_state.dart';
 import 'package:bright_impact/state/list_provider/project_list_provider.dart';
 import 'package:bright_impact/view/custom_widgets/project_card_widget.dart';
 import 'package:bright_impact/view/custom_widgets/rotating_circle_widget.dart';
-import 'package:bright_impact/view/pages/project_detail_page.dart';
+import 'package:bright_impact/view/pages/detail_pages/project_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,7 +23,7 @@ class _HomePage extends State<HomePage> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    
+
     final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
@@ -150,9 +151,10 @@ class _HomePage extends State<HomePage> with AutomaticKeepAliveClientMixin {
       {bool hideOnLoading = true}) {
     final width = MediaQuery.of(context).size.width;
     final theme = Theme.of(context);
+    final appState = Provider.of<AppState>(context);
 
     return ChangeNotifierProvider(
-        create: (context) => ProjectListProvider(resultsPerPage: 7)
+        create: (context) => ProjectListProvider(resultsPerPage: 7, donatorId: appState.donator?.id ?? 0)
           ..setFilterAndFetch(category: filterCategory, newest: true),
         child:
             Consumer<ProjectListProvider>(builder: (context, provider, child) {

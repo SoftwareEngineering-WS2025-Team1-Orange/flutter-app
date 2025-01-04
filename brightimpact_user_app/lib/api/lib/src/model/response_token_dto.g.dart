@@ -13,22 +13,27 @@ ResponseTokenDto _$ResponseTokenDtoFromJson(Map<String, dynamic> json) =>
       ($checkedConvert) {
         $checkKeys(
           json,
-          requiredKeys: const ['access_token', 'token_type'],
+          requiredKeys: const ['access_token'],
         );
         final val = ResponseTokenDto(
           accessToken: $checkedConvert('access_token', (v) => v as String),
-          tokenType: $checkedConvert('token_type', (v) => v as String),
+          tokenType: $checkedConvert('token_type', (v) => v as String?),
+          expiresIn: $checkedConvert('expires_in', (v) => (v as num?)?.toInt()),
+          scope: $checkedConvert('scope', (v) => v as String?),
         );
         return val;
       },
       fieldKeyMap: const {
         'accessToken': 'access_token',
-        'tokenType': 'token_type'
+        'tokenType': 'token_type',
+        'expiresIn': 'expires_in'
       },
     );
 
 Map<String, dynamic> _$ResponseTokenDtoToJson(ResponseTokenDto instance) =>
     <String, dynamic>{
       'access_token': instance.accessToken,
-      'token_type': instance.tokenType,
+      if (instance.tokenType case final value?) 'token_type': value,
+      if (instance.expiresIn case final value?) 'expires_in': value,
+      if (instance.scope case final value?) 'scope': value,
     };
