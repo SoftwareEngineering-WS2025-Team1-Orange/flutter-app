@@ -4,7 +4,6 @@ on:
   push:
     branches:
         - '**'
-        
     tags:
         - 'v*'
         
@@ -17,12 +16,12 @@ permissions:
   contents: write
 
 jobs:
-  build:      
-    name: Build & Release 
+  build:
+    name: Build & Release
     runs-on: ubuntu-latest
     
     defaults:
-        run: 
+        run:
           working-directory: brightimpact_user_app
 
     steps:
@@ -72,15 +71,15 @@ jobs:
         working-directory: ./brightimpact_user_app
 
       # 8. Build IPA (iOS Build)
-     # - name: Build IPA
-      #  run: flutter build ipa --no-codesign
-       # working-directory: ./brightimpact_user_app
+      # - name: Build IPA
+      #   run: flutter build ipa --no-codesign
+      #   working-directory: ./brightimpact_user_app
 
       # 9. Compress Archives and IPAs
-     # - name: Compress Archives and IPAs
-      #  run: |
-       #   cd build
-        #  tar -czf ios_build.tar.gz ios
+      # - name: Compress Archives and IPAs
+      #   run: |
+      #     cd build
+      #     tar -czf ios_build.tar.gz ios
 
       # 11. Extract Version from pubspec.yaml
       - name: Extract Version
@@ -118,9 +117,16 @@ jobs:
           new_version="${{ env.VERSION }}-build-${{ github.run_number }}"
           echo "VERSION=$new_version" >> $GITHUB_ENV
 
+      # 13.1 Modify Version if Pull Request (prebuild case)
+      - name: Modify Version for PR
+        if: github.event_name == 'pull_request'
+        run: |
+          new_version="prebuild-build-${{ github.run_number }}"
+          echo "VERSION=$new_version" >> $GITHUB_ENV
+
       # 14. Create Release
       - name: Create Release
-        if: env.TAG_EXISTS == 'true'
+        if: env.TAG_EXISTS == 'true' || github.event_name == 'pull_request'
         uses: ncipollo/release-action@v1
         with:
           artifacts: "brightimpact_user_app/build/app/outputs/flutter-apk/app-release.apk,brightimpact_user_app/build/app/outputs/bundle/release/app-release.aab"
