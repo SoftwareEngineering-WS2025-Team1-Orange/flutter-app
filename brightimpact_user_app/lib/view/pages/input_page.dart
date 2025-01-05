@@ -7,13 +7,16 @@ class InputPageData {
   final RegExp compliantRegExp;
   final RegExp inputLimitRegExp;
   final TextEditingController controller;
+  String? errorMessage;
 
-  const InputPageData(
+  InputPageData(
       {required this.previewText,
       this.isPassword = false,
       required this.compliantRegExp,
       required this.inputLimitRegExp,
-      required this.controller});
+      required this.controller,
+      this.errorMessage
+      });
 }
 
 // ignore: must_be_immutable
@@ -42,7 +45,6 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage>
     with AutomaticKeepAliveClientMixin {
   bool _isValid = false;
-  String? _errorMessage;
 
   // Keeps page alive when not visible in PageView
   @override
@@ -118,7 +120,7 @@ class _InputPageState extends State<InputPage>
         focusedBorder: UnderlineInputBorder(
           borderSide: BorderSide(color: theme.primaryColor),
         ),
-        errorText: _errorMessage,
+        errorText: textFieldData.errorMessage,
       ),
       onChanged: (value) {
         if (!textFieldData.inputLimitRegExp.hasMatch(value)) {

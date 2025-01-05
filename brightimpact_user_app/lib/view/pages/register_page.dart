@@ -1,11 +1,12 @@
 import 'package:bright_impact/state/api_login.dart';
+import 'package:bright_impact/state/app_state.dart';
 import 'package:bright_impact/view/pages/input_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
-  
   @override
   State<StatefulWidget> createState() => _RegisterPageState();
 }
@@ -13,8 +14,21 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final List<TextEditingController> controllers =
       List.generate(5, (_) => TextEditingController());
-      
+
+  String? passwordErrorMessage;
+
   Future<bool> _register() async {
+    if (controllers[3].text != controllers[4].text) {
+      setState(() {
+        passwordErrorMessage = "Passwörter müssen übereinstimmen";
+      });
+      return Future.value(false);
+    } else {
+      setState(() {
+        passwordErrorMessage = null;
+      });
+    }
+
     final login = ApiLogin();
     final res = await login.register(
         firstname: controllers[0].text,
@@ -22,11 +36,32 @@ class _RegisterPageState extends State<RegisterPage> {
         email: controllers[2].text,
         password: controllers[3].text);
 
-    if (res) {
-      await login.login(controllers[2].text, controllers[3].text);
+    if (res == null) {
+      if (context.mounted) {
+        final context = this.context;
+        // SUCCESS: Login
+        final appState = Provider.of<AppState>(context);
+        await appState.login(controllers[2].text, controllers[3].text);
+
+        // Close register sheet
+        if (context.mounted) {
+          Navigator.pop(context);
+        }
+      }
+    } else {
+      if (context.mounted) {
+        BuildContext context = this.context;
+        // Prompt error
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Hoppla! ${res.message}"),
+            duration: Duration(seconds: 3),
+          ),
+        );
+      }
     }
 
-    return res;
+    return Future.value(res == null);
   }
 
   @override
@@ -76,9 +111,9 @@ class _RegisterPageState extends State<RegisterPage> {
         textFields: [
           InputPageData(
             previewText: "Neues Passwort",
-            compliantRegExp: RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&\._]).{8,30}$'), // At least 8 characters
-            inputLimitRegExp: RegExp(
-                r'^.{,30}$'),
+            compliantRegExp: RegExp(
+                r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&\._]).{8,30}$'), // At least 8 characters
+            inputLimitRegExp: RegExp(r'^.{,30}$'),
             controller: controllers[3],
             isPassword: true,
           )
@@ -90,10 +125,12 @@ class _RegisterPageState extends State<RegisterPage> {
         textFields: [
           InputPageData(
             previewText: "Passwort wiederholen",
-            compliantRegExp: RegExp(r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&\._]).{8,30}$'), // At least 8 characters
+            compliantRegExp: RegExp(
+                r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&\._]).{8,30}$'), // At least 8 characters
             inputLimitRegExp: RegExp(r'^.{,30}$'),
             controller: controllers[4],
             isPassword: true,
+            errorMessage: passwordErrorMessage,
           )
         ],
         lastPage: true,
@@ -104,5 +141,4 @@ class _RegisterPageState extends State<RegisterPage> {
 
     return InputSheet(inputPages: inputPages);
   }
-  
 }

@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:bright_impact/model/donator.dart';
 import 'package:bright_impact/model/token.dart';
 import 'package:bright_impact/state/api_login.dart';
+import 'package:bright_impact/state/api_provider_error.dart';
 import 'package:bright_impact/state/api_service.dart';
 import 'package:bright_impact/api/lib/openapi.dart';
 import 'package:bright_impact/state/entity_provider/donator_provider.dart';
@@ -91,10 +92,10 @@ class AppState with ChangeNotifier {
   }
 
   /// Login-Logik
-  Future<bool> login(String email, String password) async {
-    final token = await ApiLogin().login(email, password);
+  Future<ApiProviderError?> login(String email, String password) async {
+    final (token, error) = await ApiLogin().login(email, password);
     if (token == null) {
-      return false;
+      return error ?? ApiProviderError.unknownError;
     }
 
     // Token will be used for all future requests
@@ -105,7 +106,7 @@ class AppState with ChangeNotifier {
 
     if (_donatorProvider.entity == null) {
       ApiService.shared.setToken(null);
-      return false;
+      return ApiProviderError.unknownError;
     }
 
     // Now set id explicitly
@@ -117,7 +118,7 @@ class AppState with ChangeNotifier {
     _isLoggedIn = true;
     notifyListeners();
 
-    return true;
+    return null;
   }
 
   /// Logout-Logik

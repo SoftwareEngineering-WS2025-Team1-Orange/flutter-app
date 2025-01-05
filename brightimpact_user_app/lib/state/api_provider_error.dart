@@ -4,6 +4,7 @@ enum ApiProviderError {
   authError("Du bist nicht angemeldet."),
   permissionError("Da darfst du nicht drauf zugreifen."),
   internalServerError("Unser Server macht gerade Faxen."),
+  wrongCredentials("Deine Email oder Passwort sind falsch."),
 
   unknownError("Da ist bei uns was schief gelaufen.");
 

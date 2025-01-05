@@ -47,11 +47,23 @@ class _LoginPageState extends State<LoginPage> {
         onNext: () async {
           final result = await appState.login(
               emailTextController.text, passwordTextController.text);
-          if (result && context.mounted) {
-            // SUCCESSFULLY LOGGED IN: 
-            Navigator.pop(context);
+          if (result == null) {
+            if (context.mounted) {
+              // SUCCESSFULLY LOGGED IN:
+              Navigator.pop(context);
+            }
+          } else {
+            if (context.mounted) {
+              // Prompt error
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text("Hoppla! ${result.message}"),
+                  duration: Duration(seconds: 3),
+                ),
+              );
+            }
           }
-          return Future.value(result);
+          return Future.value(result == null);
         },
         continueButtonText: "Anmelden",
       ),
