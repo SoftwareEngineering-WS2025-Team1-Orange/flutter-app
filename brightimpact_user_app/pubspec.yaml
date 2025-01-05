@@ -55,6 +55,13 @@ builders:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
+flutter_launcher_icons:
+  android: true 
+  ios: true  
+  image_path: "assets/icon/app_icon.png"  
+  image_path_android: "assets/icon/app_icon.png"  
+  min_sdk_android: 21 # android min sdk min:16, default 21
+
 # The following section is specific to Flutter packages.
 flutter:
 
@@ -64,7 +71,7 @@ flutter:
   uses-material-design: true
 
   assets:
-     #- assets/images/samples/beach_clean.jpg
+     - assets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
