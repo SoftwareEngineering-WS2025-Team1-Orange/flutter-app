@@ -26,6 +26,7 @@ class AppState with ChangeNotifier {
   bool get isLoggedIn => _isLoggedIn;
 
   Donator? get donator => _donatorProvider.entity ?? _initialDiskDonator;
+  DonatorProvider get donatorProvider => _donatorProvider;
 
   AppState() {
     _restoreState();
@@ -157,7 +158,7 @@ class AppState with ChangeNotifier {
         _isLoggedIn = false;
       }
     } on Exception catch (e) {
-      print("API call failed with error: $e");
+      debugPrint("API call failed with error: $e");
     } finally {
       _isLoading = false;
       notifyListeners();

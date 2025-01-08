@@ -1,6 +1,6 @@
 import 'package:bright_impact/state/api_login.dart';
 import 'package:bright_impact/state/app_state.dart';
-import 'package:bright_impact/view/pages/input_page.dart';
+import 'package:bright_impact/view/pages/input_pages/input_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

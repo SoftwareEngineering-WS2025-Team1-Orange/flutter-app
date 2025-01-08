@@ -7,10 +7,10 @@ import 'package:qr_code_scanner/qr_code_scanner.dart';
 class QRCodeScannerWidget extends StatefulWidget {
   final bool Function(String data) onQRCodeDetected;
 
-  QRCodeScannerWidget({required this.onQRCodeDetected});
+  const QRCodeScannerWidget({super.key, required this.onQRCodeDetected});
 
   @override
-  _QRCodeScannerWidgetState createState() => _QRCodeScannerWidgetState();
+  State<QRCodeScannerWidget> createState() => _QRCodeScannerWidgetState();
 }
 
 class _QRCodeScannerWidgetState extends State<QRCodeScannerWidget> {
@@ -30,20 +30,20 @@ class _QRCodeScannerWidgetState extends State<QRCodeScannerWidget> {
   }
 
   Future<void> _initCamera() async {
-    // Initialisiere verfügbare Kameras
+    // Initialize available cameras
     _cameras = await availableCameras();
     final backCamera = _cameras?.firstWhere(
         (camera) => camera.lensDirection == CameraLensDirection.back);
 
     if (backCamera != null) {
-      // Starte Kamera
+      // Start camera
       _cameraController = CameraController(backCamera,
         ResolutionPreset.medium,
         enableAudio: false);
       await _cameraController!.initialize();
       setState(() {});
     } else {
-      print("Keine Frontkamera gefunden!");
+      debugPrint("Keine Frontkamera gefunden!");
     }
   }
 
@@ -64,7 +64,7 @@ class _QRCodeScannerWidgetState extends State<QRCodeScannerWidget> {
                       aspectRatio: _cameraController!.value.aspectRatio,
                       child: CameraPreview(_cameraController!),
                     ),*/
-                    // QR-Code-Scanner
+                    // QR scanner
                     QRView(
                       key: qrKey,
                       onQRViewCreated: _onQRViewCreated,

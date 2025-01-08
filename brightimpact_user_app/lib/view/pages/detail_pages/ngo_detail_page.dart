@@ -2,6 +2,7 @@ import 'package:bright_impact/state/entity_provider/ngo_provider.dart';
 import 'package:bright_impact/model/ngo.dart';
 import 'package:bright_impact/view/custom_widgets/button_widget.dart';
 import 'package:bright_impact/view/pages/detail_pages/detail_page.dart';
+import 'package:bright_impact/view/pages/donation_page.dart';
 import 'package:flutter/material.dart';
 
 class NgoDetailSheet extends DetailSheet<NGO, NgoProvider> {
@@ -21,7 +22,8 @@ class NgoDetailsPage extends DetailsPage<NGO, NgoProvider> {
   });
 
   @override
-  NgoProvider createProvider({required int donatorId}) => NgoProvider(donatorId: donatorId);
+  NgoProvider createProvider({required int donatorId}) =>
+      NgoProvider(donatorId: donatorId);
 
   @override
   List<Widget> buildBottomButtons(BuildContext context, NgoProvider provider) {
@@ -31,9 +33,24 @@ class NgoDetailsPage extends DetailsPage<NGO, NgoProvider> {
       ButtonWidget(
           labelText: "Spenden",
           onPressed: () {
-                return Future.value(true);
-              }),
-      if (provider.entity?.websiteUrl != null)
+            showModalBottomSheet(
+              context: context,
+              isScrollControlled: true, // Ermöglicht volle Höhe
+              backgroundColor: Colors.transparent,
+              builder: (context) => FractionallySizedBox(
+                heightFactor: 0.875, // Sheet only takes 90% of screen height
+                child: DonationPage(
+                  targetTitle: provider.entity?.name ?? "",
+                  targetSubtitle: "Spende an Organisation",
+                  isNgo: true,
+                  targetEntityId: provider.entity?.id ?? 0,
+                ),
+              ),
+            );
+            return Future.value(true);
+          }),
+      if (provider.entity?.websiteUrl?.isNotEmpty ??
+          false) // when not null and not empty
         ElevatedButton(
           onPressed: () => openWebsite(provider.entity!.websiteUrl!),
           style: ElevatedButton.styleFrom(

@@ -5,7 +5,7 @@ class Donator {
   final String firstname;
   final String lastname;
   final String email;
-  final num balance;
+  final double balance;
   final int id;
 
   Donator(this.firstname, this.lastname, this.balance, this.id, this.email);
@@ -14,7 +14,7 @@ class Donator {
       : firstname = dto.firstName,
         lastname = dto.lastName,
         id = dto.id,
-        balance = dto.balance,
+        balance = dto.balance.toDouble(),
         email = dto.email;
 
   // Serialisieren in JSON

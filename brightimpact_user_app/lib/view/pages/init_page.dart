@@ -1,7 +1,7 @@
 import 'package:bright_impact/state/app_state.dart';
 import 'package:bright_impact/view/custom_widgets/qr_scanner_widget.dart';
-import 'package:bright_impact/view/pages/login_page.dart';
-import 'package:bright_impact/view/pages/register_page.dart';
+import 'package:bright_impact/view/pages/input_pages/login_page.dart';
+import 'package:bright_impact/view/pages/input_pages/register_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -128,13 +128,11 @@ class _InitPage extends State<InitPage> {
                     GestureDetector(
                       onTap: () {
                         // QR-Code-Scan-Funktionalität
-                        debugPrint('Scan button pressed');
                         _showQRCodeScanner();
                       },
                       child: ElevatedButton(
                         onPressed: () {
                           // QR-Code-Scan-Aktion
-                          debugPrint('Scan your Donationbox');
                           _showQRCodeScanner();
                         },
                         style: ElevatedButton.styleFrom(

@@ -190,7 +190,7 @@ Widget _buildTopBar({required context, void Function()? onUserPressed}) {
             ])),
         SizedBox(height: width * 0.03),
         Center(
-          child: DonationWalletWidget(amount: appState.donator?.balance.toDouble() ?? 0.0),
+          child: DonationWalletWidget(amount: appState.donator?.balance ?? 0.0),
         )
       ])
     ],

@@ -3,6 +3,7 @@ import 'package:bright_impact/model/token.dart';
 import 'package:bright_impact/state/api_provider_error.dart';
 import 'package:bright_impact/state/api_service.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 
 class ApiLogin {
   Future<(Token?,ApiProviderError?)> login(String email, String password) async {
@@ -25,7 +26,7 @@ class ApiLogin {
       return Future.value((Token(responseToken.data!.accessToken), null));
 
     } catch (e) {
-      print("Login Error: $e");
+      debugPrint("Login Error: $e");
 
       if (e is DioException) {
         // Special case: wrong credentials
@@ -67,7 +68,7 @@ class ApiLogin {
 
 
     } catch (e) {
-      print("Register Error: $e");
+      debugPrint("Register Error: $e");
 
       if (e is DioException) {
         return Future.value(e.type == DioExceptionType.connectionError ||

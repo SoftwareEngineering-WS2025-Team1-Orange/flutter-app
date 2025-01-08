@@ -124,7 +124,7 @@ abstract class ListProvider<T> with ChangeNotifier {
         _loadingError = ApiProviderError.unknownError;
       }
 
-      print("Error fetching entity: $e");
+      debugPrint("Error fetching entity: $e");
     } finally {
       _isLoading = false;
       notifyListeners();

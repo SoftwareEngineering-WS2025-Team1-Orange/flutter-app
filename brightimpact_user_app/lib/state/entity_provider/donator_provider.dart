@@ -1,4 +1,5 @@
 import 'package:bright_impact/model/donator.dart';
+import 'package:bright_impact/state/api_provider_error.dart';
 import 'package:bright_impact/state/api_service.dart';
 import 'package:bright_impact/state/entity_provider/entity_provider.dart';
 
@@ -23,5 +24,10 @@ class DonatorProvider extends EntityProvider<Donator> {
         httpStatusMessage: response.statusMessage,
         data: Donator.fromDto(entity));
   }
+
+ Future<ApiProviderError?> donateTo(bool isNgo, int targetEntityId) async {
+  // Return Static Error
+  return Future.value(ApiProviderError.internalServerError);
+ }
 
 }

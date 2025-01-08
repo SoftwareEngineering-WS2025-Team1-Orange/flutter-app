@@ -1,6 +1,8 @@
 import 'package:bright_impact/model/project.dart';
 import 'package:bright_impact/state/entity_provider/project_provider.dart';
+import 'package:bright_impact/view/custom_widgets/button_widget.dart';
 import 'package:bright_impact/view/pages/detail_pages/detail_page.dart';
+import 'package:bright_impact/view/pages/donation_page.dart';
 import 'package:flutter/material.dart';
 
 class ProjectDetailSheet extends DetailSheet<Project, ProjectProvider> {
@@ -20,33 +22,35 @@ class ProjectDetailsPage extends DetailsPage<Project, ProjectProvider> {
   });
 
   @override
-  ProjectProvider createProvider({required int donatorId}) => ProjectProvider(donatorId: donatorId);
+  ProjectProvider createProvider({required int donatorId}) =>
+      ProjectProvider(donatorId: donatorId);
 
   @override
   List<Widget> buildBottomButtons(
       BuildContext context, ProjectProvider provider) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final theme = Theme.of(context);
 
     return [
       SizedBox(
           width: screenWidth * 0.55,
-          child: ElevatedButton(
+          child: ButtonWidget(
+            labelText: "Spenden",
             onPressed: () {
-              // Navigation zu Spenden-Seite
+              showModalBottomSheet(
+                context: context,
+                isScrollControlled: true, // Ermöglicht volle Höhe
+                backgroundColor: Colors.transparent,
+                builder: (context) => FractionallySizedBox(
+                  heightFactor: 0.875, // Sheet only takes 90% of screen height
+                  child: DonationPage(
+                      targetTitle: provider.entity?.name ?? "",
+                      targetSubtitle: provider.entity?.ngoName ?? "",
+                      isNgo: false,
+                      targetEntityId: provider.id ?? 0),
+                ),
+              );
+              return Future.value(true);
             },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: theme.primaryColor,
-            ),
-            child: Center(
-                child: Text(
-              "Donate",
-              style: TextStyle(
-                fontSize: screenWidth * 0.045,
-                fontWeight: FontWeight.w600,
-                color: theme.secondaryHeaderColor,
-              ),
-            )),
           ))
     ];
   }
@@ -65,10 +69,9 @@ class ProjectDetailsPage extends DetailsPage<Project, ProjectProvider> {
           Text(
             entity.name,
             style: TextStyle(
-              fontSize: screenWidth * 0.073,
-              fontWeight: FontWeight.w700,
-              height: 1
-            ),
+                fontSize: screenWidth * 0.073,
+                fontWeight: FontWeight.w700,
+                height: 1),
           ),
           const SizedBox(height: 4),
           Text(
