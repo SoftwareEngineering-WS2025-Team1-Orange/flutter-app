@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **grantType** | **String** |  | 
 **username** | **String** |  | [optional] 
 **password** | **String** |  | [optional] 
-**scope** | **String** |  | [optional] [default to '']
+**scope** | **List&lt;String&gt;** |  | [optional] 
 **clientId** | **String** |  | 
 **clientSecret** | **String** |  | 
 

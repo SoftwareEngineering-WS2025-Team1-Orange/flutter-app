@@ -11,8 +11,19 @@ class ApiLogin {
       RequestTokenDto credentials = RequestTokenDto(
           username: email,
           password: password,
-          clientId: "postman",
-          clientSecret: "1234", // TODO: adjust
+          clientId: "V2nuwnQ42E",
+          clientSecret: "U9eCbKOQwNZ4FgGen7ntqC6xqMYHBI5GFfhXeqLH1RNEniWJX/G40BiLIdWZqKE0",
+          scope: [
+            RequestTokenDtoScopeEnum.READ_DONATION,
+            RequestTokenDtoScopeEnum.WRITE_DONATION,
+            RequestTokenDtoScopeEnum.READ_DONATIONBOX,
+            RequestTokenDtoScopeEnum.WRITE_DONATIONBOX,
+            RequestTokenDtoScopeEnum.READ_DONATOR,
+            RequestTokenDtoScopeEnum.WRITE_DONATOR,
+            RequestTokenDtoScopeEnum.READ_NGO,
+            RequestTokenDtoScopeEnum.READ_TRANSACTION,
+            RequestTokenDtoScopeEnum.READ_PROJECT,
+          ],
           grantType: "password");
       final responseToken = await ApiService.shared.api
           .getAuthApi()

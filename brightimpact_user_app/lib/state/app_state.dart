@@ -5,7 +5,6 @@ import 'package:bright_impact/model/token.dart';
 import 'package:bright_impact/state/api_login.dart';
 import 'package:bright_impact/state/api_provider_error.dart';
 import 'package:bright_impact/state/api_service.dart';
-import 'package:bright_impact/api/lib/openapi.dart';
 import 'package:bright_impact/state/entity_provider/donator_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -52,6 +51,14 @@ class AppState with ChangeNotifier {
       _isLoggedIn = false;
     }
 
+    Token? token = await _loadAuthToken();
+    if (token == null) {
+      _isLoggedIn = false;
+      _initialDiskDonator = null;
+    } else {
+      ApiService.shared.setToken(token);
+    }
+
     notifyListeners();
   }
 
@@ -75,6 +82,9 @@ class AppState with ChangeNotifier {
     final tokenString = jsonEncode(token.toJson());
     await _secureStorage.write(key: _authTokenKey, value: tokenString);
   }
+
+
+// TO-DO: USE FUNCTION
 
   /// Lädt den Auth-Token
   Future<Token?> _loadAuthToken() async {
@@ -138,30 +148,5 @@ class AppState with ChangeNotifier {
   void didUpdateDonator() {
     notifyListeners();
     _saveDonator();
-  }
-
-  Future<void> registerDonationbox(String id) async {
-    _isLoading = true;
-    notifyListeners();
-
-    try {
-      final response = await ApiService.shared.api
-          .getDonationboxApi()
-          .registerDonationbox(
-              donatorId: 1,
-              donationboxRegisterDto: DonationboxRegisterDto(cuid: id, name: "Meine Donationbox"));
-
-      if ((response.statusCode ?? 0) >= 200 &&
-          (response.statusCode ?? 0) < 300) {
-        _isLoggedIn = true;
-      } else {
-        _isLoggedIn = false;
-      }
-    } on Exception catch (e) {
-      debugPrint("API call failed with error: $e");
-    } finally {
-      _isLoading = false;
-      notifyListeners();
-    }
   }
 }

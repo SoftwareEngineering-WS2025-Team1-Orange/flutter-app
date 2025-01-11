@@ -16,8 +16,6 @@ class FilterButtonConfig {
 }
 
 abstract class ListPage<T> extends StatefulWidget {
-  /// Keeps reference to all created instances of ListProvider
-  static final Set<WeakReference<Object>> _weakProviderReferences = {};
 
   const ListPage({super.key});
 
@@ -42,23 +40,6 @@ abstract class ListPage<T> extends StatefulWidget {
   /// Override to receive tapped item events
   Future<void> onItemPressed(
       BuildContext context, ListProvider<T> provider, int index);
-
-  /// Call this method to add created ListProvider as observer to refresh
-  static addProvider<T>(ListProvider<T> newProvider) {
-    _weakProviderReferences.add(WeakReference(newProvider));
-  }
-
-  /// Can be called to refresh all instances of the ListProvider
-  static void refreshAllListPages<T>() {
-    // Filtere nur Objekte, die noch existieren
-    _weakProviderReferences.removeWhere((ref) => ref.target == null);
-    for (var ref in _weakProviderReferences) {
-      final target = ref.target;
-      if (target is ListProvider<T>) {
-        target.fetchFirstPage();
-      }
-    }
-  }
 }
 
 abstract class ListPageState<T, W extends ListPage<T>> extends State<W>
@@ -72,7 +53,6 @@ abstract class ListPageState<T, W extends ListPage<T>> extends State<W>
 
   ListProvider<T> createProvider({required int donatorId}) {
     _provider = widget.createProvider(donatorId: donatorId);
-    ListPage.addProvider(_provider);
     _provider.fetchFirstPage();
     _scrollController.addListener(() {
       if (_scrollController.position.pixels + 60 >=

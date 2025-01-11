@@ -10,8 +10,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **accessToken** | **String** |  | 
 **tokenType** | **String** |  | [optional] 
-**expiresIn** | **int** |  | [optional] 
-**scope** | **String** |  | [optional] 
+**expiresAt** | **int** |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

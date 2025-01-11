@@ -17,13 +17,8 @@ void main() {
       // TODO
     });
 
-    // int expiresIn
-    test('to test the property `expiresIn`', () async {
-      // TODO
-    });
-
-    // String scope
-    test('to test the property `scope`', () async {
+    // int expiresAt
+    test('to test the property `expiresAt`', () async {
       // TODO
     });
 

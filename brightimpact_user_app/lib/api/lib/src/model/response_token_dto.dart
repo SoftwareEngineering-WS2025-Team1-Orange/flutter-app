@@ -22,9 +22,7 @@ class ResponseTokenDto {
 
      this.tokenType,
 
-     this.expiresIn,
-
-     this.scope,
+     this.expiresAt,
   });
 
   @JsonKey(
@@ -53,25 +51,13 @@ class ResponseTokenDto {
 
   @JsonKey(
     
-    name: r'expires_in',
+    name: r'expires_at',
     required: false,
     includeIfNull: false,
   )
 
 
-  final int? expiresIn;
-
-
-
-  @JsonKey(
-    
-    name: r'scope',
-    required: false,
-    includeIfNull: false,
-  )
-
-
-  final String? scope;
+  final int? expiresAt;
 
 
 
@@ -81,15 +67,13 @@ class ResponseTokenDto {
     bool operator ==(Object other) => identical(this, other) || other is ResponseTokenDto &&
       other.accessToken == accessToken &&
       other.tokenType == tokenType &&
-      other.expiresIn == expiresIn &&
-      other.scope == scope;
+      other.expiresAt == expiresAt;
 
     @override
     int get hashCode =>
         accessToken.hashCode +
         tokenType.hashCode +
-        expiresIn.hashCode +
-        scope.hashCode;
+        expiresAt.hashCode;
 
   factory ResponseTokenDto.fromJson(Map<String, dynamic> json) => _$ResponseTokenDtoFromJson(json);
 

@@ -1,4 +1,5 @@
 import 'package:bright_impact/state/app_state.dart';
+import 'package:bright_impact/state/entity_provider/donationbox_provider.dart';
 import 'package:bright_impact/view/custom_widgets/qr_scanner_widget.dart';
 import 'package:bright_impact/view/pages/input_pages/login_page.dart';
 import 'package:bright_impact/view/pages/input_pages/register_page.dart';
@@ -19,9 +20,9 @@ class _InitPage extends State<InitPage> {
   String _donationBoxSN = "";
 
   final Map<InitPageState, String> headlineText = {
-    InitPageState.init: "Let's get\nstarted.",
-    InitPageState.qrScanning: "Scan the\nQR Code.",
-    InitPageState.boxFound: "Connect with\nyour account.",
+    InitPageState.init: "Los geht's.",
+    InitPageState.qrScanning: "Scanne den\nQR-Code.",
+    InitPageState.boxFound: "Verbinde\ndeinen Account.",
   };
 
   void _showQRCodeScanner() {
@@ -33,7 +34,7 @@ class _InitPage extends State<InitPage> {
   void _openRegisterPage(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      isScrollControlled: true, // Ermöglicht volle Höhe
+      isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (context) => FractionallySizedBox(
         heightFactor: 0.9, // Sheet only takes 90% of screen height
@@ -45,7 +46,7 @@ class _InitPage extends State<InitPage> {
   void _openLoginPage(BuildContext context) {
     showModalBottomSheet(
       context: context,
-      isScrollControlled: true, // Ermöglicht volle Höhe
+      isScrollControlled: true, 
       backgroundColor: Colors.transparent,
       builder: (context) => FractionallySizedBox(
         heightFactor: 0.9, // Sheet only takes 90% of screen height
@@ -66,7 +67,7 @@ class _InitPage extends State<InitPage> {
 
       final sn = uri.queryParameters['sn'];
       // Check if parameter exists and is a serial number
-      if (sn == null || !_isValidSN(sn)) {
+      if (sn == null || !DonationboxProvider.isValidSN(sn)) {
         throw Exception("No valid serial number in parameter sn");
       }
 
@@ -80,14 +81,6 @@ class _InitPage extends State<InitPage> {
     } catch (e) {
       return false;
     }
-  }
-
-  bool _isValidSN(String uuid) {
-    // Regex zum Überprüfen eines UUID-Formats
-    final uuidRegex = RegExp(
-      r'^[0-9]{8}$',
-    );
-    return uuidRegex.hasMatch(uuid);
   }
 
   @override
@@ -120,7 +113,7 @@ class _InitPage extends State<InitPage> {
                 children: [
                   if (_state == InitPageState.boxFound)
                     Text(
-                      'Donationbox found',
+                      "Donationbox erkannt",
                       style: theme.textTheme.labelLarge,
                       textAlign: TextAlign.center,
                     ),
@@ -150,7 +143,7 @@ class _InitPage extends State<InitPage> {
                   if (_state == InitPageState.qrScanning)
                     LayoutBuilder(
                       builder: (context, constraints) {
-                        // Berechne 1/3 der Bildschirmbreite
+                        // Calc 1/3 of screen width
                         double widgetWidth = 250; //constraints.maxWidth / 3;
 
                         return Center(
@@ -183,7 +176,7 @@ class _InitPage extends State<InitPage> {
                   if (_state == InitPageState.init ||
                       _state == InitPageState.qrScanning)
                     Text(
-                      'Scan your\nDonationbox',
+                      "Scanne deine\nDonationbox",
                       style: theme.textTheme.labelMedium!.copyWith(
                         color: Colors.white,
                       ),
@@ -202,7 +195,7 @@ class _InitPage extends State<InitPage> {
                           height: 60,
                           child: OutlinedButton(
                             onPressed: () {
-                              //appState.testLogIn();
+                              //showInputDialog(context);
                               _openLoginPage(context);
                             },
                             style: OutlinedButton.styleFrom(
@@ -229,10 +222,6 @@ class _InitPage extends State<InitPage> {
                           height: 60,
                           child: ElevatedButton(
                             onPressed: () {
-                              if (_state == InitPageState.boxFound) {
-                                appState.registerDonationbox(_donationBoxSN);
-                              }
-
                               _openRegisterPage(context);
 
                             },

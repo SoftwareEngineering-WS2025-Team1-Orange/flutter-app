@@ -22,7 +22,7 @@ void main() {
       // TODO
     });
 
-    // String scope (default value: '')
+    // List<String> scope
     test('to test the property `scope`', () async {
       // TODO
     });

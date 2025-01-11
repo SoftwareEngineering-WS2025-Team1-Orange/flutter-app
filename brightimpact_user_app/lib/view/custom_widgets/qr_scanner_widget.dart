@@ -18,7 +18,7 @@ class _QRCodeScannerWidgetState extends State<QRCodeScannerWidget> {
   List<CameraDescription>? _cameras;
   QRViewController? _qrController;
 
-  final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
+  final GlobalKey qrKey = GlobalKey(debugLabel: "QR");
 
   bool _isValidQRCode = true;
   Timer? _validTimer;
@@ -43,7 +43,7 @@ class _QRCodeScannerWidgetState extends State<QRCodeScannerWidget> {
       await _cameraController!.initialize();
       setState(() {});
     } else {
-      debugPrint("Keine Frontkamera gefunden!");
+      debugPrint("No back camera found!");
     }
   }
 
@@ -51,14 +51,16 @@ class _QRCodeScannerWidgetState extends State<QRCodeScannerWidget> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Scaffold(
-      body: Center(
+    return Center(
         child: _cameraController != null &&
                 _cameraController!.value.isInitialized
             ? ClipRRect(
                 borderRadius: BorderRadius.circular(15),
                 child: Stack(
                   children: [
+                    Container(
+                      color: Colors.black,
+                    ),
                     // QR scanner
                     QRView(
                       key: qrKey,
@@ -75,8 +77,7 @@ class _QRCodeScannerWidgetState extends State<QRCodeScannerWidget> {
                   ],
                 ))
             : CircularProgressIndicator(color: theme.primaryColor), // Progress indicator during camera initialisation
-      ),
-    );
+      );
   }
 
   void _onQRViewCreated(QRViewController controller) {
