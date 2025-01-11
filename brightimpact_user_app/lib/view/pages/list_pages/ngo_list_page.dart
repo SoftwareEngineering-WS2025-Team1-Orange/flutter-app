@@ -12,7 +12,8 @@ class NGOListPage extends ListPage<NGO> {
   State<StatefulWidget> createState() => _NGOListPageState();
 
   @override
-  ListProvider<NGO> createProvider({required int donatorId}) => NgoListProvider(donatorId: donatorId);
+  ListProvider<NGO> createProvider({required int donatorId}) =>
+      NgoListProvider(donatorId: donatorId);
 
   @override
   String pageTitle() => "Gemeinnützige Organisationen";
@@ -43,7 +44,8 @@ class NGOListPage extends ListPage<NGO> {
   }
 
   @override
-  Future<void> onItemPressed(BuildContext context, ListProvider<NGO> provider, int index) async {
+  Future<void> onItemPressed(
+      BuildContext context, ListProvider<NGO> provider, int index) async {
     final ngo = provider.entries[index];
     NgoDetailSheet(id: ngo.id).openDetailSheet(context);
   }
@@ -62,20 +64,37 @@ class NGOListPage extends ListPage<NGO> {
           children: [
             GestureDetector(
                 onTap: onPressed,
-                child: CircleAvatar(
-                  backgroundImage: NetworkImage(item.bannerUri),
-                  backgroundColor: const Color.fromARGB(255, 209, 209, 209),
-                  radius: width * 0.2,
-                )),
+                child: Stack(children: [
+                  CircleAvatar(
+                    backgroundImage: NetworkImage(item.bannerUri),
+                    backgroundColor: const Color.fromARGB(255, 209, 209, 209),
+                    radius: width * 0.2,
+                  ),
+                ])),
             SizedBox(height: width * 0.02),
-            Text(
-              item.name,
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: theme.secondaryHeaderColor),
-            ),
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Text(
+                item.name,
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: theme.secondaryHeaderColor),
+              ),
+              if (item.isFavorite)
+                Padding(
+                    padding: EdgeInsets.only(left: 7),
+                    child: ClipOval(
+                        child: Container(
+                            color: theme.primaryColor,
+                            child: Padding(
+                                padding: EdgeInsets.all(6),
+                                child: Icon(
+                                  size: 12,
+                                  Icons.favorite,
+                                  color: Colors.white,
+                                )))))
+            ])
           ],
         ));
   }

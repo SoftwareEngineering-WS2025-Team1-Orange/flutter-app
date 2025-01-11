@@ -34,7 +34,7 @@ class DonationWalletWidget extends StatelessWidget {
               size: 37,
             ),
           ),
-          const SizedBox(width: 12),
+          Spacer(),
 
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -58,6 +58,7 @@ class DonationWalletWidget extends StatelessWidget {
               ),
             ],
           ),
+          Spacer()
         ],
       ),
     );

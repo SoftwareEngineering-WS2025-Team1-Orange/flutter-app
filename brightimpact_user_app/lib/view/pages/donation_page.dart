@@ -1,5 +1,7 @@
 import 'package:bright_impact/model/donator.dart';
+import 'package:bright_impact/model/transaction.dart';
 import 'package:bright_impact/state/app_state.dart';
+import 'package:bright_impact/state/list_provider/list_provider.dart';
 import 'package:bright_impact/view/custom_widgets/button_widget.dart';
 import 'package:bright_impact/view/custom_widgets/donation_wallet_widget.dart';
 import 'package:flutter/material.dart';
@@ -116,18 +118,31 @@ class _DonationPageState extends State<DonationPage> {
                         ),
                         SizedBox(height: 16),
                         ButtonWidget(
-                          labelText: "Spenden",
-                          onPressed: () async {
-                            final result = await appState.donatorProvider
-                                .donateTo(widget.isNgo, widget.targetEntityId);
+                            labelText: "Spenden",
+                            onPressed: () async {
+                              // Amount must be bigger than 0
+                              if (donationAmountInCents <= 0) {
+                                return Future.value(false);
+                              }
 
-                            // Display error when necessary
-                            if (result != null && context.mounted) {
-                              _displayError("Hoppla. ${result.message}", context);
-                            }
-                            return result == null;
-                          },
-                        ),
+                              final result = await appState.donatorProvider
+                                  .donateTo(widget.isNgo, widget.targetEntityId,
+                                      donationAmountInCents / 100);
+
+                              // Display error when necessary
+                              if (result != null && context.mounted) {
+                                _displayError(
+                                    "Hoppla. ${result.message}", context);
+                              }
+
+                              // SUCCESS:
+                              if (result == null && context.mounted) {
+                                ListProvider.refreshAllListPages<Transaction>();
+                                Navigator.pop(context);
+                              }
+
+                              return result == null;
+                            }),
                       ],
                     ),
                   ),

@@ -15,7 +15,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePage extends State<HomePage> with AutomaticKeepAliveClientMixin {
-
   // Keeps page alive when not visible in PageView
   @override
   bool get wantKeepAlive => true;
@@ -109,41 +108,68 @@ class _HomePage extends State<HomePage> with AutomaticKeepAliveClientMixin {
       String label, String? subtitle, IconData icon, BuildContext context,
       {bool animationReversed = false}) {
     final theme = Theme.of(context);
-    return Stack(children: [
-      AspectRatio(
+    return Stack(
+      children: [
+        AspectRatio(
           aspectRatio: 1.0,
           child: ClipRRect(
-              borderRadius: BorderRadius.circular(1000),
-              child: Container(
-                  color: theme.secondaryHeaderColor,
-                  child: Column(
+            borderRadius: BorderRadius.circular(1000),
+            child: Container(
+              color: theme.secondaryHeaderColor,
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  return Padding(
+                    padding: EdgeInsets.all(constraints.maxHeight * 0.1),
+                    child: 
+                  Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        label,
-                        style: TextStyle(
-                            fontSize: 15,
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          label,
+                          style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: theme.primaryColor),
-                        textAlign: TextAlign.center,
+                            color: theme.primaryColor,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                       if (subtitle != null)
-                        Text(subtitle,
+                        FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Text(
+                            subtitle,
                             style: TextStyle(
-                                fontSize: 10, color: theme.primaryColor),
-                            textAlign: TextAlign.center),
-                      SizedBox(height: 4),
-                      Icon(icon, color: theme.primaryColor, size: 32),
+                              color: theme.primaryColor,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      SizedBox(height: constraints.maxHeight * 0.05),
+                      Icon(
+                        icon,
+                        color: theme.primaryColor,
+                        size: constraints.maxHeight *
+                            0.2,
+                      ),
                     ],
-                  )))),
-      Padding(
-          padding: EdgeInsets.all(5),
+                  ));
+                },
+              ),
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(5),
           child: RotatingCircle(
             gaps: 3,
             color: theme.primaryColor,
             reversed: animationReversed,
-          ))
-    ]);
+          ),
+        ),
+      ],
+    );
   }
 
   Widget _buildProjectSection(
@@ -154,7 +180,8 @@ class _HomePage extends State<HomePage> with AutomaticKeepAliveClientMixin {
     final appState = Provider.of<AppState>(context);
 
     return ChangeNotifierProvider(
-        create: (context) => ProjectListProvider(resultsPerPage: 7, donatorId: appState.donator?.id ?? 0)
+        create: (context) => ProjectListProvider(
+            resultsPerPage: 7, donatorId: appState.donator?.id ?? 0)
           ..setFilterAndFetch(category: filterCategory, newest: true),
         child:
             Consumer<ProjectListProvider>(builder: (context, provider, child) {
@@ -214,12 +241,13 @@ class _HomePage extends State<HomePage> with AutomaticKeepAliveClientMixin {
             width: width * 0.7,
             height: width * 0.55,
             child: GestureDetector(
-                onTap: () => ProjectDetailSheet(id: e.id)
-                  ..openDetailSheet(context),
+                onTap: () =>
+                    ProjectDetailSheet(id: e.id)..openDetailSheet(context),
                 child: ProjectCardWidget(
                     title: e.name,
                     subtitle: e.ngoName,
-                    imageUri: e.bannerUri))))
+                    imageUri: e.bannerUri,
+                    isFavorite: e.isFavorite,))))
         .toList();
   }
 }

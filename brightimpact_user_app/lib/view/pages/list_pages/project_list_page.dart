@@ -56,28 +56,6 @@ class ProjectListPage extends ListPage<Project> {
       required BuildContext context,
       void Function()? onPressed}) {
     final width = MediaQuery.of(context).size.width;
-    //final theme = Theme.of(context);
-    /*return Padding(
-        padding: EdgeInsets.all(width * 0.04),
-        child: Column(
-          children: [
-            CircleAvatar(
-              backgroundImage: NetworkImage(item.bannerUri),
-              backgroundColor: const Color.fromARGB(255, 209, 209, 209),
-              radius: width * 0.2,
-            ),
-            SizedBox(height: width * 0.02),
-            Text(
-              item.name,
-              textAlign: TextAlign.left,
-              style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: theme.secondaryHeaderColor),
-            ),
-          ],
-        ));*/
-
     return GestureDetector(
         onTap: onPressed,
         child: Padding(
@@ -88,7 +66,8 @@ class ProjectListPage extends ListPage<Project> {
             child: ProjectCardWidget(
                 title: item.name,
                 subtitle: item.ngoName,
-                imageUri: item.bannerUri))));
+                imageUri: item.bannerUri,
+                isFavorite: item.isFavorite,))));
   }
 }
 

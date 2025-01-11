@@ -1,5 +1,6 @@
 import 'package:bright_impact/model/project.dart';
 import 'package:bright_impact/state/entity_provider/project_provider.dart';
+import 'package:bright_impact/state/list_provider/list_provider.dart';
 import 'package:bright_impact/view/custom_widgets/button_widget.dart';
 import 'package:bright_impact/view/pages/detail_pages/detail_page.dart';
 import 'package:bright_impact/view/pages/donation_page.dart';
@@ -161,7 +162,13 @@ class ProjectDetailsPage extends DetailsPage<Project, ProjectProvider> {
           top: 16,
           right: 16,
           child: ElevatedButton(
-            onPressed: () => provider.toggleFavorite(),
+            // Toggle favorite state
+            onPressed: () async {
+              if(await provider.setFavorite(!(entity?.isFavorite ?? false))) {
+                // On Success: Refresh all Project Lists
+                ListProvider.refreshAllListPages<Project>();
+              }
+            },
             style: ElevatedButton.styleFrom(
               shape: CircleBorder(),
               backgroundColor: const Color.fromARGB(255, 238, 236, 236),

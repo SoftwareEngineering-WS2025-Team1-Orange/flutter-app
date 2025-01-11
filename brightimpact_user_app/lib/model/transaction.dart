@@ -12,8 +12,8 @@ class Donation extends Transaction {
   final int id;
   final int ngoId;
   final String ngoName;
-  final int projectId;
-  final String projectName;
+  final int? projectId;
+  final String? projectName;
 
   Donation(super.datetime, super.amount, this.id, this.ngoId, this.ngoName,
       this.projectId, this.projectName);
@@ -22,9 +22,9 @@ class Donation extends Transaction {
       : id = dto.id,
         ngoId = dto.ngo.id,
         ngoName = dto.ngo.name,
-        projectId = dto.project?.id ?? 0,
-        projectName = dto.project?.name ?? "FEHLT",
-        super(dto.createdAt, dto.amount.toDouble());
+        projectId = dto.project?.id,
+        projectName = dto.project?.name,
+        super(dto.createdAt, -dto.amount.toDouble());
 }
 
 class Earning extends Transaction {
@@ -45,7 +45,7 @@ class Earning extends Transaction {
   Earning.fromDto(EarningDto dto)
       : id = dto.id,
         donationboxId = dto.donationBox.id,
-        donationboxName = dto.donationBox.name ?? "Donationbox",
+        donationboxName = dto.donationBox.name,
         calcDuration = Duration(seconds: dto.activeTimeInPeriod.toInt()),
         super(dto.createdAt, dto.amount.toDouble());
 }

@@ -1,10 +1,18 @@
+import 'package:openapi/src/model/donate_to_ngo201_response_all_of_project_dto.dart';
+import 'package:openapi/src/model/donate_to_ngo201_response_dto.dart';
+import 'package:openapi/src/model/donate_to_ngo_request_dto.dart';
+import 'package:openapi/src/model/donate_to_project201_response_dto.dart';
+import 'package:openapi/src/model/donate_to_project_request_dto.dart';
 import 'package:openapi/src/model/donation_dto.dart';
+import 'package:openapi/src/model/donation_response_dto.dart';
 import 'package:openapi/src/model/donationbox_basic_dto.dart';
 import 'package:openapi/src/model/donationbox_dto.dart';
 import 'package:openapi/src/model/donationbox_register_dto.dart';
 import 'package:openapi/src/model/donator_dto.dart';
 import 'package:openapi/src/model/donator_register_dto.dart';
+import 'package:openapi/src/model/donator_update_dto.dart';
 import 'package:openapi/src/model/earning_dto.dart';
+import 'package:openapi/src/model/favorite_project_request_dto.dart';
 import 'package:openapi/src/model/get_ngo_list200_response_dto.dart';
 import 'package:openapi/src/model/get_project_list200_response_dto.dart';
 import 'package:openapi/src/model/get_transaction_list200_response_dto.dart';
@@ -37,8 +45,20 @@ final _regMap = RegExp(r'^Map<String,(.*)>$');
           return (valueString == 'true' || valueString == '1') as ReturnType;
         case 'double':
           return (value is double ? value : double.parse('$value')) as ReturnType;
+        case 'DonateToNgo201ResponseAllOfProjectDto':
+          return DonateToNgo201ResponseAllOfProjectDto.fromJson(value as Map<String, dynamic>) as ReturnType;
+        case 'DonateToNgo201ResponseDto':
+          return DonateToNgo201ResponseDto.fromJson(value as Map<String, dynamic>) as ReturnType;
+        case 'DonateToNgoRequestDto':
+          return DonateToNgoRequestDto.fromJson(value as Map<String, dynamic>) as ReturnType;
+        case 'DonateToProject201ResponseDto':
+          return DonateToProject201ResponseDto.fromJson(value as Map<String, dynamic>) as ReturnType;
+        case 'DonateToProjectRequestDto':
+          return DonateToProjectRequestDto.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'DonationDto':
           return DonationDto.fromJson(value as Map<String, dynamic>) as ReturnType;
+        case 'DonationResponseDto':
+          return DonationResponseDto.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'DonationboxBasicDto':
           return DonationboxBasicDto.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'DonationboxDto':
@@ -49,8 +69,12 @@ final _regMap = RegExp(r'^Map<String,(.*)>$');
           return DonatorDto.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'DonatorRegisterDto':
           return DonatorRegisterDto.fromJson(value as Map<String, dynamic>) as ReturnType;
+        case 'DonatorUpdateDto':
+          return DonatorUpdateDto.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'EarningDto':
           return EarningDto.fromJson(value as Map<String, dynamic>) as ReturnType;
+        case 'FavoriteProjectRequestDto':
+          return FavoriteProjectRequestDto.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'GetNgoList200ResponseDto':
           return GetNgoList200ResponseDto.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'GetProjectList200ResponseDto':

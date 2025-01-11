@@ -68,12 +68,18 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 [*AuthApi*](doc/AuthApi.md) | [**getToken**](doc/AuthApi.md#gettoken) | **POST** /api-donator/auth/token | 
 [*AuthApi*](doc/AuthApi.md) | [**logout**](doc/AuthApi.md#logout) | **POST** /api-donator/auth/logout | 
+[*DonationApi*](doc/DonationApi.md) | [**donateToNgo**](doc/DonationApi.md#donatetongo) | **POST** /api-donator/donation/donator/{donator_id}/ngo/{ngo_id} | 
+[*DonationApi*](doc/DonationApi.md) | [**donateToProject**](doc/DonationApi.md#donatetoproject) | **POST** /api-donator/donation/donator/{donator_id}/project/{project_id} | 
 [*DonationboxApi*](doc/DonationboxApi.md) | [**getDonationbox**](doc/DonationboxApi.md#getdonationbox) | **GET** /api-donator/donationbox/donator/{donator_id} | 
 [*DonationboxApi*](doc/DonationboxApi.md) | [**registerDonationbox**](doc/DonationboxApi.md#registerdonationbox) | **POST** /api-donator/donationbox/donator/{donator_id} | 
 [*DonationsApi*](doc/DonationsApi.md) | [**getTransactionList**](doc/DonationsApi.md#gettransactionlist) | **GET** /api-donator/transaction/donator/{donator_id} | 
+[*DonatorApi*](doc/DonatorApi.md) | [**deleteDonator**](doc/DonatorApi.md#deletedonator) | **DELETE** /api-donator/donator/{donator_id} | 
+[*DonatorApi*](doc/DonatorApi.md) | [**favoriteNgo**](doc/DonatorApi.md#favoritengo) | **PUT** /api-donator/ngo/{ngo_id}/donator/{donator_id}/favorite | 
+[*DonatorApi*](doc/DonatorApi.md) | [**favoriteProject**](doc/DonatorApi.md#favoriteproject) | **PUT** /api-donator/project/{project_id}/donator/{donator_id}/favorite | 
 [*DonatorApi*](doc/DonatorApi.md) | [**getDonator**](doc/DonatorApi.md#getdonator) | **GET** /api-donator/donator/{donator_id} | 
 [*DonatorApi*](doc/DonatorApi.md) | [**getDonatorByToken**](doc/DonatorApi.md#getdonatorbytoken) | **GET** /api-donator/donator/me | 
 [*DonatorApi*](doc/DonatorApi.md) | [**registerDonator**](doc/DonatorApi.md#registerdonator) | **POST** /api-donator/donator | 
+[*DonatorApi*](doc/DonatorApi.md) | [**updateDonator**](doc/DonatorApi.md#updatedonator) | **PUT** /api-donator/donator/{donator_id} | 
 [*NGOApi*](doc/NGOApi.md) | [**getNgoList**](doc/NGOApi.md#getngolist) | **GET** /api-donator/ngo/donator/{donator_id} | 
 [*PowerSupplyApi*](doc/PowerSupplyApi.md) | [**addPowersupply**](doc/PowerSupplyApi.md#addpowersupply) | **POST** /api-donator/powersupply/donator/{donator_id} | 
 [*PowerSupplyApi*](doc/PowerSupplyApi.md) | [**getPowersupply**](doc/PowerSupplyApi.md#getpowersupply) | **GET** /api-donator/powersupply/donator/{donator_id} | 
@@ -82,13 +88,21 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [DonateToNgo201ResponseAllOfProjectDto](doc/DonateToNgo201ResponseAllOfProjectDto.md)
+ - [DonateToNgo201ResponseDto](doc/DonateToNgo201ResponseDto.md)
+ - [DonateToNgoRequestDto](doc/DonateToNgoRequestDto.md)
+ - [DonateToProject201ResponseDto](doc/DonateToProject201ResponseDto.md)
+ - [DonateToProjectRequestDto](doc/DonateToProjectRequestDto.md)
  - [DonationDto](doc/DonationDto.md)
+ - [DonationResponseDto](doc/DonationResponseDto.md)
  - [DonationboxBasicDto](doc/DonationboxBasicDto.md)
  - [DonationboxDto](doc/DonationboxDto.md)
  - [DonationboxRegisterDto](doc/DonationboxRegisterDto.md)
  - [DonatorDto](doc/DonatorDto.md)
  - [DonatorRegisterDto](doc/DonatorRegisterDto.md)
+ - [DonatorUpdateDto](doc/DonatorUpdateDto.md)
  - [EarningDto](doc/EarningDto.md)
+ - [FavoriteProjectRequestDto](doc/FavoriteProjectRequestDto.md)
  - [GetNgoList200ResponseDto](doc/GetNgoList200ResponseDto.md)
  - [GetProjectList200ResponseDto](doc/GetProjectList200ResponseDto.md)
  - [GetTransactionList200ResponseDto](doc/GetTransactionList200ResponseDto.md)

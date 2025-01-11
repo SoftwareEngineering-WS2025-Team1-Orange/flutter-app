@@ -29,14 +29,14 @@ class AppState with ChangeNotifier {
   DonatorProvider get donatorProvider => _donatorProvider;
 
   AppState() {
-    _restoreState();
-
-    // When logged in: setup donatorProvider and fetch data from server
+    _restoreState().whenComplete((){
+      // When logged in: setup donatorProvider and fetch data from server
     if (_initialDiskDonator != null) {
       _donatorProvider
         ..addListener(didUpdateDonator)
         ..setIdAndFetch(donator!.id);
     }
+    });
   }
 
   /// Loads stored objects
@@ -163,9 +163,5 @@ class AppState with ChangeNotifier {
       _isLoading = false;
       notifyListeners();
     }
-  }
-
-  void testLogIn() {
-    login("email", "passwort");
   }
 }

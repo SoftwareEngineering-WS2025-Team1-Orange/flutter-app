@@ -16,6 +16,9 @@ class FilterButtonConfig {
 }
 
 abstract class ListPage<T> extends StatefulWidget {
+  /// Keeps reference to all created instances of ListProvider
+  static final Set<WeakReference<Object>> _weakProviderReferences = {};
+
   const ListPage({super.key});
 
   /// Override to provide a list of filter configs that will be displayed as filter buttons to the user
@@ -39,6 +42,23 @@ abstract class ListPage<T> extends StatefulWidget {
   /// Override to receive tapped item events
   Future<void> onItemPressed(
       BuildContext context, ListProvider<T> provider, int index);
+
+  /// Call this method to add created ListProvider as observer to refresh
+  static addProvider<T>(ListProvider<T> newProvider) {
+    _weakProviderReferences.add(WeakReference(newProvider));
+  }
+
+  /// Can be called to refresh all instances of the ListProvider
+  static void refreshAllListPages<T>() {
+    // Filtere nur Objekte, die noch existieren
+    _weakProviderReferences.removeWhere((ref) => ref.target == null);
+    for (var ref in _weakProviderReferences) {
+      final target = ref.target;
+      if (target is ListProvider<T>) {
+        target.fetchFirstPage();
+      }
+    }
+  }
 }
 
 abstract class ListPageState<T, W extends ListPage<T>> extends State<W>
@@ -52,6 +72,7 @@ abstract class ListPageState<T, W extends ListPage<T>> extends State<W>
 
   ListProvider<T> createProvider({required int donatorId}) {
     _provider = widget.createProvider(donatorId: donatorId);
+    ListPage.addProvider(_provider);
     _provider.fetchFirstPage();
     _scrollController.addListener(() {
       if (_scrollController.position.pixels + 60 >=
@@ -65,6 +86,10 @@ abstract class ListPageState<T, W extends ListPage<T>> extends State<W>
     return _provider;
   }
 
+  Future<void> fetchFirstPage() async {
+    await _provider.fetchFirstPage();
+  }
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -75,7 +100,8 @@ abstract class ListPageState<T, W extends ListPage<T>> extends State<W>
     final appState = Provider.of<AppState>(context);
 
     return ChangeNotifierProvider(
-        create: (context) => createProvider(donatorId: appState.donator?.id ?? 0),
+        create: (context) =>
+            createProvider(donatorId: appState.donator?.id ?? 0),
         child: Scaffold(
             backgroundColor: const Color.fromARGB(255, 228, 228, 228),
             body:
@@ -117,7 +143,8 @@ abstract class ListPageState<T, W extends ListPage<T>> extends State<W>
                             provider.entries.isEmpty
                         ? SingleChildScrollView(
                             physics: const BouncingScrollPhysics(),
-                            padding: EdgeInsets.only(top: height * 0.25, bottom: height * 0.45),
+                            padding: EdgeInsets.only(
+                                top: height * 0.25, bottom: height * 0.45),
                             child: Center(
                                 child: !provider.isLoading
                                     ? Text(provider.loadingError != null

@@ -20,9 +20,9 @@ class DonationboxBasicDto {
 
     required  this.id,
 
-     this.cuid,
+    required  this.cuid,
 
-     this.name,
+    required  this.name,
   });
 
   @JsonKey(
@@ -40,24 +40,24 @@ class DonationboxBasicDto {
   @JsonKey(
     
     name: r'cuid',
-    required: false,
+    required: true,
     includeIfNull: false,
   )
 
 
-  final String? cuid;
+  final String cuid;
 
 
 
   @JsonKey(
     
     name: r'name',
-    required: false,
+    required: true,
     includeIfNull: false,
   )
 
 
-  final String? name;
+  final String name;
 
 
 

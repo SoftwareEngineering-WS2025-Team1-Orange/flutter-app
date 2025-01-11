@@ -59,11 +59,6 @@ class _QRCodeScannerWidgetState extends State<QRCodeScannerWidget> {
                 borderRadius: BorderRadius.circular(15),
                 child: Stack(
                   children: [
-                    // Kamera-Vorschau
-                    /*AspectRatio(
-                      aspectRatio: _cameraController!.value.aspectRatio,
-                      child: CameraPreview(_cameraController!),
-                    ),*/
                     // QR scanner
                     QRView(
                       key: qrKey,

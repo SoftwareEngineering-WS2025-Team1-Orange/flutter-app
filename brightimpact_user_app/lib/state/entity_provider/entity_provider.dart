@@ -11,7 +11,7 @@ class ApiResponse<T> {
   ApiResponse({this.httpStatusCode, this.httpStatusMessage, this.data});
 }
 
-abstract class EntityProvider<T> extends ChangeNotifier{
+abstract class EntityProvider<T> extends ChangeNotifier {
   // PRIVATE ATTRIBUTES
   bool _isLoading = false;
   ApiProviderError? _loadingError;
@@ -40,8 +40,16 @@ abstract class EntityProvider<T> extends ChangeNotifier{
     await _fetch();
   }
 
+  // Used to update entity using a new entity object, e.g. returned after a API POST request. Should only be used by subclasses.
+  void updateEntitiy(T entity) {
+    _entity = entity;
+    notifyListeners();
+  }
+
   Future<void> _fetch() async {
-    if (id == null) { return; }
+    if (id == null) {
+      return;
+    }
 
     _isLoading = true;
     _loadingError = null;
@@ -61,23 +69,21 @@ abstract class EntityProvider<T> extends ChangeNotifier{
       }
 
       _entity = response.data;
-
-
     } catch (e) {
       // Set provider error. If error is unknown, return unkown error.
       if (e is ApiProviderException) {
         _loadingError = e.errorType;
       } else if (e is DioException) {
-        _loadingError =
-        e.type == DioExceptionType.connectionError || e.type == DioExceptionType.connectionTimeout || e.type == DioExceptionType.receiveTimeout
-        ? ApiProviderError.connectionError
-        : ApiProviderError.fromHttpCode(e.response?.statusCode ?? 0);
+        _loadingError = e.type == DioExceptionType.connectionError ||
+                e.type == DioExceptionType.connectionTimeout ||
+                e.type == DioExceptionType.receiveTimeout
+            ? ApiProviderError.connectionError
+            : ApiProviderError.fromHttpCode(e.response?.statusCode ?? 0);
       } else {
         _loadingError = ApiProviderError.unknownError;
       }
-      
-      debugPrint("Error fetching entity: $e");
 
+      debugPrint("Error fetching entity: $e");
     } finally {
       _isLoading = false;
       notifyListeners();

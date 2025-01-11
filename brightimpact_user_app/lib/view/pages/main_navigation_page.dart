@@ -110,7 +110,8 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
                           children: [
                             _buildNavItem(icon: Icons.home, index: 0),
                             _buildNavItem(icon: Icons.group, index: 1),
-                            _buildNavItem(icon: Icons.volunteer_activism, index: 2),
+                            _buildNavItem(
+                                icon: Icons.volunteer_activism, index: 2),
                             _buildNavItem(icon: Icons.euro_symbol, index: 3),
                           ],
                         ),
@@ -122,8 +123,8 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
             ),
           ),
           _buildTopBar(
-              context: context,
-              onUserPressed: () => {appState.logout()},
+            context: context,
+            onUserPressed: () => {appState.logout()},
           )
         ],
       ),
@@ -140,7 +141,6 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
       ),
     );
   }
-  
 }
 
 Widget _buildTopBar({required context, void Function()? onUserPressed}) {
@@ -190,21 +190,12 @@ Widget _buildTopBar({required context, void Function()? onUserPressed}) {
             ])),
         SizedBox(height: width * 0.03),
         Center(
-          child: DonationWalletWidget(amount: appState.donator?.balance ?? 0.0),
+          child: SizedBox(
+            width: width * 0.6,
+              child: DonationWalletWidget(
+                  amount: appState.donator?.balance ?? 0.0)),
         )
       ])
     ],
   );
-}
-
-class Page1 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        'Page 1',
-        style: TextStyle(fontSize: 24),
-      ),
-    );
-  }
 }
