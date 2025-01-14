@@ -22,7 +22,7 @@ void main() {
       // TODO
     });
 
-    //Future<DonatorDto> getDonator(int donatorId) async
+    //Future<DonatorDto> getDonator(int donatorId, { bool forceEarningsUpdate }) async
     test('test getDonator', () async {
       // TODO
     });

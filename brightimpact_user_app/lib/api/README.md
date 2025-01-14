@@ -71,7 +71,7 @@ Class | Method | HTTP request | Description
 [*DonationApi*](doc/DonationApi.md) | [**donateToNgo**](doc/DonationApi.md#donatetongo) | **POST** /api-donator/donation/donator/{donator_id}/ngo/{ngo_id} | 
 [*DonationApi*](doc/DonationApi.md) | [**donateToProject**](doc/DonationApi.md#donatetoproject) | **POST** /api-donator/donation/donator/{donator_id}/project/{project_id} | 
 [*DonationboxApi*](doc/DonationboxApi.md) | [**getDonationbox**](doc/DonationboxApi.md#getdonationbox) | **GET** /api-donator/donationbox/donator/{donator_id} | 
-[*DonationboxApi*](doc/DonationboxApi.md) | [**registerDonationbox**](doc/DonationboxApi.md#registerdonationbox) | **POST** /api-donator/donationbox/donator/{donator_id} | 
+[*DonationboxApi*](doc/DonationboxApi.md) | [**registerDonationbox**](doc/DonationboxApi.md#registerdonationbox) | **PUT** /api-donator/donationbox/donator/{donator_id} | 
 [*DonationsApi*](doc/DonationsApi.md) | [**getTransactionList**](doc/DonationsApi.md#gettransactionlist) | **GET** /api-donator/transaction/donator/{donator_id} | 
 [*DonatorApi*](doc/DonatorApi.md) | [**deleteDonator**](doc/DonatorApi.md#deletedonator) | **DELETE** /api-donator/donator/{donator_id} | 
 [*DonatorApi*](doc/DonatorApi.md) | [**favoriteNgo**](doc/DonatorApi.md#favoritengo) | **PUT** /api-donator/ngo/{ngo_id}/donator/{donator_id}/favorite | 
@@ -106,10 +106,10 @@ Class | Method | HTTP request | Description
  - [GetNgoList200ResponseDto](doc/GetNgoList200ResponseDto.md)
  - [GetProjectList200ResponseDto](doc/GetProjectList200ResponseDto.md)
  - [GetTransactionList200ResponseDto](doc/GetTransactionList200ResponseDto.md)
+ - [MoneroMiningPayoutBasicDto](doc/MoneroMiningPayoutBasicDto.md)
  - [NGOBasicDto](doc/NGOBasicDto.md)
  - [NGODto](doc/NGODto.md)
  - [PaginationDto](doc/PaginationDto.md)
- - [PayoutDto](doc/PayoutDto.md)
  - [PowerSupplyDto](doc/PowerSupplyDto.md)
  - [PowerSupplyRegisterDto](doc/PowerSupplyRegisterDto.md)
  - [ProjectBasicDto](doc/ProjectBasicDto.md)

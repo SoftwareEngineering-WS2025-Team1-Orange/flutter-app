@@ -16,7 +16,7 @@ DonateToProject201ResponseDto _$DonateToProject201ResponseDtoFromJson(
           json,
           requiredKeys: const [
             'id',
-            'amount',
+            'amountInCent',
             'createdAt',
             'ngo',
             'newBalance',
@@ -25,7 +25,8 @@ DonateToProject201ResponseDto _$DonateToProject201ResponseDtoFromJson(
         );
         final val = DonateToProject201ResponseDto(
           id: $checkedConvert('id', (v) => (v as num).toInt()),
-          amount: $checkedConvert('amount', (v) => v as num),
+          amountInCent:
+              $checkedConvert('amountInCent', (v) => (v as num).toInt()),
           createdAt:
               $checkedConvert('createdAt', (v) => DateTime.parse(v as String)),
           ngo: $checkedConvert(
@@ -46,7 +47,7 @@ Map<String, dynamic> _$DonateToProject201ResponseDtoToJson(
         DonateToProject201ResponseDto instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'amount': instance.amount,
+      'amountInCent': instance.amountInCent,
       'createdAt': instance.createdAt.toIso8601String(),
       'ngo': instance.ngo.toJson(),
       'newBalance': instance.newBalance,

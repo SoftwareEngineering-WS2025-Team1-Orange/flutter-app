@@ -24,7 +24,13 @@ class DonationboxDto {
 
     required  this.name,
 
-    required  this.lastStatus,
+     this.lastSolarStatus,
+
+     this.earningsLastSuccessfullUpdateAt,
+
+    required  this.earningsLastUpdateSuccessfull,
+
+     this.powerSurplus,
 
      this.powerConsumption,
 
@@ -69,13 +75,49 @@ class DonationboxDto {
 
   @JsonKey(
     
-    name: r'last_status',
+    name: r'lastSolarStatus',
+    required: false,
+    includeIfNull: false,
+  )
+
+
+  final String? lastSolarStatus;
+
+
+
+  @JsonKey(
+    
+    name: r'earningsLastSuccessfullUpdateAt',
+    required: false,
+    includeIfNull: false,
+  )
+
+
+  final DateTime? earningsLastSuccessfullUpdateAt;
+
+
+
+  @JsonKey(
+    
+    name: r'earningsLastUpdateSuccessfull',
     required: true,
     includeIfNull: false,
   )
 
 
-  final DonationboxDtoLastStatusEnum lastStatus;
+  final bool earningsLastUpdateSuccessfull;
+
+
+
+  @JsonKey(
+    
+    name: r'power_surplus',
+    required: false,
+    includeIfNull: false,
+  )
+
+
+  final num? powerSurplus;
 
 
 
@@ -110,7 +152,10 @@ class DonationboxDto {
       other.id == id &&
       other.cuid == cuid &&
       other.name == name &&
-      other.lastStatus == lastStatus &&
+      other.lastSolarStatus == lastSolarStatus &&
+      other.earningsLastSuccessfullUpdateAt == earningsLastSuccessfullUpdateAt &&
+      other.earningsLastUpdateSuccessfull == earningsLastUpdateSuccessfull &&
+      other.powerSurplus == powerSurplus &&
       other.powerConsumption == powerConsumption &&
       other.powerSupplyId == powerSupplyId;
 
@@ -119,7 +164,10 @@ class DonationboxDto {
         id.hashCode +
         cuid.hashCode +
         name.hashCode +
-        lastStatus.hashCode +
+        lastSolarStatus.hashCode +
+        earningsLastSuccessfullUpdateAt.hashCode +
+        earningsLastUpdateSuccessfull.hashCode +
+        powerSurplus.hashCode +
         powerConsumption.hashCode +
         powerSupplyId.hashCode;
 
@@ -133,26 +181,4 @@ class DonationboxDto {
   }
 
 }
-
-
-enum DonationboxDtoLastStatusEnum {
-@JsonValue(r'OFFLINE')
-OFFLINE(r'OFFLINE'),
-@JsonValue(r'ERROR')
-ERROR(r'ERROR'),
-@JsonValue(r'CONNECTED')
-CONNECTED(r'CONNECTED'),
-@JsonValue(r'READY')
-READY(r'READY'),
-@JsonValue(r'WORKING')
-WORKING(r'WORKING');
-
-const DonationboxDtoLastStatusEnum(this.value);
-
-final String value;
-
-@override
-String toString() => value;
-}
-
 

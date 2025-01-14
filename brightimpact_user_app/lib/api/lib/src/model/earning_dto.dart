@@ -3,8 +3,8 @@
 //
 
 // ignore_for_file: unused_element
+import 'package:openapi/src/model/monero_mining_payout_basic_dto.dart';
 import 'package:openapi/src/model/donationbox_basic_dto.dart';
-import 'package:openapi/src/model/payout_dto.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'earning_dto.g.dart';
@@ -22,13 +22,15 @@ class EarningDto {
 
     required  this.id,
 
-    required  this.amount,
+    required  this.amountInCent,
 
     required  this.createdAt,
 
-    required  this.activeTimeInPeriod,
+    required  this.payoutType,
 
-    required  this.payout,
+    required  this.payoutTimestamp,
+
+    required  this.moneroMiningPayout,
 
     required  this.donationBox,
   });
@@ -47,13 +49,13 @@ class EarningDto {
 
   @JsonKey(
     
-    name: r'amount',
+    name: r'amountInCent',
     required: true,
     includeIfNull: false,
   )
 
 
-  final num amount;
+  final int amountInCent;
 
 
 
@@ -71,25 +73,37 @@ class EarningDto {
 
   @JsonKey(
     
-    name: r'activeTimeInPeriod',
+    name: r'payoutType',
     required: true,
     includeIfNull: false,
   )
 
 
-  final num activeTimeInPeriod;
+  final EarningDtoPayoutTypeEnum payoutType;
 
 
 
   @JsonKey(
     
-    name: r'payout',
+    name: r'payoutTimestamp',
     required: true,
     includeIfNull: false,
   )
 
 
-  final PayoutDto payout;
+  final DateTime payoutTimestamp;
+
+
+
+  @JsonKey(
+    
+    name: r'moneroMiningPayout',
+    required: true,
+    includeIfNull: false,
+  )
+
+
+  final MoneroMiningPayoutBasicDto moneroMiningPayout;
 
 
 
@@ -110,19 +124,21 @@ class EarningDto {
     @override
     bool operator ==(Object other) => identical(this, other) || other is EarningDto &&
       other.id == id &&
-      other.amount == amount &&
+      other.amountInCent == amountInCent &&
       other.createdAt == createdAt &&
-      other.activeTimeInPeriod == activeTimeInPeriod &&
-      other.payout == payout &&
+      other.payoutType == payoutType &&
+      other.payoutTimestamp == payoutTimestamp &&
+      other.moneroMiningPayout == moneroMiningPayout &&
       other.donationBox == donationBox;
 
     @override
     int get hashCode =>
         id.hashCode +
-        amount.hashCode +
+        amountInCent.hashCode +
         createdAt.hashCode +
-        activeTimeInPeriod.hashCode +
-        payout.hashCode +
+        payoutType.hashCode +
+        payoutTimestamp.hashCode +
+        moneroMiningPayout.hashCode +
         donationBox.hashCode;
 
   factory EarningDto.fromJson(Map<String, dynamic> json) => _$EarningDtoFromJson(json);
@@ -135,4 +151,18 @@ class EarningDto {
   }
 
 }
+
+
+enum EarningDtoPayoutTypeEnum {
+@JsonValue(r'MONERO_MINING')
+MONERO_MINING(r'MONERO_MINING');
+
+const EarningDtoPayoutTypeEnum(this.value);
+
+final String value;
+
+@override
+String toString() => value;
+}
+
 

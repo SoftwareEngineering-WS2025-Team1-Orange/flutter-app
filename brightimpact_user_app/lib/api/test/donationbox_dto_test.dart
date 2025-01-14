@@ -22,8 +22,23 @@ void main() {
       // TODO
     });
 
-    // String lastStatus
-    test('to test the property `lastStatus`', () async {
+    // String lastSolarStatus
+    test('to test the property `lastSolarStatus`', () async {
+      // TODO
+    });
+
+    // DateTime earningsLastSuccessfullUpdateAt
+    test('to test the property `earningsLastSuccessfullUpdateAt`', () async {
+      // TODO
+    });
+
+    // bool earningsLastUpdateSuccessfull
+    test('to test the property `earningsLastUpdateSuccessfull`', () async {
+      // TODO
+    });
+
+    // num powerSurplus
+    test('to test the property `powerSurplus`', () async {
       // TODO
     });
 

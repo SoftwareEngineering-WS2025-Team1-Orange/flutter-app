@@ -5,12 +5,14 @@ class RotatingCircle extends StatefulWidget {
   final int gaps;
   final Color color;
   final bool reversed;
+  final bool isRotating;
 
   const RotatingCircle({
     super.key,
     this.gaps = 2,
     required this.color,
     this.reversed = false,
+    required this.isRotating,
   });
 
   @override
@@ -47,7 +49,7 @@ class _RotatingCircleState extends State<RotatingCircle>
             final double size = min(constraints.maxWidth, constraints.maxHeight);
             return CustomPaint(
               painter: RotatingCirclePainter(
-                rotation: widget.reversed ? -_controller.value : _controller.value,
+                rotation: widget.isRotating ? (widget.reversed ? -_controller.value : _controller.value) : 0,
                 gaps: widget.gaps,
                 color: widget.color,
               ),

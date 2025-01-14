@@ -9,7 +9,7 @@ import 'package:openapi/api.dart';
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  | 
-**amount** | **num** |  | 
+**amountInCent** | **int** |  | 
 **project** | [**ProjectBasicDto**](ProjectBasicDto.md) |  | [optional] 
 **ngo** | [**NGOBasicDto**](NGOBasicDto.md) |  | 
 **createdAt** | [**DateTime**](DateTime.md) |  | 

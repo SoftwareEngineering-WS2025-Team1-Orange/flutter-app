@@ -1,12 +1,11 @@
 import 'package:bright_impact/model/donationbox.dart';
-import 'package:bright_impact/model/power_supply.dart';
 import 'package:bright_impact/state/app_state.dart';
 import 'package:bright_impact/state/entity_provider/donationbox_provider.dart';
-import 'package:bright_impact/state/entity_provider/power_supply_provider.dart';
 import 'package:bright_impact/view/custom_widgets/button_widget.dart';
 import 'package:bright_impact/view/custom_widgets/qr_scanner_widget.dart';
 import 'package:bright_impact/view/custom_widgets/rotating_circle_widget.dart';
 import 'package:bright_impact/view/pages/input_pages/add_donationbox_page.dart';
+import 'package:bright_impact/view/pages/input_pages/others/add_powersupply_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -17,7 +16,8 @@ class DonationboxStatusWidget extends StatefulWidget {
   State<StatefulWidget> createState() => _DonationBoxStatusWidgetState();
 }
 
-class _DonationBoxStatusWidgetState extends State<DonationboxStatusWidget> {
+class _DonationBoxStatusWidgetState extends State<DonationboxStatusWidget>
+    with WidgetsBindingObserver {
   bool _isScanningForBox = false;
 
   bool _qrCodeDetected(String data, DonationboxProvider provider) {
@@ -58,77 +58,136 @@ class _DonationBoxStatusWidgetState extends State<DonationboxStatusWidget> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+    // Start cyclic refetching
+    Provider.of<DonationboxProvider>(context, listen: false)
+        .startCyclicRefetch();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final appState = Provider.of<AppState>(context, listen: false);
+      final provider = Provider.of<DonationboxProvider>(context, listen: false);
+
+      if (appState.pendingActionRegisterBoxCUID != null) {
+        final cuid = appState.pendingActionRegisterBoxCUID!;
+        appState.pendingActionRegisterBoxCUID = null;
+
+        showModalBottomSheet(
+          context: context,
+          isScrollControlled: true,
+          backgroundColor: Colors.transparent,
+          builder: (context) => FractionallySizedBox(
+            heightFactor: 0.9,
+            child: AddDonationBoxPage(cuid: cuid, provider: provider),
+          ),
+        );
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    // Stop cyclic refetching
+    Provider.of<DonationboxProvider>(context, listen: false)
+        .stopCyclicRefetch();
+    super.dispose();
+  }
+
+  // Tracks current app lifecycle state
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    final donationboxProvider =
+        Provider.of<DonationboxProvider>(context, listen: false);
+    // App in active
+    if (state == AppLifecycleState.resumed) {
+      donationboxProvider.refetch();
+      donationboxProvider.startCyclicRefetch();
+      // App not active
+    } else if (state == AppLifecycleState.paused) {
+      donationboxProvider.stopCyclicRefetch();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final appState = Provider.of<AppState>(context);
     final theme = Theme.of(context);
     final width = MediaQuery.of(context).size.width;
 
-    // Intialize 2 Providers: DonationboxProvider and PowerSupplyProvider
-    return MultiProvider(
-        providers: [
-          ChangeNotifierProvider<DonationboxProvider>(
-            create: (_) => DonationboxProvider(
-              donatorId: appState.donator?.id ?? 0,
-              // entity id is 0 since all Boxes are fetched in a list
-            )..setIdAndFetch(0),
-          ),
-          ChangeNotifierProvider<PowerSupplyProvider>(
-            create: (_) => PowerSupplyProvider(
-                donatorId: appState.donator?.id ?? 0
-                // entity id is 0 since all power supplies are fetched in a list
-                )
-              ..setIdAndFetch(0),
-          ),
-        ],
-        child: Consumer2<DonationboxProvider, PowerSupplyProvider>(builder:
-            (context, donationboxProvider, powerSupplyProvider, child) {
-          final box = donationboxProvider.entity?.firstOrNull;
-          final supplyList = powerSupplyProvider.entity;
+    return Consumer<DonationboxProvider>(
+        builder: (context, donationboxProvider, child) {
+      final box = donationboxProvider.entity?.firstOrNull;
 
-          return SizedBox(
-              width: width * 0.95,
+      return SizedBox(
+          width: width * 0.85,
+          child: Container(
+              margin: EdgeInsets.symmetric(vertical: 40),
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(40),
+              ),
               child: Container(
-                  margin: EdgeInsets.symmetric(vertical: 40, horizontal: 30),
-                  padding: EdgeInsets.all(20),
+                  padding: EdgeInsets.all(15),
                   decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(40),
-                  ),
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(35),
+                      border: Border.all(
+                          color: const Color.fromARGB(255, 238, 238, 238),
+                          width: 1.0)),
                   child: Center(
-                      child: Stack(children: [
-                    if (donationboxProvider.isLoading)
+                      child: Column(children: [
+                    Text(
+                      "Donationbox",
+                      style: theme.textTheme.labelMedium,
+                    ),
+                    // Show progress indicator for very first load
+                    if (donationboxProvider.isLoading &&
+                        donationboxProvider.loadingError == null &&
+                        donationboxProvider.entity == null)
                       CircularProgressIndicator(color: theme.primaryColor)
+                    // Show error when error appeared
                     else if (donationboxProvider.loadingError != null)
                       Text(donationboxProvider.loadingError!.message)
                     else if (box != null)
-                      _buildDonationboxInfo(
-                          context,
-                          box,
-                          supplyList
-                              ?.firstWhere((e) => e.id == box.powerSupplyId))
+                      _buildDonationboxInfo(context, box, donationboxProvider)
                     else
                       _buildAddDonationBoxWidget(context, donationboxProvider)
-                  ]))));
-        }));
+                  ])))));
+    });
   }
 
   Widget _buildDonationboxInfo(
-      BuildContext context, Donationbox box, PowerSupply? supply) {
+      BuildContext context, Donationbox box, DonationboxProvider provider) {
     final theme = Theme.of(context);
+    final width = MediaQuery.of(context).size.width;
+
+    const double secondsForDay = 3600 * 24;
+
+    final avgEarningString =
+        "${(box.earningsAvgDayCent / 100).toStringAsFixed(2).replaceAll(".", ",")} €";
+    final activeTimeStr =
+        "${(100 * (box.activeTimeEachDaySec ?? 0) / secondsForDay).round()}%";
+
+    final isActive = box.status == DonationboxStatus.working;
+    final isOnline = box.status != DonationboxStatus.disconnected;
+    final isPowerSupplyOk = box.solarStatus == DonationboxSolarStatus.ok;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text("Donationbox"),
         Text(
           box.name,
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
         ),
         SizedBox(height: 8),
         Text(
-          box.lastStatus.name.toUpperCase(),
+          box.status.name.toUpperCase(),
           style: TextStyle(
-            color: theme.primaryColor,
+            color: box.status == DonationboxStatus.disconnected
+                ? Colors.grey
+                : theme.primaryColor,
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
@@ -138,25 +197,73 @@ class _DonationBoxStatusWidgetState extends State<DonationboxStatusWidget> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Expanded(
-                child: _buildStatusItem("27 Watt", null, Icons.bolt, context)),
+                child: _buildStatusItem(
+                    avgEarningString, "Ø/Tag", Icons.euro, context,
+                    animationReversed: true,
+                    isActive: isActive,
+                    isOnline: isOnline)),
             SizedBox(width: 10),
             Expanded(
-                child: _buildStatusItem("0,05 €", "Ø/Tag", Icons.euro, context,
-                    animationReversed: true)),
+                child: Opacity(
+                    opacity:
+                        box.solarStatus != DonationboxSolarStatus.ok ? 0.1 : 1,
+                    child: _buildStatusItem(
+                        "${box.powerSurplusWatt?.toStringAsFixed(0) ?? "--"} Watt",
+                        (box.powerSurplusWatt ?? 0) >= 0
+                            ? "Überschuss"
+                            : "Defizit",
+                        Icons.bolt,
+                        context,
+                        isActive: isActive && isPowerSupplyOk,
+                        isOnline: isOnline))),
             SizedBox(width: 10),
             Expanded(
                 child: _buildStatusItem(
-                    "17%", "Active Time", Icons.timer, context)),
+                    activeTimeStr, "Active Time", Icons.timer, context,
+                    isActive: isActive, isOnline: isOnline)),
           ],
         ),
+        if (box.solarStatus == DonationboxSolarStatus.pending)
+          Padding(
+              padding: EdgeInsets.only(top: width * 0.07),
+              child: Text("Warten auf Solaranlage ...")),
+        if (box.solarStatus == DonationboxSolarStatus.error)
+          Padding(
+              padding: EdgeInsets.only(top: width * 0.07),
+              child: Text(
+                "Fehler mit Solaranlage",
+                style: TextStyle(color: Colors.red),
+              )),
+        if (box.solarStatus == DonationboxSolarStatus.noConfig ||
+            box.solarStatus == DonationboxSolarStatus.error)
+          Padding(
+              padding: EdgeInsets.only(top: width * 0.07),
+              child: Opacity(
+                  opacity:
+                      box.status == DonationboxStatus.disconnected ? 0.2 : 1.0,
+                  child: ButtonWidget(
+                    labelText: "Solaranlage anbinden",
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (context) => AddPowersupplyPage(
+                                provider: provider,
+                              ));
+                      return Future.value(true);
+                    },
+                  ))),
       ],
     );
   }
 
   Widget _buildStatusItem(
       String label, String? subtitle, IconData icon, BuildContext context,
-      {bool animationReversed = false}) {
+      {bool animationReversed = false,
+      bool isActive = true,
+      bool isOnline = true}) {
     final theme = Theme.of(context);
+    const lightWhite = Color.fromARGB(120, 255, 255, 255);
+
     return Stack(
       children: [
         AspectRatio(
@@ -178,7 +285,9 @@ class _DonationBoxStatusWidgetState extends State<DonationboxStatusWidget> {
                               label,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: theme.primaryColor,
+                                color: isActive
+                                    ? theme.primaryColor
+                                    : Colors.white,
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -189,7 +298,9 @@ class _DonationBoxStatusWidgetState extends State<DonationboxStatusWidget> {
                               child: Text(
                                 subtitle,
                                 style: TextStyle(
-                                  color: theme.primaryColor,
+                                  color: isActive
+                                      ? theme.primaryColor
+                                      : Colors.white,
                                 ),
                                 textAlign: TextAlign.center,
                               ),
@@ -197,7 +308,7 @@ class _DonationBoxStatusWidgetState extends State<DonationboxStatusWidget> {
                           SizedBox(height: constraints.maxHeight * 0.05),
                           Icon(
                             icon,
-                            color: theme.primaryColor,
+                            color: isActive ? theme.primaryColor : Colors.white,
                             size: constraints.maxHeight * 0.2,
                           ),
                         ],
@@ -211,15 +322,17 @@ class _DonationBoxStatusWidgetState extends State<DonationboxStatusWidget> {
           padding: const EdgeInsets.all(5),
           child: RotatingCircle(
             gaps: 3,
-            color: theme.primaryColor,
+            color: isActive ? theme.primaryColor : lightWhite,
             reversed: animationReversed,
+            isRotating: isOnline,
           ),
         ),
       ],
     );
   }
 
-  Widget _buildAddDonationBoxWidget(BuildContext context, DonationboxProvider donationboxProvider) {
+  Widget _buildAddDonationBoxWidget(
+      BuildContext context, DonationboxProvider donationboxProvider) {
     final width = MediaQuery.of(context).size.width;
     final theme = Theme.of(context);
 

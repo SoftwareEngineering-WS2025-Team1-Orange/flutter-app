@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:bright_impact/api/lib/openapi.dart';
 import 'package:bright_impact/model/donationbox.dart';
 import 'package:bright_impact/state/api_provider_error.dart';
@@ -16,7 +17,8 @@ class DonationboxProvider extends EntityProvider<List<Donationbox>> {
   @override
   Future<ApiResponse<List<Donationbox>>> getFromServer(
       {required int id}) async {
-    final api = ApiService.shared.api.getDonationboxApi();
+
+  final api = ApiService.shared.api.getDonationboxApi();
     final response = await api.getDonationbox(donatorId: _donatorId);
 
     if (response.data == null) {
@@ -51,7 +53,45 @@ class DonationboxProvider extends EntityProvider<List<Donationbox>> {
 
       // SUCCESS
       return null;
+    } catch (e) {
+      debugPrint("Error fetching entity: $e");
 
+      // Return provider error. If error is unknown, return unkown error.
+      if (e is ApiProviderException) {
+        return e.errorType;
+      } else if (e is DioException) {
+        return e.type == DioExceptionType.connectionError ||
+                e.type == DioExceptionType.connectionTimeout ||
+                e.type == DioExceptionType.receiveTimeout
+            ? ApiProviderError.connectionError
+            : ApiProviderError.fromHttpCode(e.response?.statusCode ?? 0);
+      } else {
+        return ApiProviderError.unknownError;
+      }
+    }
+  }
+
+  Future<ApiProviderError?> registerPowerSupply(
+      String name, String modelNumber, PowersupplyApiConfig apiConfig) async {
+    final api = ApiService.shared.api.getPowerSupplyApi();
+    final dto = PowerSupplyRegisterDto(
+        name: name,
+        modelNumber: modelNumber,
+        apiConfig: apiConfig.toJson(),
+        type: PowerSupplyRegisterDtoTypeEnum.solar);
+    try {
+      final response = await api.addPowersupply(
+          donatorId: _donatorId, powerSupplyRegisterDto: dto);
+
+      if ((response.statusCode ?? 500) >= 300) {
+        return ApiProviderError.unknownError;
+      }
+
+      // If successfull refetch donationbox objects
+      refetch();
+
+      // SUCCESS
+      return null;
     } catch (e) {
       debugPrint("Error fetching entity: $e");
 
@@ -73,8 +113,26 @@ class DonationboxProvider extends EntityProvider<List<Donationbox>> {
   static bool isValidSN(String uuid) {
     // Regex zum Überprüfen eines UUID-Formats
     final uuidRegex = RegExp(
-      r'^[A-Za-z0-9]{24}$',
+      r'^[A-Za-z0-9]{8,120}$',
     );
     return uuidRegex.hasMatch(uuid);
   }
+}
+
+class PowersupplyApiConfig {
+  final String url;
+  final String username;
+  final String password;
+
+  PowersupplyApiConfig({
+    required this.url,
+    required this.username,
+    required this.password,
+  });
+
+  String toJson() => jsonEncode({
+        "url": url,
+        "username": username,
+        "password": password,
+      });
 }

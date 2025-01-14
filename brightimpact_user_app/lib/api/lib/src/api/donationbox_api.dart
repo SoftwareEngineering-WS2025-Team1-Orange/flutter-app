@@ -121,7 +121,7 @@ _responseData = rawData == null ? null : deserialize<List<DonationboxDto>, Donat
   }) async {
     final _path = r'/api-donator/donationbox/donator/{donator_id}'.replaceAll('{' r'donator_id' '}', donatorId.toString());
     final _options = Options(
-      method: r'POST',
+      method: r'PUT',
       headers: <String, dynamic>{
         ...?headers,
       },

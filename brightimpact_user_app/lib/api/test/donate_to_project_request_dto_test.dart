@@ -7,8 +7,8 @@ void main() {
   // TODO add properties to the entity
 
   group(DonateToProjectRequestDto, () {
-    // num amount
-    test('to test the property `amount`', () async {
+    // int amountInCent
+    test('to test the property `amountInCent`', () async {
       // TODO
     });
 

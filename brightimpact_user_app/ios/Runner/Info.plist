@@ -42,7 +42,5 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>NSCameraUsageDescription</key>
-	<string>Kamerazugriff wird benötigt, um QR-Codes zu scannen.</string>
 </dict>
 </plist>

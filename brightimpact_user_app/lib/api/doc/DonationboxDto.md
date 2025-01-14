@@ -11,7 +11,10 @@ Name | Type | Description | Notes
 **id** | **int** |  | 
 **cuid** | **String** |  | 
 **name** | **String** |  | 
-**lastStatus** | **String** |  | 
+**lastSolarStatus** | **String** |  | [optional] 
+**earningsLastSuccessfullUpdateAt** | [**DateTime**](DateTime.md) |  | [optional] 
+**earningsLastUpdateSuccessfull** | **bool** |  | 
+**powerSurplus** | **num** |  | [optional] 
 **powerConsumption** | **num** |  | [optional] 
 **powerSupplyId** | **String** |  | [optional] 
 

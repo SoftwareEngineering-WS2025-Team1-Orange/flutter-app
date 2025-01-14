@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bright_impact/state/api_provider_error.dart';
 import 'package:bright_impact/state/api_provider_exception.dart';
 import 'package:dio/dio.dart';
@@ -17,6 +19,7 @@ abstract class EntityProvider<T> extends ChangeNotifier {
   ApiProviderError? _loadingError;
   T? _entity;
   int? _id;
+  Timer? _timer;
 
   // PUBLIC GETTER FOR PRIVATE ATTRIBUTES
   bool get isLoading => _isLoading;
@@ -26,6 +29,8 @@ abstract class EntityProvider<T> extends ChangeNotifier {
 
   /// Override to fetch entity from server
   Future<ApiResponse<T>> getFromServer({required int id});
+
+  Duration refetchInterval = Duration(seconds: 5);
 
   void setId(int id) {
     this._id = id;
@@ -52,7 +57,6 @@ abstract class EntityProvider<T> extends ChangeNotifier {
     }
 
     _isLoading = true;
-    _loadingError = null;
 
     try {
       final response = await getFromServer(id: id!);
@@ -68,6 +72,7 @@ abstract class EntityProvider<T> extends ChangeNotifier {
             ApiProviderError.unknownError, "Missing entity response data");
       }
 
+      _loadingError = null;
       _entity = response.data;
     } catch (e) {
       // Set provider error. If error is unknown, return unkown error.
@@ -78,7 +83,7 @@ abstract class EntityProvider<T> extends ChangeNotifier {
                 e.type == DioExceptionType.connectionTimeout ||
                 e.type == DioExceptionType.receiveTimeout
             ? ApiProviderError.connectionError
-            : ApiProviderError.fromHttpCode(e.response?.statusCode ?? 0);
+            : ApiProviderError.fromHttpCode(e.response?.statusCode ?? 0) ?? ApiProviderError.unknownError;
       } else {
         _loadingError = ApiProviderError.unknownError;
       }
@@ -89,4 +94,17 @@ abstract class EntityProvider<T> extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  /// Start cyclic refetching of entity: pull-based update
+  void startCyclicRefetch() {
+    stopCyclicRefetch(); // Ensure no other timer is running
+    _timer = Timer.periodic(refetchInterval, (timer) => refetch());
+  }
+
+  /// Stop cyclic refetching, e.g when app gets inactive
+  void stopCyclicRefetch() {
+    _timer?.cancel();
+    _timer = null;
+  }
+
 }

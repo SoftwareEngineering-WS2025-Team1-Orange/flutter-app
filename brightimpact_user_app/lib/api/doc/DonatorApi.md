@@ -155,7 +155,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **getDonator**
-> DonatorDto getDonator(donatorId)
+> DonatorDto getDonator(donatorId, forceEarningsUpdate)
 
 
 
@@ -167,9 +167,10 @@ import 'package:openapi/api.dart';
 
 final api = Openapi().getDonatorApi();
 final int donatorId = 56; // int | 
+final bool forceEarningsUpdate = true; // bool | 
 
 try {
-    final response = api.getDonator(donatorId);
+    final response = api.getDonator(donatorId, forceEarningsUpdate);
     print(response);
 } catch on DioException (e) {
     print('Exception when calling DonatorApi->getDonator: $e\n');
@@ -181,6 +182,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **donatorId** | **int**|  | 
+ **forceEarningsUpdate** | **bool**|  | [optional] [default to false]
 
 ### Return type
 

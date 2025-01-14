@@ -1,5 +1,8 @@
 import 'package:bright_impact/api/lib/openapi.dart';
+import 'package:bright_impact/model/project.dart';
 import 'package:bright_impact/state/app_state.dart';
+import 'package:bright_impact/state/entity_provider/donationbox_provider.dart';
+import 'package:bright_impact/state/list_provider/list_provider.dart';
 import 'package:bright_impact/state/list_provider/project_list_provider.dart';
 import 'package:bright_impact/view/custom_widgets/donationbox_status_widget.dart';
 import 'package:bright_impact/view/custom_widgets/project_card_widget.dart';
@@ -19,42 +22,58 @@ class _HomePage extends State<HomePage> with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
+
   @override
   Widget build(BuildContext context) {
     super.build(context);
 
+    final appState = Provider.of<AppState>(context);
     final width = MediaQuery.of(context).size.width;
+    final theme = Theme.of(context);
 
-    return Scaffold(
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider<DonationboxProvider>(
+            create: (_) => DonationboxProvider(
+              donatorId: appState.donator?.id ?? 0,
+              // entity id is 0 since all Boxes are fetched in a list
+            )..setIdAndFetch(0),
+          ),
+        ],
+        child: Scaffold(
         backgroundColor: const Color.fromARGB(255, 228, 228, 228),
         body: Stack(children: [
-          SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(height: width * 0.5),
-                DonationboxStatusWidget(),
-                _buildProjectSection(
-                    context, "Kürzlich hinzugefügte Projekte", null,
-                    hideOnLoading: false),
-                _buildProjectSection(context, "Umwelt und Nachhaltigkeit",
-                    ProjectCategoryDto.environment),
-                _buildProjectSection(context, "Schule und Bildung",
-                    ProjectCategoryDto.education),
-                _buildProjectSection(
-                    context, "Menschenrechte", ProjectCategoryDto.humanRights),
-                _buildProjectSection(
-                    context, "Gesundheit", ProjectCategoryDto.health),
-                _buildProjectSection(
-                    context, "Tierwohl", ProjectCategoryDto.animalRights),
-                SizedBox(height: width * 0.25),
-              ],
-            ),
-          ),
-        ]));
+          RefreshIndicator(
+              color: theme.primaryColor,
+              onRefresh: () async {
+                await ListProvider.refreshAllListPages<Project>();
+              }, // Pull-to-Refresh
+              child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(height: width * 0.5),
+                    DonationboxStatusWidget(),
+                    _buildProjectSection(
+                        context, "Kürzlich hinzugefügte Projekte", null,
+                        hideOnLoading: false),
+                    _buildProjectSection(context, "Umwelt und Nachhaltigkeit",
+                        ProjectCategoryDto.environment),
+                    _buildProjectSection(context, "Schule und Bildung",
+                        ProjectCategoryDto.education),
+                    _buildProjectSection(context, "Menschenrechte",
+                        ProjectCategoryDto.humanRights),
+                    _buildProjectSection(
+                        context, "Gesundheit", ProjectCategoryDto.health),
+                    _buildProjectSection(
+                        context, "Tierwohl", ProjectCategoryDto.animalRights),
+                    SizedBox(height: width * 0.25),
+                  ],
+                ),
+              )),
+        ])));
   }
-
 
   Widget _buildProjectSection(
       BuildContext context, String title, ProjectCategoryDto? filterCategory,
@@ -128,10 +147,11 @@ class _HomePage extends State<HomePage> with AutomaticKeepAliveClientMixin {
                 onTap: () =>
                     ProjectDetailSheet(id: e.id)..openDetailSheet(context),
                 child: ProjectCardWidget(
-                    title: e.name,
-                    subtitle: e.ngoName,
-                    imageUri: e.bannerUri,
-                    isFavorite: e.isFavorite,))))
+                  title: e.name,
+                  subtitle: e.ngoName,
+                  imageUri: e.bannerUri,
+                  isFavorite: e.isFavorite,
+                ))))
         .toList();
   }
 }

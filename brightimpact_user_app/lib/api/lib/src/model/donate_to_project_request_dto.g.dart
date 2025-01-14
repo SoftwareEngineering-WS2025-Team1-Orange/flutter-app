@@ -13,7 +13,8 @@ DonateToProjectRequestDto _$DonateToProjectRequestDtoFromJson(
       json,
       ($checkedConvert) {
         final val = DonateToProjectRequestDto(
-          amount: $checkedConvert('amount', (v) => v as num?),
+          amountInCent:
+              $checkedConvert('amountInCent', (v) => (v as num?)?.toInt()),
         );
         return val;
       },
@@ -22,5 +23,5 @@ DonateToProjectRequestDto _$DonateToProjectRequestDtoFromJson(
 Map<String, dynamic> _$DonateToProjectRequestDtoToJson(
         DonateToProjectRequestDto instance) =>
     <String, dynamic>{
-      if (instance.amount case final value?) 'amount': value,
+      if (instance.amountInCent case final value?) 'amountInCent': value,
     };

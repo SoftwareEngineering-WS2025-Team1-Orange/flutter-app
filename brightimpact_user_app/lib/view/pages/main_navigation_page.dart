@@ -1,6 +1,7 @@
 import 'package:bright_impact/state/app_state.dart';
 import 'package:bright_impact/view/custom_widgets/donation_wallet_widget.dart';
 import 'package:bright_impact/view/pages/home_page.dart';
+import 'package:bright_impact/view/pages/input_pages/others/edit_donator_profile_page.dart';
 import 'package:bright_impact/view/pages/list_pages/ngo_list_page.dart';
 import 'package:bright_impact/view/pages/list_pages/project_list_page.dart';
 import 'package:bright_impact/view/pages/list_pages/transaction_list_page.dart';
@@ -14,7 +15,8 @@ class MainNavigationPage extends StatefulWidget {
   State<StatefulWidget> createState() => _MainNavigationPageState();
 }
 
-class _MainNavigationPageState extends State<MainNavigationPage> {
+class _MainNavigationPageState extends State<MainNavigationPage>
+    with WidgetsBindingObserver {
   int _selectedIndex = 0;
   final PageController _pageController = PageController(initialPage: 0);
 
@@ -30,9 +32,28 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    // To oberserve app state
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+
+  @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _pageController.dispose();
     super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    final appState = Provider.of<AppState>(context, listen: false);
+    // When app gets active again
+    if (state == AppLifecycleState.resumed) {
+      appState.donatorProvider.refetch();
+    }
   }
 
   @override
@@ -42,8 +63,6 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
     final double navBarHeight = navBarWidth * 0.24;
     final double tabWidth = navBarWidth / 4; // 4 tabs
     final double tabHeight = navBarHeight * 0.8;
-
-    final appState = Provider.of<AppState>(context);
 
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 228, 228, 228),
@@ -124,7 +143,17 @@ class _MainNavigationPageState extends State<MainNavigationPage> {
           ),
           _buildTopBar(
             context: context,
-            onUserPressed: () => {appState.logout()},
+            onUserPressed: () {
+              showModalBottomSheet(
+                context: context,
+                isScrollControlled: true,
+                backgroundColor: Colors.transparent,
+                builder: (context) => FractionallySizedBox(
+                  heightFactor: 0.9,
+                  child: EditDonatorDialogPage(),
+                ),
+              );
+            },
           )
         ],
       ),
@@ -191,7 +220,7 @@ Widget _buildTopBar({required context, void Function()? onUserPressed}) {
         SizedBox(height: width * 0.03),
         Center(
           child: SizedBox(
-            width: width * 0.6,
+              width: width * 0.6,
               child: DonationWalletWidget(
                   amount: appState.donator?.balance ?? 0.0)),
         )

@@ -16,10 +16,10 @@ import 'package:openapi/src/model/favorite_project_request_dto.dart';
 import 'package:openapi/src/model/get_ngo_list200_response_dto.dart';
 import 'package:openapi/src/model/get_project_list200_response_dto.dart';
 import 'package:openapi/src/model/get_transaction_list200_response_dto.dart';
+import 'package:openapi/src/model/monero_mining_payout_basic_dto.dart';
 import 'package:openapi/src/model/ngo_basic_dto.dart';
 import 'package:openapi/src/model/ngo_dto.dart';
 import 'package:openapi/src/model/pagination_dto.dart';
-import 'package:openapi/src/model/payout_dto.dart';
 import 'package:openapi/src/model/power_supply_dto.dart';
 import 'package:openapi/src/model/power_supply_register_dto.dart';
 import 'package:openapi/src/model/project_basic_dto.dart';
@@ -81,14 +81,14 @@ final _regMap = RegExp(r'^Map<String,(.*)>$');
           return GetProjectList200ResponseDto.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'GetTransactionList200ResponseDto':
           return GetTransactionList200ResponseDto.fromJson(value as Map<String, dynamic>) as ReturnType;
+        case 'MoneroMiningPayoutBasicDto':
+          return MoneroMiningPayoutBasicDto.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'NGOBasicDto':
           return NGOBasicDto.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'NGODto':
           return NGODto.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'PaginationDto':
           return PaginationDto.fromJson(value as Map<String, dynamic>) as ReturnType;
-        case 'PayoutDto':
-          return PayoutDto.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'PowerSupplyDto':
           return PowerSupplyDto.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'PowerSupplyRegisterDto':

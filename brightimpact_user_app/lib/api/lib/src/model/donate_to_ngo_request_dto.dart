@@ -18,18 +18,18 @@ class DonateToNgoRequestDto {
   /// Returns a new [DonateToNgoRequestDto] instance.
   DonateToNgoRequestDto({
 
-     this.amount,
+     this.amountInCent,
   });
 
   @JsonKey(
     
-    name: r'amount',
+    name: r'amountInCent',
     required: false,
     includeIfNull: false,
   )
 
 
-  final num? amount;
+  final int? amountInCent;
 
 
 
@@ -37,11 +37,11 @@ class DonateToNgoRequestDto {
 
     @override
     bool operator ==(Object other) => identical(this, other) || other is DonateToNgoRequestDto &&
-      other.amount == amount;
+      other.amountInCent == amountInCent;
 
     @override
     int get hashCode =>
-        amount.hashCode;
+        amountInCent.hashCode;
 
   factory DonateToNgoRequestDto.fromJson(Map<String, dynamic> json) => _$DonateToNgoRequestDtoFromJson(json);
 

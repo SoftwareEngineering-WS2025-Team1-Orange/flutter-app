@@ -33,8 +33,8 @@ class DonatorProvider extends EntityProvider<Donator> {
   if (id != null) {
     try {
     final api = ApiService.shared.api.getDonationApi();
-    final ngoAmount = DonateToNgoRequestDto(amount: amount);
-    final projectAmount = DonateToProjectRequestDto(amount: amount);
+    final ngoAmount = DonateToNgoRequestDto(amountInCent: (amount*100).round());
+    final projectAmount = DonateToProjectRequestDto(amountInCent: (amount*100).round());
     final response = isNgo ? (await api.donateToNgo(donatorId: id!, ngoId: targetEntityId, donateToNgoRequestDto: ngoAmount)).statusCode : (await api.donateToProject(donatorId: id!, projectId: targetEntityId, donateToProjectRequestDto: projectAmount)).statusCode;
 
     if ((response ?? 500) >= 300) {
@@ -44,6 +44,51 @@ class DonatorProvider extends EntityProvider<Donator> {
     // If successfull refetch latest donator object
     refetch();
 
+    return null;
+
+
+    } catch (e) {
+      debugPrint("Error fetching entity: $e");
+
+      // Return provider error. If error is unknown, return unkown error.
+      if (e is ApiProviderException) {
+        return e.errorType;
+      } else if (e is DioException) {
+        return
+        e.type == DioExceptionType.connectionError || e.type == DioExceptionType.connectionTimeout || e.type == DioExceptionType.receiveTimeout
+        ? ApiProviderError.connectionError
+        : ApiProviderError.fromHttpCode(e.response?.statusCode ?? 0);
+      } else {
+        return ApiProviderError.unknownError;
+      }
+    }
+
+  } else {
+    return Future.value(ApiProviderError.internalServerError);
+  }
+  
+ }
+
+
+ Future<ApiProviderError?> setDonatorAttribute({String? firstName, String? lastName, String? email, String? password,
+  }) async {
+  if (id != null) {
+    try {
+    final api = ApiService.shared.api.getDonatorApi();
+    final dto = DonatorUpdateDto(firstName: firstName, lastName: lastName, email: email, password: password);
+    final response = await api.updateDonator(donatorId: id!, donatorUpdateDto: dto);
+
+    if ((response.statusCode ?? 500) >= 300) {
+      return ApiProviderError.fromHttpCode(response.statusCode) ?? ApiProviderError.unknownError;
+    }
+
+    if (response.data == null) {
+      return ApiProviderError.unknownError;
+    }
+
+    updateEntitiy(Donator.fromDto(response.data!));
+
+    // SUCCESS:
     return null;
 
 

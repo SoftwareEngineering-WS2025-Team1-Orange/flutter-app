@@ -24,7 +24,7 @@ class Donation extends Transaction {
         ngoName = dto.ngo.name,
         projectId = dto.project?.id,
         projectName = dto.project?.name,
-        super(dto.createdAt, -dto.amount.toDouble());
+        super(dto.createdAt, -dto.amountInCent.toDouble());
 }
 
 class Earning extends Transaction {
@@ -46,6 +46,6 @@ class Earning extends Transaction {
       : id = dto.id,
         donationboxId = dto.donationBox.id,
         donationboxName = dto.donationBox.name,
-        calcDuration = Duration(seconds: dto.activeTimeInPeriod.toInt()),
-        super(dto.createdAt, dto.amount.toDouble());
+        calcDuration = dto.moneroMiningPayout.timestamp.difference(dto.moneroMiningPayout.lastPayoutTimestamp),
+        super(dto.createdAt, dto.amountInCent.toDouble());
 }

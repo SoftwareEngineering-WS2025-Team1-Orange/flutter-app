@@ -43,7 +43,7 @@ class ProjectListProvider extends ListProvider<Project> {
     _filterNgoNameContains = ngoNameContains ?? _filterNgoNameContains;
     _filterCategory = category ?? _filterCategory;
     _sortNewest = newest ?? _sortNewest;
-    await fetchFirstPage();
+    await fetchFirstPage(directlyEmptyList: true);
   }
 
   @override

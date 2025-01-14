@@ -21,7 +21,7 @@ class DonationResponseDto {
 
     required  this.id,
 
-    required  this.amount,
+    required  this.amountInCent,
 
     required  this.createdAt,
 
@@ -44,13 +44,13 @@ class DonationResponseDto {
 
   @JsonKey(
     
-    name: r'amount',
+    name: r'amountInCent',
     required: true,
     includeIfNull: false,
   )
 
 
-  final num amount;
+  final int amountInCent;
 
 
 
@@ -95,7 +95,7 @@ class DonationResponseDto {
     @override
     bool operator ==(Object other) => identical(this, other) || other is DonationResponseDto &&
       other.id == id &&
-      other.amount == amount &&
+      other.amountInCent == amountInCent &&
       other.createdAt == createdAt &&
       other.ngo == ngo &&
       other.newBalance == newBalance;
@@ -103,7 +103,7 @@ class DonationResponseDto {
     @override
     int get hashCode =>
         id.hashCode +
-        amount.hashCode +
+        amountInCent.hashCode +
         createdAt.hashCode +
         ngo.hashCode +
         newBalance.hashCode;

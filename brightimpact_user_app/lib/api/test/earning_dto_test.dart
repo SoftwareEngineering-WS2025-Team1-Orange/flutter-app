@@ -12,8 +12,8 @@ void main() {
       // TODO
     });
 
-    // num amount
-    test('to test the property `amount`', () async {
+    // int amountInCent
+    test('to test the property `amountInCent`', () async {
       // TODO
     });
 
@@ -22,13 +22,18 @@ void main() {
       // TODO
     });
 
-    // num activeTimeInPeriod
-    test('to test the property `activeTimeInPeriod`', () async {
+    // String payoutType
+    test('to test the property `payoutType`', () async {
       // TODO
     });
 
-    // PayoutDto payout
-    test('to test the property `payout`', () async {
+    // DateTime payoutTimestamp
+    test('to test the property `payoutTimestamp`', () async {
+      // TODO
+    });
+
+    // MoneroMiningPayoutBasicDto moneroMiningPayout
+    test('to test the property `moneroMiningPayout`', () async {
       // TODO
     });
 

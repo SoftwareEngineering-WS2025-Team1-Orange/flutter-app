@@ -23,6 +23,7 @@ class DonationsApi {
   ///
   /// Parameters:
   /// * [donatorId] 
+  /// * [forceEarningsUpdate] 
   /// * [filterDonationNgoId] 
   /// * [filterDonationNgoName] 
   /// * [filterDonationProjectId] 
@@ -47,6 +48,7 @@ class DonationsApi {
   /// Throws [DioException] if API call or serialization fails
   Future<Response<GetTransactionList200ResponseDto>> getTransactionList({ 
     required int donatorId,
+    bool? forceEarningsUpdate = false,
     int? filterDonationNgoId,
     String? filterDonationNgoName,
     int? filterDonationProjectId,
@@ -86,6 +88,7 @@ class DonationsApi {
     );
 
     final _queryParameters = <String, dynamic>{
+      if (forceEarningsUpdate != null) r'force_earnings_update': forceEarningsUpdate,
       if (filterDonationNgoId != null) r'filter_donation_ngo_id': filterDonationNgoId,
       if (filterDonationNgoName != null) r'filter_donation_ngo_name': filterDonationNgoName,
       if (filterDonationProjectId != null) r'filter_donation_project_id': filterDonationProjectId,

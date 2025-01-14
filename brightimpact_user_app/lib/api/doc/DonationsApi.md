@@ -13,7 +13,7 @@ Method | HTTP request | Description
 
 
 # **getTransactionList**
-> GetTransactionList200ResponseDto getTransactionList(donatorId, filterDonationNgoId, filterDonationNgoName, filterDonationProjectId, filterDonationProjectName, filterEarningDonationboxId, filterCreatedFrom, filterCreatedTo, filterAmountFrom, filterAmountTo, sortFor, sortType, paginationPage, paginationPageSize)
+> GetTransactionList200ResponseDto getTransactionList(donatorId, forceEarningsUpdate, filterDonationNgoId, filterDonationNgoName, filterDonationProjectId, filterDonationProjectName, filterEarningDonationboxId, filterCreatedFrom, filterCreatedTo, filterAmountFrom, filterAmountTo, sortFor, sortType, paginationPage, paginationPageSize)
 
 
 
@@ -25,6 +25,7 @@ import 'package:openapi/api.dart';
 
 final api = Openapi().getDonationsApi();
 final int donatorId = 56; // int | 
+final bool forceEarningsUpdate = true; // bool | 
 final int filterDonationNgoId = 56; // int | 
 final String filterDonationNgoName = filterDonationNgoName_example; // String | 
 final int filterDonationProjectId = 56; // int | 
@@ -40,7 +41,7 @@ final int paginationPage = 56; // int |
 final int paginationPageSize = 56; // int | 
 
 try {
-    final response = api.getTransactionList(donatorId, filterDonationNgoId, filterDonationNgoName, filterDonationProjectId, filterDonationProjectName, filterEarningDonationboxId, filterCreatedFrom, filterCreatedTo, filterAmountFrom, filterAmountTo, sortFor, sortType, paginationPage, paginationPageSize);
+    final response = api.getTransactionList(donatorId, forceEarningsUpdate, filterDonationNgoId, filterDonationNgoName, filterDonationProjectId, filterDonationProjectName, filterEarningDonationboxId, filterCreatedFrom, filterCreatedTo, filterAmountFrom, filterAmountTo, sortFor, sortType, paginationPage, paginationPageSize);
     print(response);
 } catch on DioException (e) {
     print('Exception when calling DonationsApi->getTransactionList: $e\n');
@@ -52,6 +53,7 @@ try {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **donatorId** | **int**|  | 
+ **forceEarningsUpdate** | **bool**|  | [optional] [default to false]
  **filterDonationNgoId** | **int**|  | [optional] 
  **filterDonationNgoName** | **String**|  | [optional] 
  **filterDonationProjectId** | **int**|  | [optional] 

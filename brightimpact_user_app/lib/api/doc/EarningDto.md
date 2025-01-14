@@ -9,10 +9,11 @@ import 'package:openapi/api.dart';
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  | 
-**amount** | **num** |  | 
+**amountInCent** | **int** |  | 
 **createdAt** | [**DateTime**](DateTime.md) |  | 
-**activeTimeInPeriod** | **num** |  | 
-**payout** | [**PayoutDto**](PayoutDto.md) |  | 
+**payoutType** | **String** |  | 
+**payoutTimestamp** | [**DateTime**](DateTime.md) |  | 
+**moneroMiningPayout** | [**MoneroMiningPayoutBasicDto**](MoneroMiningPayoutBasicDto.md) |  | 
 **donationBox** | [**DonationboxBasicDto**](DonationboxBasicDto.md) |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

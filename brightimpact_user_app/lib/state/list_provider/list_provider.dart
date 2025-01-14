@@ -57,10 +57,9 @@ abstract class ListProvider<T> with ChangeNotifier {
   List<T> get entries => _entries;
 
   // CONSTRUCTOR
-  ListProvider({int resultsPerPage = 3})
-      : _resultsPerPage = resultsPerPage {
-        _addProvider(this);
-      }
+  ListProvider({int resultsPerPage = 3}) : _resultsPerPage = resultsPerPage {
+    _addProvider(this);
+  }
 
   /// Call this method to add created ListProvider as observer to refresh
   static _addProvider<T>(ListProvider<T> newProvider) {
@@ -68,7 +67,7 @@ abstract class ListProvider<T> with ChangeNotifier {
   }
 
   /// Can be called to refresh all instances of the ListProvider
-  static void refreshAllListPages<T>() {
+  static Future<void> refreshAllListPages<T>() async {
     // Filtere nur Objekte, die noch existieren
     _weakProviderReferences.removeWhere((ref) => ref.target == null);
     for (var ref in _weakProviderReferences) {
@@ -84,14 +83,16 @@ abstract class ListProvider<T> with ChangeNotifier {
     _currentPage = 1;
     _loadedPage = 0;
     _isLoading = false;
-    _entries.clear();
-    notifyListeners();
   }
 
   /// removes all existing list entries and fetches first page
-  Future<void> fetchFirstPage() async {
+  Future<void> fetchFirstPage({bool directlyEmptyList = false}) async {
     _reset();
-    await _fetch();
+    if (directlyEmptyList) {
+      _entries.clear();
+      notifyListeners();
+    }
+    await _fetch(clearOnReceive: true);
   }
 
   Future<void> fetchNextPage() async {
@@ -104,7 +105,7 @@ abstract class ListProvider<T> with ChangeNotifier {
   Future<ApiResponse<PaginatedList<T>>> getFromServer();
 
   /// Should be called from the UI to load NGOs
-  Future<void> _fetch() async {
+  Future<void> _fetch({bool clearOnReceive = false}) async {
     _isLoading = true;
     _loadingError = null;
 
@@ -127,13 +128,20 @@ abstract class ListProvider<T> with ChangeNotifier {
 
       // Checks that the next page is only appended if it has not been appended before
       // and that it is indeed the next page (page number incremented by 1)
+
       if (paginationData.currentPage == _currentPage &&
           paginationData.currentPage == _loadedPage + 1) {
+        if (clearOnReceive) {
+          _entries.clear();
+          notifyListeners();
+        }
         _hasMore = paginationData.currentPage < paginationData.numberOfPages;
         _entries.addAll(entries);
         _loadedPage = paginationData.currentPage;
       }
     } catch (e) {
+      _reset();
+
       // Set provider error. If error is unknown, return unkown error.
       if (e is ApiProviderException) {
         _loadingError = e.errorType;

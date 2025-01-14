@@ -275,6 +275,7 @@ _responseData = rawData == null ? null : deserialize<ProjectDto, ProjectDto>(raw
   ///
   /// Parameters:
   /// * [donatorId] 
+  /// * [forceEarningsUpdate] 
   /// * [cancelToken] - A [CancelToken] that can be used to cancel the operation
   /// * [headers] - Can be used to add additional headers to the request
   /// * [extras] - Can be used to add flags to the request
@@ -286,6 +287,7 @@ _responseData = rawData == null ? null : deserialize<ProjectDto, ProjectDto>(raw
   /// Throws [DioException] if API call or serialization fails
   Future<Response<DonatorDto>> getDonator({ 
     required int donatorId,
+    bool? forceEarningsUpdate = false,
     CancelToken? cancelToken,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? extra,
@@ -311,9 +313,14 @@ _responseData = rawData == null ? null : deserialize<ProjectDto, ProjectDto>(raw
       validateStatus: validateStatus,
     );
 
+    final _queryParameters = <String, dynamic>{
+      if (forceEarningsUpdate != null) r'force_earnings_update': forceEarningsUpdate,
+    };
+
     final _response = await _dio.request<Object>(
       _path,
       options: _options,
+      queryParameters: _queryParameters,
       cancelToken: cancelToken,
       onSendProgress: onSendProgress,
       onReceiveProgress: onReceiveProgress,

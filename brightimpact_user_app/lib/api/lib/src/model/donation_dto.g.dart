@@ -12,11 +12,12 @@ DonationDto _$DonationDtoFromJson(Map<String, dynamic> json) => $checkedCreate(
       ($checkedConvert) {
         $checkKeys(
           json,
-          requiredKeys: const ['id', 'amount', 'ngo', 'createdAt'],
+          requiredKeys: const ['id', 'amountInCent', 'ngo', 'createdAt'],
         );
         final val = DonationDto(
           id: $checkedConvert('id', (v) => (v as num).toInt()),
-          amount: $checkedConvert('amount', (v) => v as num),
+          amountInCent:
+              $checkedConvert('amountInCent', (v) => (v as num).toInt()),
           project: $checkedConvert(
               'project',
               (v) => v == null
@@ -34,7 +35,7 @@ DonationDto _$DonationDtoFromJson(Map<String, dynamic> json) => $checkedCreate(
 Map<String, dynamic> _$DonationDtoToJson(DonationDto instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'amount': instance.amount,
+      'amountInCent': instance.amountInCent,
       if (instance.project?.toJson() case final value?) 'project': value,
       'ngo': instance.ngo.toJson(),
       'createdAt': instance.createdAt.toIso8601String(),

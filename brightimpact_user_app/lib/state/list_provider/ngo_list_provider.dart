@@ -28,7 +28,7 @@ class NgoListProvider extends ListProvider<NGO> {
     _filterIsFavorite = isFavorite ?? filterIsFavorite;
     _filterDonatedTo = donatedTo ?? filterDonatedTo;
     _sortNewest = newest ?? sortNewest;
-    await fetchFirstPage();
+    await fetchFirstPage(directlyEmptyList: true);
   }
 
   @override

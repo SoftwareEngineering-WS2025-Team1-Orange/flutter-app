@@ -31,7 +31,9 @@ class _InitPage extends State<InitPage> {
     });
   }
 
-  void _openRegisterPage(BuildContext context) {
+  void _openRegisterPage(BuildContext context, AppState appState) {
+    appState.pendingActionRegisterBoxCUID = _state == InitPageState.boxFound ? _donationBoxSN : null;
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -43,7 +45,9 @@ class _InitPage extends State<InitPage> {
     );
   }
 
-  void _openLoginPage(BuildContext context) {
+  void _openLoginPage(BuildContext context, AppState appState) {
+    appState.pendingActionRegisterBoxCUID = _state == InitPageState.boxFound ? _donationBoxSN : null;
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true, 
@@ -165,7 +169,7 @@ class _InitPage extends State<InitPage> {
                   const SizedBox(height: 10),
                   if (_state == InitPageState.boxFound)
                     Text(
-                      "S/N: $_donationBoxSN",
+                      "SerialNo.: ${_donationBoxSN.substring(_donationBoxSN.length - 8)}",
                       style: TextStyle(
                         fontFamily: 'monospace',
                         fontSize: 20,
@@ -195,8 +199,7 @@ class _InitPage extends State<InitPage> {
                           height: 60,
                           child: OutlinedButton(
                             onPressed: () {
-                              //showInputDialog(context);
-                              _openLoginPage(context);
+                              _openLoginPage(context, appState);
                             },
                             style: OutlinedButton.styleFrom(
                               side: BorderSide(color: Colors.white, width: 2),
@@ -222,7 +225,7 @@ class _InitPage extends State<InitPage> {
                           height: 60,
                           child: ElevatedButton(
                             onPressed: () {
-                              _openRegisterPage(context);
+                              _openRegisterPage(context, appState);
 
                             },
                             style: ElevatedButton.styleFrom(

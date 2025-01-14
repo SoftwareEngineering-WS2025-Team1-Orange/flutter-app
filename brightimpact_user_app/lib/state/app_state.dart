@@ -27,6 +27,10 @@ class AppState with ChangeNotifier {
   Donator? get donator => _donatorProvider.entity ?? _initialDiskDonator;
   DonatorProvider get donatorProvider => _donatorProvider;
 
+
+  /// should a donationbox with CUID be registered dircetly after successfull login
+  String? pendingActionRegisterBoxCUID;
+
   AppState() {
     _restoreState().whenComplete((){
       // When logged in: setup donatorProvider and fetch data from server
@@ -84,9 +88,7 @@ class AppState with ChangeNotifier {
   }
 
 
-// TO-DO: USE FUNCTION
-
-  /// Lädt den Auth-Token
+  /// loads auth token
   Future<Token?> _loadAuthToken() async {
     final tokenString = await _secureStorage.read(key: _authTokenKey);
     if (tokenString == null) return null;
@@ -97,7 +99,7 @@ class AppState with ChangeNotifier {
     }
   }
 
-  /// Löscht den Auth-Token
+  /// Deletes auth token
   Future<void> _deleteAuthToken() async {
     await _secureStorage.delete(key: _authTokenKey);
   }

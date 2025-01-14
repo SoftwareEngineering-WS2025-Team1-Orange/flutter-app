@@ -26,11 +26,11 @@ doc/FavoriteProjectRequestDto.md
 doc/GetNgoList200ResponseDto.md
 doc/GetProjectList200ResponseDto.md
 doc/GetTransactionList200ResponseDto.md
+doc/MoneroMiningPayoutBasicDto.md
 doc/NGOApi.md
 doc/NGOBasicDto.md
 doc/NGODto.md
 doc/PaginationDto.md
-doc/PayoutDto.md
 doc/PowerSupplyApi.md
 doc/PowerSupplyDto.md
 doc/PowerSupplyRegisterDto.md
@@ -75,10 +75,10 @@ lib/src/model/favorite_project_request_dto.dart
 lib/src/model/get_ngo_list200_response_dto.dart
 lib/src/model/get_project_list200_response_dto.dart
 lib/src/model/get_transaction_list200_response_dto.dart
+lib/src/model/monero_mining_payout_basic_dto.dart
 lib/src/model/ngo_basic_dto.dart
 lib/src/model/ngo_dto.dart
 lib/src/model/pagination_dto.dart
-lib/src/model/payout_dto.dart
 lib/src/model/power_supply_dto.dart
 lib/src/model/power_supply_register_dto.dart
 lib/src/model/project_basic_dto.dart
@@ -111,11 +111,11 @@ test/favorite_project_request_dto_test.dart
 test/get_ngo_list200_response_dto_test.dart
 test/get_project_list200_response_dto_test.dart
 test/get_transaction_list200_response_dto_test.dart
+test/monero_mining_payout_basic_dto_test.dart
 test/ngo_api_test.dart
 test/ngo_basic_dto_test.dart
 test/ngo_dto_test.dart
 test/pagination_dto_test.dart
-test/payout_dto_test.dart
 test/power_supply_api_test.dart
 test/power_supply_dto_test.dart
 test/power_supply_register_dto_test.dart
