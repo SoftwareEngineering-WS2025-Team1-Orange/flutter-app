@@ -48,45 +48,84 @@ Please follow the [installation procedure](#installation--usage) and then run th
 import 'package:openapi/openapi.dart';
 
 
-final api = Openapi().getDonationboxApi();
-final int donatorId = 56; // int | 
+final api = Openapi().getAuthApi();
+final RequestTokenDto requestTokenDto = ; // RequestTokenDto | 
 
 try {
-    final response = await api.donatorDonatorIdDonationboxGet(donatorId);
+    final response = await api.getToken(requestTokenDto);
     print(response);
 } catch on DioException (e) {
-    print("Exception when calling DonationboxApi->donatorDonatorIdDonationboxGet: $e\n");
+    print("Exception when calling AuthApi->getToken: $e\n");
 }
 
 ```
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *https://localhost:9000/api/v1/api/v1*
+All URIs are relative to *https://localhost:9000/api/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-[*DonationboxApi*](doc/DonationboxApi.md) | [**donatorDonatorIdDonationboxGet**](doc/DonationboxApi.md#donatordonatoriddonationboxget) | **GET** /donator/{donator_id}/donationbox | 
-[*DonationboxApi*](doc/DonationboxApi.md) | [**donatorDonatorIdDonationboxPost**](doc/DonationboxApi.md#donatordonatoriddonationboxpost) | **POST** /donator/{donator_id}/donationbox | 
-[*DonatorApi*](doc/DonatorApi.md) | [**donatorDonatorIdGet**](doc/DonatorApi.md#donatordonatoridget) | **GET** /donator/{donator_id} | 
-[*DonatorApi*](doc/DonatorApi.md) | [**donatorMeGet**](doc/DonatorApi.md#donatormeget) | **GET** /donator/me | 
-[*DonatorApi*](doc/DonatorApi.md) | [**donatorPost**](doc/DonatorApi.md#donatorpost) | **POST** /donator | 
-[*PowerSupplyApi*](doc/PowerSupplyApi.md) | [**donatorDonatorIdPowersupplyGet**](doc/PowerSupplyApi.md#donatordonatoridpowersupplyget) | **GET** /donator/{donator_id}/powersupply | 
-[*PowerSupplyApi*](doc/PowerSupplyApi.md) | [**donatorDonatorIdPowersupplyPost**](doc/PowerSupplyApi.md#donatordonatoridpowersupplypost) | **POST** /donator/{donator_id}/powersupply | 
-[*TokenApi*](doc/TokenApi.md) | [**tokenPost**](doc/TokenApi.md#tokenpost) | **POST** /token | 
-[*WalletApi*](doc/WalletApi.md) | [**donatorDonatorIdWalletGet**](doc/WalletApi.md#donatordonatoridwalletget) | **GET** /donator/{donator_id}/wallet | 
+[*AuthApi*](doc/AuthApi.md) | [**getToken**](doc/AuthApi.md#gettoken) | **POST** /api-donator/auth/token | 
+[*AuthApi*](doc/AuthApi.md) | [**logout**](doc/AuthApi.md#logout) | **POST** /api-donator/auth/logout | 
+[*DonationApi*](doc/DonationApi.md) | [**donateToNgo**](doc/DonationApi.md#donatetongo) | **POST** /api-donator/donation/donator/{donator_id}/ngo/{ngo_id} | 
+[*DonationApi*](doc/DonationApi.md) | [**donateToProject**](doc/DonationApi.md#donatetoproject) | **POST** /api-donator/donation/donator/{donator_id}/project/{project_id} | 
+[*DonationboxApi*](doc/DonationboxApi.md) | [**getDonationbox**](doc/DonationboxApi.md#getdonationbox) | **GET** /api-donator/donationbox/donator/{donator_id} | 
+[*DonationboxApi*](doc/DonationboxApi.md) | [**registerDonationbox**](doc/DonationboxApi.md#registerdonationbox) | **PUT** /api-donator/donationbox/donator/{donator_id} | 
+[*DonationboxApi*](doc/DonationboxApi.md) | [**sendConfig**](doc/DonationboxApi.md#sendconfig) | **POST** /api-donationbox/sendConfig | 
+[*DonationboxApi*](doc/DonationboxApi.md) | [**sendStatusUpdateRequest**](doc/DonationboxApi.md#sendstatusupdaterequest) | **POST** /api-donationbox/sendStatusUpdateRequest | 
+[*DonationsApi*](doc/DonationsApi.md) | [**getTransactionList**](doc/DonationsApi.md#gettransactionlist) | **GET** /api-donator/transaction/donator/{donator_id} | 
+[*DonatorApi*](doc/DonatorApi.md) | [**deleteDonator**](doc/DonatorApi.md#deletedonator) | **DELETE** /api-donator/donator/{donator_id} | 
+[*DonatorApi*](doc/DonatorApi.md) | [**favoriteNgo**](doc/DonatorApi.md#favoritengo) | **PUT** /api-donator/ngo/{ngo_id}/donator/{donator_id}/favorite | 
+[*DonatorApi*](doc/DonatorApi.md) | [**favoriteProject**](doc/DonatorApi.md#favoriteproject) | **PUT** /api-donator/project/{project_id}/donator/{donator_id}/favorite | 
+[*DonatorApi*](doc/DonatorApi.md) | [**getDonator**](doc/DonatorApi.md#getdonator) | **GET** /api-donator/donator/{donator_id} | 
+[*DonatorApi*](doc/DonatorApi.md) | [**getDonatorByToken**](doc/DonatorApi.md#getdonatorbytoken) | **GET** /api-donator/donator/me | 
+[*DonatorApi*](doc/DonatorApi.md) | [**registerDonator**](doc/DonatorApi.md#registerdonator) | **POST** /api-donator/donator | 
+[*DonatorApi*](doc/DonatorApi.md) | [**updateDonator**](doc/DonatorApi.md#updatedonator) | **PUT** /api-donator/donator/{donator_id} | 
+[*NGOApi*](doc/NGOApi.md) | [**getNgoList**](doc/NGOApi.md#getngolist) | **GET** /api-donator/ngo/donator/{donator_id} | 
+[*PowerSupplyApi*](doc/PowerSupplyApi.md) | [**addPowersupply**](doc/PowerSupplyApi.md#addpowersupply) | **POST** /api-donator/powersupply/donator/{donator_id} | 
+[*PowerSupplyApi*](doc/PowerSupplyApi.md) | [**getPowersupply**](doc/PowerSupplyApi.md#getpowersupply) | **GET** /api-donator/powersupply/donator/{donator_id} | 
+[*ProjectApi*](doc/ProjectApi.md) | [**getProjectList**](doc/ProjectApi.md#getprojectlist) | **GET** /api-donator/project/donator/{donator_id} | 
 
 
 ## Documentation For Models
 
+ - [ConfigDto](doc/ConfigDto.md)
+ - [DonateToNgo201ResponseAllOfProjectDto](doc/DonateToNgo201ResponseAllOfProjectDto.md)
+ - [DonateToNgo201ResponseDto](doc/DonateToNgo201ResponseDto.md)
+ - [DonateToNgoRequestDto](doc/DonateToNgoRequestDto.md)
+ - [DonateToProject201ResponseDto](doc/DonateToProject201ResponseDto.md)
+ - [DonateToProjectRequestDto](doc/DonateToProjectRequestDto.md)
+ - [DonationDto](doc/DonationDto.md)
+ - [DonationResponseDto](doc/DonationResponseDto.md)
+ - [DonationboxBasicDto](doc/DonationboxBasicDto.md)
  - [DonationboxDto](doc/DonationboxDto.md)
  - [DonationboxRegisterDto](doc/DonationboxRegisterDto.md)
+ - [DonationboxSendConfigDto](doc/DonationboxSendConfigDto.md)
  - [DonatorDto](doc/DonatorDto.md)
  - [DonatorRegisterDto](doc/DonatorRegisterDto.md)
+ - [DonatorUpdateDto](doc/DonatorUpdateDto.md)
+ - [EarningDto](doc/EarningDto.md)
+ - [FavoriteProjectRequestDto](doc/FavoriteProjectRequestDto.md)
+ - [GetNgoList200ResponseDto](doc/GetNgoList200ResponseDto.md)
+ - [GetProjectList200ResponseDto](doc/GetProjectList200ResponseDto.md)
+ - [GetTransactionList200ResponseDto](doc/GetTransactionList200ResponseDto.md)
+ - [LastSolarDataConsumptionDto](doc/LastSolarDataConsumptionDto.md)
+ - [LastSolarDataDto](doc/LastSolarDataDto.md)
+ - [LastSolarDataProductionDto](doc/LastSolarDataProductionDto.md)
+ - [MoneroMiningPayoutBasicDto](doc/MoneroMiningPayoutBasicDto.md)
+ - [NGOBasicDto](doc/NGOBasicDto.md)
+ - [NGODto](doc/NGODto.md)
+ - [PaginationDto](doc/PaginationDto.md)
  - [PowerSupplyDto](doc/PowerSupplyDto.md)
  - [PowerSupplyRegisterDto](doc/PowerSupplyRegisterDto.md)
+ - [ProjectBasicDto](doc/ProjectBasicDto.md)
+ - [ProjectCategoryDto](doc/ProjectCategoryDto.md)
+ - [ProjectDto](doc/ProjectDto.md)
+ - [RequestTokenDto](doc/RequestTokenDto.md)
  - [ResponseTokenDto](doc/ResponseTokenDto.md)
- - [WalletDto](doc/WalletDto.md)
+ - [SendStatusUpdateRequestRequestDto](doc/SendStatusUpdateRequestRequestDto.md)
+ - [SortTypeDto](doc/SortTypeDto.md)
 
 
 ## Documentation For Authorization

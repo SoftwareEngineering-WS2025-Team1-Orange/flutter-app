@@ -18,22 +18,36 @@ class DonatorRegisterDto {
   /// Returns a new [DonatorRegisterDto] instance.
   DonatorRegisterDto({
 
-    required  this.name,
+    required  this.firstName,
+
+    required  this.lastName,
 
     required  this.password,
 
-    required  this.mail,
+    required  this.email,
   });
 
   @JsonKey(
     
-    name: r'name',
+    name: r'firstName',
     required: true,
     includeIfNull: false,
   )
 
 
-  final String name;
+  final String firstName;
+
+
+
+  @JsonKey(
+    
+    name: r'lastName',
+    required: true,
+    includeIfNull: false,
+  )
+
+
+  final String lastName;
 
 
 
@@ -51,13 +65,13 @@ class DonatorRegisterDto {
 
   @JsonKey(
     
-    name: r'mail',
+    name: r'email',
     required: true,
     includeIfNull: false,
   )
 
 
-  final String mail;
+  final String email;
 
 
 
@@ -65,15 +79,17 @@ class DonatorRegisterDto {
 
     @override
     bool operator ==(Object other) => identical(this, other) || other is DonatorRegisterDto &&
-      other.name == name &&
+      other.firstName == firstName &&
+      other.lastName == lastName &&
       other.password == password &&
-      other.mail == mail;
+      other.email == email;
 
     @override
     int get hashCode =>
-        name.hashCode +
+        firstName.hashCode +
+        lastName.hashCode +
         password.hashCode +
-        mail.hashCode;
+        email.hashCode;
 
   factory DonatorRegisterDto.fromJson(Map<String, dynamic> json) => _$DonatorRegisterDtoFromJson(json);
 

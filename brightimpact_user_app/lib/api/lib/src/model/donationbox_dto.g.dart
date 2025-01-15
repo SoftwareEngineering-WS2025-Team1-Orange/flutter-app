@@ -13,43 +13,92 @@ DonationboxDto _$DonationboxDtoFromJson(Map<String, dynamic> json) =>
       ($checkedConvert) {
         $checkKeys(
           json,
-          requiredKeys: const ['id', 'state', 'power_consumption'],
+          requiredKeys: const [
+            'id',
+            'name',
+            'cuid',
+            'status',
+            'solarStatus',
+            'earningsLastUpdateSuccessful'
+          ],
         );
         final val = DonationboxDto(
-          id: $checkedConvert('id', (v) => v as String),
-          state: $checkedConvert(
-              'state', (v) => $enumDecode(_$DonationboxDtoStateEnumEnumMap, v)),
-          powerConsumption:
-              $checkedConvert('power_consumption', (v) => v as num),
-          locLat: $checkedConvert('loc_lat', (v) => v as num?),
-          locLgt: $checkedConvert('loc_lgt', (v) => v as num?),
-          powerSupplyId:
-              $checkedConvert('power_supply_id', (v) => v as String?),
+          id: $checkedConvert('id', (v) => (v as num).toInt()),
+          name: $checkedConvert('name', (v) => v as String),
+          cuid: $checkedConvert('cuid', (v) => v as String),
+          lastSolarData: $checkedConvert(
+              'lastSolarData',
+              (v) => v == null
+                  ? null
+                  : LastSolarDataDto.fromJson(v as Map<String, dynamic>)),
+          solarDataLastSuccessfulUpdateAt: $checkedConvert(
+              'solarDataLastSuccessfulUpdateAt',
+              (v) => v == null ? null : DateTime.parse(v as String)),
+          averageWorkingTimePerDayInSeconds: $checkedConvert(
+              'averageWorkingTimePerDayInSeconds', (v) => v as num?),
+          averageWorkingTimePerDayInSecondsLastUpdateAt: $checkedConvert(
+              'averageWorkingTimePerDayInSecondsLastUpdateAt',
+              (v) => v == null ? null : DateTime.parse(v as String)),
+          averageIncomePerDayInCent:
+              $checkedConvert('averageIncomePerDayInCent', (v) => v as num?),
+          averageIncomePerDayLastUpdateAt: $checkedConvert(
+              'averageIncomePerDayLastUpdateAt',
+              (v) => v == null ? null : DateTime.parse(v as String)),
+          status: $checkedConvert('status',
+              (v) => $enumDecode(_$DonationboxDtoStatusEnumEnumMap, v)),
+          solarStatus: $checkedConvert('solarStatus',
+              (v) => $enumDecode(_$DonationboxDtoSolarStatusEnumEnumMap, v)),
+          earningsLastSuccessfulUpdateAt: $checkedConvert(
+              'earningsLastSuccessfulUpdateAt',
+              (v) => v == null ? null : DateTime.parse(v as String)),
+          earningsLastUpdateSuccessful:
+              $checkedConvert('earningsLastUpdateSuccessful', (v) => v as bool),
         );
         return val;
-      },
-      fieldKeyMap: const {
-        'powerConsumption': 'power_consumption',
-        'locLat': 'loc_lat',
-        'locLgt': 'loc_lgt',
-        'powerSupplyId': 'power_supply_id'
       },
     );
 
 Map<String, dynamic> _$DonationboxDtoToJson(DonationboxDto instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'state': _$DonationboxDtoStateEnumEnumMap[instance.state]!,
-      'power_consumption': instance.powerConsumption,
-      if (instance.locLat case final value?) 'loc_lat': value,
-      if (instance.locLgt case final value?) 'loc_lgt': value,
-      if (instance.powerSupplyId case final value?) 'power_supply_id': value,
+      'name': instance.name,
+      'cuid': instance.cuid,
+      if (instance.lastSolarData?.toJson() case final value?)
+        'lastSolarData': value,
+      if (instance.solarDataLastSuccessfulUpdateAt?.toIso8601String()
+          case final value?)
+        'solarDataLastSuccessfulUpdateAt': value,
+      if (instance.averageWorkingTimePerDayInSeconds case final value?)
+        'averageWorkingTimePerDayInSeconds': value,
+      if (instance.averageWorkingTimePerDayInSecondsLastUpdateAt
+              ?.toIso8601String()
+          case final value?)
+        'averageWorkingTimePerDayInSecondsLastUpdateAt': value,
+      if (instance.averageIncomePerDayInCent case final value?)
+        'averageIncomePerDayInCent': value,
+      if (instance.averageIncomePerDayLastUpdateAt?.toIso8601String()
+          case final value?)
+        'averageIncomePerDayLastUpdateAt': value,
+      'status': _$DonationboxDtoStatusEnumEnumMap[instance.status]!,
+      'solarStatus':
+          _$DonationboxDtoSolarStatusEnumEnumMap[instance.solarStatus]!,
+      if (instance.earningsLastSuccessfulUpdateAt?.toIso8601String()
+          case final value?)
+        'earningsLastSuccessfulUpdateAt': value,
+      'earningsLastUpdateSuccessful': instance.earningsLastUpdateSuccessful,
     };
 
-const _$DonationboxDtoStateEnumEnumMap = {
-  DonationboxDtoStateEnum.OFFLINE: 'OFFLINE',
-  DonationboxDtoStateEnum.CONNECTED: 'CONNECTED',
-  DonationboxDtoStateEnum.READY: 'READY',
-  DonationboxDtoStateEnum.RUNNING: 'RUNNING',
-  DonationboxDtoStateEnum.ERROR: 'ERROR',
+const _$DonationboxDtoStatusEnumEnumMap = {
+  DonationboxDtoStatusEnum.connected: 'Connected',
+  DonationboxDtoStatusEnum.disconnected: 'Disconnected',
+  DonationboxDtoStatusEnum.working: 'Working',
+  DonationboxDtoStatusEnum.uninitialized: 'Uninitialized',
+  DonationboxDtoStatusEnum.unknownStatusCode: 'Unknown_Status_Code',
+};
+
+const _$DonationboxDtoSolarStatusEnumEnumMap = {
+  DonationboxDtoSolarStatusEnum.ok: 'Ok',
+  DonationboxDtoSolarStatusEnum.error: 'Error',
+  DonationboxDtoSolarStatusEnum.pending: 'Pending',
+  DonationboxDtoSolarStatusEnum.uninitialized: 'Uninitialized',
 };

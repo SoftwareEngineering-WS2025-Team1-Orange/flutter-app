@@ -22,11 +22,9 @@ class PowerSupplyRegisterDto {
 
     required  this.modelNumber,
 
-     this.apiKey,
+    required  this.apiConfig,
 
-     this.ip,
-
-     this.password,
+    required  this.type,
   });
 
   @JsonKey(
@@ -53,39 +51,28 @@ class PowerSupplyRegisterDto {
 
 
 
+      /// Flexible JSON string that contains attributes depending on the model number
   @JsonKey(
     
-    name: r'api_key',
-    required: false,
+    name: r'api_config',
+    required: true,
     includeIfNull: false,
   )
 
 
-  final String? apiKey;
-
-
-
-  @JsonKey(
-    
-    name: r'ip',
-    required: false,
-    includeIfNull: false,
-  )
-
-
-  final String? ip;
+  final String apiConfig;
 
 
 
   @JsonKey(
     
-    name: r'password',
-    required: false,
+    name: r'type',
+    required: true,
     includeIfNull: false,
   )
 
 
-  final String? password;
+  final PowerSupplyRegisterDtoTypeEnum type;
 
 
 
@@ -95,17 +82,15 @@ class PowerSupplyRegisterDto {
     bool operator ==(Object other) => identical(this, other) || other is PowerSupplyRegisterDto &&
       other.name == name &&
       other.modelNumber == modelNumber &&
-      other.apiKey == apiKey &&
-      other.ip == ip &&
-      other.password == password;
+      other.apiConfig == apiConfig &&
+      other.type == type;
 
     @override
     int get hashCode =>
         name.hashCode +
         modelNumber.hashCode +
-        apiKey.hashCode +
-        ip.hashCode +
-        password.hashCode;
+        apiConfig.hashCode +
+        type.hashCode;
 
   factory PowerSupplyRegisterDto.fromJson(Map<String, dynamic> json) => _$PowerSupplyRegisterDtoFromJson(json);
 
@@ -117,4 +102,20 @@ class PowerSupplyRegisterDto {
   }
 
 }
+
+
+enum PowerSupplyRegisterDtoTypeEnum {
+@JsonValue(r'Solar')
+solar(r'Solar'),
+@JsonValue(r'Alternative')
+alternative(r'Alternative');
+
+const PowerSupplyRegisterDtoTypeEnum(this.value);
+
+final String value;
+
+@override
+String toString() => value;
+}
+
 

@@ -3,6 +3,7 @@
 //
 
 // ignore_for_file: unused_element
+import 'package:openapi/src/model/last_solar_data_dto.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'donationbox_dto.g.dart';
@@ -20,15 +21,29 @@ class DonationboxDto {
 
     required  this.id,
 
-    required  this.state,
+    required  this.name,
 
-    required  this.powerConsumption,
+    required  this.cuid,
 
-     this.locLat,
+     this.lastSolarData,
 
-     this.locLgt,
+     this.solarDataLastSuccessfulUpdateAt,
 
-     this.powerSupplyId,
+     this.averageWorkingTimePerDayInSeconds,
+
+     this.averageWorkingTimePerDayInSecondsLastUpdateAt,
+
+     this.averageIncomePerDayInCent,
+
+     this.averageIncomePerDayLastUpdateAt,
+
+    required  this.status,
+
+    required  this.solarStatus,
+
+     this.earningsLastSuccessfulUpdateAt,
+
+    required  this.earningsLastUpdateSuccessful,
   });
 
   @JsonKey(
@@ -39,67 +54,151 @@ class DonationboxDto {
   )
 
 
-  final String id;
+  final int id;
 
 
 
   @JsonKey(
     
-    name: r'state',
+    name: r'name',
     required: true,
     includeIfNull: false,
   )
 
 
-  final DonationboxDtoStateEnum state;
+  final String name;
 
 
 
   @JsonKey(
     
-    name: r'power_consumption',
+    name: r'cuid',
     required: true,
     includeIfNull: false,
   )
 
 
-  final num powerConsumption;
+  final String cuid;
 
 
 
   @JsonKey(
     
-    name: r'loc_lat',
+    name: r'lastSolarData',
     required: false,
     includeIfNull: false,
   )
 
 
-  final num? locLat;
+  final LastSolarDataDto? lastSolarData;
 
 
 
   @JsonKey(
     
-    name: r'loc_lgt',
+    name: r'solarDataLastSuccessfulUpdateAt',
     required: false,
     includeIfNull: false,
   )
 
 
-  final num? locLgt;
+  final DateTime? solarDataLastSuccessfulUpdateAt;
 
 
 
   @JsonKey(
     
-    name: r'power_supply_id',
+    name: r'averageWorkingTimePerDayInSeconds',
     required: false,
     includeIfNull: false,
   )
 
 
-  final String? powerSupplyId;
+  final num? averageWorkingTimePerDayInSeconds;
+
+
+
+  @JsonKey(
+    
+    name: r'averageWorkingTimePerDayInSecondsLastUpdateAt',
+    required: false,
+    includeIfNull: false,
+  )
+
+
+  final DateTime? averageWorkingTimePerDayInSecondsLastUpdateAt;
+
+
+
+  @JsonKey(
+    
+    name: r'averageIncomePerDayInCent',
+    required: false,
+    includeIfNull: false,
+  )
+
+
+  final num? averageIncomePerDayInCent;
+
+
+
+  @JsonKey(
+    
+    name: r'averageIncomePerDayLastUpdateAt',
+    required: false,
+    includeIfNull: false,
+  )
+
+
+  final DateTime? averageIncomePerDayLastUpdateAt;
+
+
+
+  @JsonKey(
+    
+    name: r'status',
+    required: true,
+    includeIfNull: false,
+  )
+
+
+  final DonationboxDtoStatusEnum status;
+
+
+
+  @JsonKey(
+    
+    name: r'solarStatus',
+    required: true,
+    includeIfNull: false,
+  )
+
+
+  final DonationboxDtoSolarStatusEnum solarStatus;
+
+
+
+  @JsonKey(
+    
+    name: r'earningsLastSuccessfulUpdateAt',
+    required: false,
+    includeIfNull: false,
+  )
+
+
+  final DateTime? earningsLastSuccessfulUpdateAt;
+
+
+
+  @JsonKey(
+    
+    name: r'earningsLastUpdateSuccessful',
+    required: true,
+    includeIfNull: false,
+  )
+
+
+  final bool earningsLastUpdateSuccessful;
 
 
 
@@ -108,20 +207,34 @@ class DonationboxDto {
     @override
     bool operator ==(Object other) => identical(this, other) || other is DonationboxDto &&
       other.id == id &&
-      other.state == state &&
-      other.powerConsumption == powerConsumption &&
-      other.locLat == locLat &&
-      other.locLgt == locLgt &&
-      other.powerSupplyId == powerSupplyId;
+      other.name == name &&
+      other.cuid == cuid &&
+      other.lastSolarData == lastSolarData &&
+      other.solarDataLastSuccessfulUpdateAt == solarDataLastSuccessfulUpdateAt &&
+      other.averageWorkingTimePerDayInSeconds == averageWorkingTimePerDayInSeconds &&
+      other.averageWorkingTimePerDayInSecondsLastUpdateAt == averageWorkingTimePerDayInSecondsLastUpdateAt &&
+      other.averageIncomePerDayInCent == averageIncomePerDayInCent &&
+      other.averageIncomePerDayLastUpdateAt == averageIncomePerDayLastUpdateAt &&
+      other.status == status &&
+      other.solarStatus == solarStatus &&
+      other.earningsLastSuccessfulUpdateAt == earningsLastSuccessfulUpdateAt &&
+      other.earningsLastUpdateSuccessful == earningsLastUpdateSuccessful;
 
     @override
     int get hashCode =>
         id.hashCode +
-        state.hashCode +
-        powerConsumption.hashCode +
-        locLat.hashCode +
-        locLgt.hashCode +
-        powerSupplyId.hashCode;
+        name.hashCode +
+        cuid.hashCode +
+        lastSolarData.hashCode +
+        solarDataLastSuccessfulUpdateAt.hashCode +
+        averageWorkingTimePerDayInSeconds.hashCode +
+        averageWorkingTimePerDayInSecondsLastUpdateAt.hashCode +
+        averageIncomePerDayInCent.hashCode +
+        averageIncomePerDayLastUpdateAt.hashCode +
+        status.hashCode +
+        solarStatus.hashCode +
+        earningsLastSuccessfulUpdateAt.hashCode +
+        earningsLastUpdateSuccessful.hashCode;
 
   factory DonationboxDto.fromJson(Map<String, dynamic> json) => _$DonationboxDtoFromJson(json);
 
@@ -135,19 +248,39 @@ class DonationboxDto {
 }
 
 
-enum DonationboxDtoStateEnum {
-@JsonValue(r'OFFLINE')
-OFFLINE(r'OFFLINE'),
-@JsonValue(r'CONNECTED')
-CONNECTED(r'CONNECTED'),
-@JsonValue(r'READY')
-READY(r'READY'),
-@JsonValue(r'RUNNING')
-RUNNING(r'RUNNING'),
-@JsonValue(r'ERROR')
-ERROR(r'ERROR');
+enum DonationboxDtoStatusEnum {
+@JsonValue(r'Connected')
+connected(r'Connected'),
+@JsonValue(r'Disconnected')
+disconnected(r'Disconnected'),
+@JsonValue(r'Working')
+working(r'Working'),
+@JsonValue(r'Uninitialized')
+uninitialized(r'Uninitialized'),
+@JsonValue(r'Unknown_Status_Code')
+unknownStatusCode(r'Unknown_Status_Code');
 
-const DonationboxDtoStateEnum(this.value);
+const DonationboxDtoStatusEnum(this.value);
+
+final String value;
+
+@override
+String toString() => value;
+}
+
+
+
+enum DonationboxDtoSolarStatusEnum {
+@JsonValue(r'Ok')
+ok(r'Ok'),
+@JsonValue(r'Error')
+error(r'Error'),
+@JsonValue(r'Pending')
+pending(r'Pending'),
+@JsonValue(r'Uninitialized')
+uninitialized(r'Uninitialized');
+
+const DonationboxDtoSolarStatusEnum(this.value);
 
 final String value;
 

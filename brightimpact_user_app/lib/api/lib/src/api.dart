@@ -7,14 +7,17 @@ import 'package:openapi/src/auth/api_key_auth.dart';
 import 'package:openapi/src/auth/basic_auth.dart';
 import 'package:openapi/src/auth/bearer_auth.dart';
 import 'package:openapi/src/auth/oauth.dart';
+import 'package:openapi/src/api/auth_api.dart';
+import 'package:openapi/src/api/donation_api.dart';
 import 'package:openapi/src/api/donationbox_api.dart';
+import 'package:openapi/src/api/donations_api.dart';
 import 'package:openapi/src/api/donator_api.dart';
+import 'package:openapi/src/api/ngo_api.dart';
 import 'package:openapi/src/api/power_supply_api.dart';
-import 'package:openapi/src/api/token_api.dart';
-import 'package:openapi/src/api/wallet_api.dart';
+import 'package:openapi/src/api/project_api.dart';
 
 class Openapi {
-  static const String basePath = r'https://localhost:9000/api/v1/api/v1';
+  static const String basePath = r'https://localhost:9000/api/v1';
 
   final Dio dio;
   Openapi({
@@ -64,10 +67,28 @@ class Openapi {
     }
   }
 
+  /// Get AuthApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  AuthApi getAuthApi() {
+    return AuthApi(dio);
+  }
+
+  /// Get DonationApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  DonationApi getDonationApi() {
+    return DonationApi(dio);
+  }
+
   /// Get DonationboxApi instance, base route and serializer can be overridden by a given but be careful,
   /// by doing that all interceptors will not be executed
   DonationboxApi getDonationboxApi() {
     return DonationboxApi(dio);
+  }
+
+  /// Get DonationsApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  DonationsApi getDonationsApi() {
+    return DonationsApi(dio);
   }
 
   /// Get DonatorApi instance, base route and serializer can be overridden by a given but be careful,
@@ -76,21 +97,21 @@ class Openapi {
     return DonatorApi(dio);
   }
 
+  /// Get NGOApi instance, base route and serializer can be overridden by a given but be careful,
+  /// by doing that all interceptors will not be executed
+  NGOApi getNGOApi() {
+    return NGOApi(dio);
+  }
+
   /// Get PowerSupplyApi instance, base route and serializer can be overridden by a given but be careful,
   /// by doing that all interceptors will not be executed
   PowerSupplyApi getPowerSupplyApi() {
     return PowerSupplyApi(dio);
   }
 
-  /// Get TokenApi instance, base route and serializer can be overridden by a given but be careful,
+  /// Get ProjectApi instance, base route and serializer can be overridden by a given but be careful,
   /// by doing that all interceptors will not be executed
-  TokenApi getTokenApi() {
-    return TokenApi(dio);
-  }
-
-  /// Get WalletApi instance, base route and serializer can be overridden by a given but be careful,
-  /// by doing that all interceptors will not be executed
-  WalletApi getWalletApi() {
-    return WalletApi(dio);
+  ProjectApi getProjectApi() {
+    return ProjectApi(dio);
   }
 }

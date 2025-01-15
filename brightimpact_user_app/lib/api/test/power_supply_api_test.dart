@@ -7,13 +7,13 @@ void main() {
   final instance = Openapi().getPowerSupplyApi();
 
   group(PowerSupplyApi, () {
-    //Future<List<PowerSupplyDto>> donatorDonatorIdPowersupplyGet(int donatorId) async
-    test('test donatorDonatorIdPowersupplyGet', () async {
+    //Future addPowersupply(int donatorId, PowerSupplyRegisterDto powerSupplyRegisterDto) async
+    test('test addPowersupply', () async {
       // TODO
     });
 
-    //Future donatorDonatorIdPowersupplyPost(int donatorId, PowerSupplyRegisterDto powerSupplyRegisterDto) async
-    test('test donatorDonatorIdPowersupplyPost', () async {
+    //Future<List<PowerSupplyDto>> getPowersupply(int donatorId) async
+    test('test getPowersupply', () async {
       // TODO
     });
 

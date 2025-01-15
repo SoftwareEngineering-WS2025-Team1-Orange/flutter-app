@@ -17,5 +17,10 @@ void main() {
       // TODO
     });
 
+    // int expiresAt
+    test('to test the property `expiresAt`', () async {
+      // TODO
+    });
+
   });
 }

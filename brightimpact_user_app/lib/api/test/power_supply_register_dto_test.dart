@@ -17,18 +17,14 @@ void main() {
       // TODO
     });
 
-    // String apiKey
-    test('to test the property `apiKey`', () async {
+    // Flexible JSON string that contains attributes depending on the model number
+    // String apiConfig
+    test('to test the property `apiConfig`', () async {
       // TODO
     });
 
-    // String ip
-    test('to test the property `ip`', () async {
-      // TODO
-    });
-
-    // String password
-    test('to test the property `password`', () async {
+    // String type
+    test('to test the property `type`', () async {
       // TODO
     });
 

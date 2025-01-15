@@ -7,18 +7,38 @@ void main() {
   final instance = Openapi().getDonatorApi();
 
   group(DonatorApi, () {
-    //Future<DonatorDto> donatorDonatorIdGet(int donatorId) async
-    test('test donatorDonatorIdGet', () async {
+    //Future deleteDonator(int donatorId) async
+    test('test deleteDonator', () async {
       // TODO
     });
 
-    //Future<DonatorDto> donatorMeGet() async
-    test('test donatorMeGet', () async {
+    //Future<NGODto> favoriteNgo(int ngoId, int donatorId, FavoriteProjectRequestDto favoriteProjectRequestDto) async
+    test('test favoriteNgo', () async {
       // TODO
     });
 
-    //Future<int> donatorPost(DonatorRegisterDto donatorRegisterDto) async
-    test('test donatorPost', () async {
+    //Future<ProjectDto> favoriteProject(int projectId, int donatorId, FavoriteProjectRequestDto favoriteProjectRequestDto) async
+    test('test favoriteProject', () async {
+      // TODO
+    });
+
+    //Future<DonatorDto> getDonator(int donatorId, { bool forceEarningsUpdate }) async
+    test('test getDonator', () async {
+      // TODO
+    });
+
+    //Future<DonatorDto> getDonatorByToken() async
+    test('test getDonatorByToken', () async {
+      // TODO
+    });
+
+    //Future<DonatorDto> registerDonator(DonatorRegisterDto donatorRegisterDto) async
+    test('test registerDonator', () async {
+      // TODO
+    });
+
+    //Future<DonatorDto> updateDonator(int donatorId, DonatorUpdateDto donatorUpdateDto) async
+    test('test updateDonator', () async {
       // TODO
     });
 

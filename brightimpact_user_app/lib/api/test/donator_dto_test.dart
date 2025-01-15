@@ -7,18 +7,28 @@ void main() {
   // TODO add properties to the entity
 
   group(DonatorDto, () {
-    // String name
-    test('to test the property `name`', () async {
+    // String firstName
+    test('to test the property `firstName`', () async {
       // TODO
     });
 
-    // String mail
-    test('to test the property `mail`', () async {
+    // String lastName
+    test('to test the property `lastName`', () async {
       // TODO
     });
 
-    // int donatorId
-    test('to test the property `donatorId`', () async {
+    // String email
+    test('to test the property `email`', () async {
+      // TODO
+    });
+
+    // num balance
+    test('to test the property `balance`', () async {
+      // TODO
+    });
+
+    // int id
+    test('to test the property `id`', () async {
       // TODO
     });
 

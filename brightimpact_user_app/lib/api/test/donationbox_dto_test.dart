@@ -7,33 +7,68 @@ void main() {
   // TODO add properties to the entity
 
   group(DonationboxDto, () {
-    // String id
+    // int id
     test('to test the property `id`', () async {
       // TODO
     });
 
-    // String state
-    test('to test the property `state`', () async {
+    // String name
+    test('to test the property `name`', () async {
       // TODO
     });
 
-    // num powerConsumption
-    test('to test the property `powerConsumption`', () async {
+    // String cuid
+    test('to test the property `cuid`', () async {
       // TODO
     });
 
-    // num locLat
-    test('to test the property `locLat`', () async {
+    // LastSolarDataDto lastSolarData
+    test('to test the property `lastSolarData`', () async {
       // TODO
     });
 
-    // num locLgt
-    test('to test the property `locLgt`', () async {
+    // DateTime solarDataLastSuccessfulUpdateAt
+    test('to test the property `solarDataLastSuccessfulUpdateAt`', () async {
       // TODO
     });
 
-    // String powerSupplyId
-    test('to test the property `powerSupplyId`', () async {
+    // num averageWorkingTimePerDayInSeconds
+    test('to test the property `averageWorkingTimePerDayInSeconds`', () async {
+      // TODO
+    });
+
+    // DateTime averageWorkingTimePerDayInSecondsLastUpdateAt
+    test('to test the property `averageWorkingTimePerDayInSecondsLastUpdateAt`', () async {
+      // TODO
+    });
+
+    // num averageIncomePerDayInCent
+    test('to test the property `averageIncomePerDayInCent`', () async {
+      // TODO
+    });
+
+    // DateTime averageIncomePerDayLastUpdateAt
+    test('to test the property `averageIncomePerDayLastUpdateAt`', () async {
+      // TODO
+    });
+
+    // String status
+    test('to test the property `status`', () async {
+      // TODO
+    });
+
+    // String solarStatus
+    test('to test the property `solarStatus`', () async {
+      // TODO
+    });
+
+    // DateTime earningsLastSuccessfulUpdateAt
+    test('to test the property `earningsLastSuccessfulUpdateAt`', () async {
+      // TODO
+    });
+
+    // bool earningsLastUpdateSuccessful
+    test('to test the property `earningsLastUpdateSuccessful`', () async {
       // TODO
     });
 
