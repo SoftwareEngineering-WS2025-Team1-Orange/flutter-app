@@ -10,9 +10,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  | 
 **amountInCent** | **int** |  | 
-**createdAt** | [**DateTime**](DateTime.md) |  | 
 **payoutType** | **String** |  | 
 **payoutTimestamp** | [**DateTime**](DateTime.md) |  | 
+**workingTimeInSeconds** | **int** |  | [optional] 
 **moneroMiningPayout** | [**MoneroMiningPayoutBasicDto**](MoneroMiningPayoutBasicDto.md) |  | 
 **donationBox** | [**DonationboxBasicDto**](DonationboxBasicDto.md) |  | 
 

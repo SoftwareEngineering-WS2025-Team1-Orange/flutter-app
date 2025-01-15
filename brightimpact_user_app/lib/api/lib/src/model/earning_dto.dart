@@ -24,11 +24,11 @@ class EarningDto {
 
     required  this.amountInCent,
 
-    required  this.createdAt,
-
     required  this.payoutType,
 
     required  this.payoutTimestamp,
+
+     this.workingTimeInSeconds,
 
     required  this.moneroMiningPayout,
 
@@ -61,18 +61,6 @@ class EarningDto {
 
   @JsonKey(
     
-    name: r'createdAt',
-    required: true,
-    includeIfNull: false,
-  )
-
-
-  final DateTime createdAt;
-
-
-
-  @JsonKey(
-    
     name: r'payoutType',
     required: true,
     includeIfNull: false,
@@ -92,6 +80,18 @@ class EarningDto {
 
 
   final DateTime payoutTimestamp;
+
+
+
+  @JsonKey(
+    
+    name: r'workingTimeInSeconds',
+    required: false,
+    includeIfNull: false,
+  )
+
+
+  final int? workingTimeInSeconds;
 
 
 
@@ -125,9 +125,9 @@ class EarningDto {
     bool operator ==(Object other) => identical(this, other) || other is EarningDto &&
       other.id == id &&
       other.amountInCent == amountInCent &&
-      other.createdAt == createdAt &&
       other.payoutType == payoutType &&
       other.payoutTimestamp == payoutTimestamp &&
+      other.workingTimeInSeconds == workingTimeInSeconds &&
       other.moneroMiningPayout == moneroMiningPayout &&
       other.donationBox == donationBox;
 
@@ -135,9 +135,9 @@ class EarningDto {
     int get hashCode =>
         id.hashCode +
         amountInCent.hashCode +
-        createdAt.hashCode +
         payoutType.hashCode +
         payoutTimestamp.hashCode +
+        workingTimeInSeconds.hashCode +
         moneroMiningPayout.hashCode +
         donationBox.hashCode;
 

@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:bright_impact/api/lib/openapi.dart';
 import 'package:bright_impact/model/donationbox.dart';
 import 'package:bright_impact/state/api_provider_error.dart';
@@ -17,8 +16,7 @@ class DonationboxProvider extends EntityProvider<List<Donationbox>> {
   @override
   Future<ApiResponse<List<Donationbox>>> getFromServer(
       {required int id}) async {
-
-  final api = ApiService.shared.api.getDonationboxApi();
+    final api = ApiService.shared.api.getDonationboxApi();
     final response = await api.getDonationbox(donatorId: _donatorId);
 
     if (response.data == null) {
@@ -39,7 +37,7 @@ class DonationboxProvider extends EntityProvider<List<Donationbox>> {
   Future<ApiProviderError?> registerDonationBox(
       String cuid, String name) async {
     final api = ApiService.shared.api.getDonationboxApi();
-    final dto = DonationboxRegisterDto(cuid: "cuid", name: "name");
+    final dto = DonationboxRegisterDto(cuid: cuid, name: name);
     try {
       final response = await api.registerDonationbox(
           donatorId: _donatorId, donationboxRegisterDto: dto);
@@ -72,16 +70,16 @@ class DonationboxProvider extends EntityProvider<List<Donationbox>> {
   }
 
   Future<ApiProviderError?> registerPowerSupply(
-      String name, String modelNumber, PowersupplyApiConfig apiConfig) async {
-    final api = ApiService.shared.api.getPowerSupplyApi();
-    final dto = PowerSupplyRegisterDto(
-        name: name,
-        modelNumber: modelNumber,
-        apiConfig: apiConfig.toJson(),
-        type: PowerSupplyRegisterDtoTypeEnum.solar);
+      String username, String password, String serialNumber, String cuid) async {
+    final api = ApiService.shared.api.getDonationboxApi();
+    final config = ConfigDto(
+        e3dcUser: username,
+        e3dcPassword: password,
+        e3dcSerial: serialNumber);
+    final dto =
+        DonationboxSendConfigDto(pluginName: "E3DC", cuid: cuid, config: config);
     try {
-      final response = await api.addPowersupply(
-          donatorId: _donatorId, powerSupplyRegisterDto: dto);
+      final response = await api.sendConfig(donationboxSendConfigDto: dto);
 
       if ((response.statusCode ?? 500) >= 300) {
         return ApiProviderError.unknownError;
@@ -113,26 +111,8 @@ class DonationboxProvider extends EntityProvider<List<Donationbox>> {
   static bool isValidSN(String uuid) {
     // Regex zum Überprüfen eines UUID-Formats
     final uuidRegex = RegExp(
-      r'^[A-Za-z0-9]{8,120}$',
+      r'^[A-Za-z0-9]{24}$',
     );
     return uuidRegex.hasMatch(uuid);
   }
-}
-
-class PowersupplyApiConfig {
-  final String url;
-  final String username;
-  final String password;
-
-  PowersupplyApiConfig({
-    required this.url,
-    required this.username,
-    required this.password,
-  });
-
-  String toJson() => jsonEncode({
-        "url": url,
-        "username": username,
-        "password": password,
-      });
 }

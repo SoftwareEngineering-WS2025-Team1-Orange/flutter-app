@@ -9,14 +9,18 @@ import 'package:openapi/api.dart';
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **int** |  | 
-**cuid** | **String** |  | 
 **name** | **String** |  | 
-**lastSolarStatus** | **String** |  | [optional] 
-**earningsLastSuccessfullUpdateAt** | [**DateTime**](DateTime.md) |  | [optional] 
-**earningsLastUpdateSuccessfull** | **bool** |  | 
-**powerSurplus** | **num** |  | [optional] 
-**powerConsumption** | **num** |  | [optional] 
-**powerSupplyId** | **String** |  | [optional] 
+**cuid** | **String** |  | 
+**lastSolarData** | [**LastSolarDataDto**](LastSolarDataDto.md) |  | [optional] 
+**solarDataLastSuccessfulUpdateAt** | [**DateTime**](DateTime.md) |  | [optional] 
+**averageWorkingTimePerDayInSeconds** | **num** |  | [optional] 
+**averageWorkingTimePerDayInSecondsLastUpdateAt** | [**DateTime**](DateTime.md) |  | [optional] 
+**averageIncomePerDayInCent** | **num** |  | [optional] 
+**averageIncomePerDayLastUpdateAt** | [**DateTime**](DateTime.md) |  | [optional] 
+**status** | **String** |  | 
+**solarStatus** | **String** |  | 
+**earningsLastSuccessfulUpdateAt** | [**DateTime**](DateTime.md) |  | [optional] 
+**earningsLastUpdateSuccessful** | **bool** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

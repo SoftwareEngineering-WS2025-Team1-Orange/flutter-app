@@ -72,6 +72,8 @@ Class | Method | HTTP request | Description
 [*DonationApi*](doc/DonationApi.md) | [**donateToProject**](doc/DonationApi.md#donatetoproject) | **POST** /api-donator/donation/donator/{donator_id}/project/{project_id} | 
 [*DonationboxApi*](doc/DonationboxApi.md) | [**getDonationbox**](doc/DonationboxApi.md#getdonationbox) | **GET** /api-donator/donationbox/donator/{donator_id} | 
 [*DonationboxApi*](doc/DonationboxApi.md) | [**registerDonationbox**](doc/DonationboxApi.md#registerdonationbox) | **PUT** /api-donator/donationbox/donator/{donator_id} | 
+[*DonationboxApi*](doc/DonationboxApi.md) | [**sendConfig**](doc/DonationboxApi.md#sendconfig) | **POST** /api-donationbox/sendConfig | 
+[*DonationboxApi*](doc/DonationboxApi.md) | [**sendStatusUpdateRequest**](doc/DonationboxApi.md#sendstatusupdaterequest) | **POST** /api-donationbox/sendStatusUpdateRequest | 
 [*DonationsApi*](doc/DonationsApi.md) | [**getTransactionList**](doc/DonationsApi.md#gettransactionlist) | **GET** /api-donator/transaction/donator/{donator_id} | 
 [*DonatorApi*](doc/DonatorApi.md) | [**deleteDonator**](doc/DonatorApi.md#deletedonator) | **DELETE** /api-donator/donator/{donator_id} | 
 [*DonatorApi*](doc/DonatorApi.md) | [**favoriteNgo**](doc/DonatorApi.md#favoritengo) | **PUT** /api-donator/ngo/{ngo_id}/donator/{donator_id}/favorite | 
@@ -88,6 +90,7 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [ConfigDto](doc/ConfigDto.md)
  - [DonateToNgo201ResponseAllOfProjectDto](doc/DonateToNgo201ResponseAllOfProjectDto.md)
  - [DonateToNgo201ResponseDto](doc/DonateToNgo201ResponseDto.md)
  - [DonateToNgoRequestDto](doc/DonateToNgoRequestDto.md)
@@ -98,6 +101,7 @@ Class | Method | HTTP request | Description
  - [DonationboxBasicDto](doc/DonationboxBasicDto.md)
  - [DonationboxDto](doc/DonationboxDto.md)
  - [DonationboxRegisterDto](doc/DonationboxRegisterDto.md)
+ - [DonationboxSendConfigDto](doc/DonationboxSendConfigDto.md)
  - [DonatorDto](doc/DonatorDto.md)
  - [DonatorRegisterDto](doc/DonatorRegisterDto.md)
  - [DonatorUpdateDto](doc/DonatorUpdateDto.md)
@@ -106,6 +110,9 @@ Class | Method | HTTP request | Description
  - [GetNgoList200ResponseDto](doc/GetNgoList200ResponseDto.md)
  - [GetProjectList200ResponseDto](doc/GetProjectList200ResponseDto.md)
  - [GetTransactionList200ResponseDto](doc/GetTransactionList200ResponseDto.md)
+ - [LastSolarDataConsumptionDto](doc/LastSolarDataConsumptionDto.md)
+ - [LastSolarDataDto](doc/LastSolarDataDto.md)
+ - [LastSolarDataProductionDto](doc/LastSolarDataProductionDto.md)
  - [MoneroMiningPayoutBasicDto](doc/MoneroMiningPayoutBasicDto.md)
  - [NGOBasicDto](doc/NGOBasicDto.md)
  - [NGODto](doc/NGODto.md)
@@ -117,6 +124,7 @@ Class | Method | HTTP request | Description
  - [ProjectDto](doc/ProjectDto.md)
  - [RequestTokenDto](doc/RequestTokenDto.md)
  - [ResponseTokenDto](doc/ResponseTokenDto.md)
+ - [SendStatusUpdateRequestRequestDto](doc/SendStatusUpdateRequestRequestDto.md)
  - [SortTypeDto](doc/SortTypeDto.md)
 
 

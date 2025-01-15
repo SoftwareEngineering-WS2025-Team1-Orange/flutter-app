@@ -47,10 +47,10 @@ class TransactionListPage extends ListPage<Transaction> {
     final title = isDonation ? "Donation" : "Earning";
     final subtitle =
         isDonation ? item.ngoName : (item as Earning).donationboxName;
-    final description = isDonation ? (item.projectName ?? "Spende an Organisation") : "Computing Time (Day)";
+    final description = isDonation ? (item.projectName ?? "Spende an Organisation") : "Innerhalb des Zeitraums";
     final additionalInfo = isDonation
         ? null
-        : "${(item as Earning).calcDuration.inMinutes}m ${item.calcDuration.inSeconds % 60}s";
+        : "${(item as Earning).calcDuration.inHours}h ${item .calcDuration.inMinutes % 60}m ${item.calcDuration.inSeconds % 60}s";
 
     return Padding(
       padding: EdgeInsets.symmetric(

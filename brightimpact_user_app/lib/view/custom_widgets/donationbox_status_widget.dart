@@ -19,6 +19,7 @@ class DonationboxStatusWidget extends StatefulWidget {
 class _DonationBoxStatusWidgetState extends State<DonationboxStatusWidget>
     with WidgetsBindingObserver {
   bool _isScanningForBox = false;
+  late DonationboxProvider provider;
 
   bool _qrCodeDetected(String data, DonationboxProvider provider) {
     try {
@@ -62,12 +63,11 @@ class _DonationBoxStatusWidgetState extends State<DonationboxStatusWidget>
     super.initState();
     WidgetsBinding.instance.addObserver(this);
     // Start cyclic refetching
-    Provider.of<DonationboxProvider>(context, listen: false)
-        .startCyclicRefetch();
+    provider = Provider.of<DonationboxProvider>(context, listen: false);
+    provider.startCyclicRefetch();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final appState = Provider.of<AppState>(context, listen: false);
-      final provider = Provider.of<DonationboxProvider>(context, listen: false);
 
       if (appState.pendingActionRegisterBoxCUID != null) {
         final cuid = appState.pendingActionRegisterBoxCUID!;
@@ -90,23 +90,20 @@ class _DonationBoxStatusWidgetState extends State<DonationboxStatusWidget>
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
     // Stop cyclic refetching
-    Provider.of<DonationboxProvider>(context, listen: false)
-        .stopCyclicRefetch();
+    provider.stopCyclicRefetch();
     super.dispose();
   }
 
   // Tracks current app lifecycle state
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    final donationboxProvider =
-        Provider.of<DonationboxProvider>(context, listen: false);
     // App in active
     if (state == AppLifecycleState.resumed) {
-      donationboxProvider.refetch();
-      donationboxProvider.startCyclicRefetch();
+      provider.refetch();
+      provider.startCyclicRefetch();
       // App not active
     } else if (state == AppLifecycleState.paused) {
-      donationboxProvider.stopCyclicRefetch();
+      provider.stopCyclicRefetch();
     }
   }
 
@@ -166,7 +163,7 @@ class _DonationBoxStatusWidgetState extends State<DonationboxStatusWidget>
     const double secondsForDay = 3600 * 24;
 
     final avgEarningString =
-        "${(box.earningsAvgDayCent / 100).toStringAsFixed(2).replaceAll(".", ",")} €";
+        "${(box.earningsAvgDayCent / 100.0).toStringAsFixed(2).replaceAll(".", ",")} €";
     final activeTimeStr =
         "${(100 * (box.activeTimeEachDaySec ?? 0) / secondsForDay).round()}%";
 
@@ -206,16 +203,16 @@ class _DonationBoxStatusWidgetState extends State<DonationboxStatusWidget>
             Expanded(
                 child: Opacity(
                     opacity:
-                        box.solarStatus != DonationboxSolarStatus.ok ? 0.1 : 1,
+                        box.solarStatus != DonationboxSolarStatus.ok ? 0.25 : 1,
                     child: _buildStatusItem(
-                        "${box.powerSurplusWatt?.toStringAsFixed(0) ?? "--"} Watt",
-                        (box.powerSurplusWatt ?? 0) >= 0
+                        "${box.powerSurplusKiloWatt?.toStringAsFixed(2) ?? "--"} kW",
+                        (box.powerSurplusKiloWatt ?? 0) >= 0
                             ? "Überschuss"
                             : "Defizit",
                         Icons.bolt,
                         context,
                         isActive: isActive && isPowerSupplyOk,
-                        isOnline: isOnline))),
+                        isOnline: isOnline && isPowerSupplyOk))),
             SizedBox(width: 10),
             Expanded(
                 child: _buildStatusItem(
@@ -223,11 +220,11 @@ class _DonationBoxStatusWidgetState extends State<DonationboxStatusWidget>
                     isActive: isActive, isOnline: isOnline)),
           ],
         ),
-        if (box.solarStatus == DonationboxSolarStatus.pending)
+        if (box.solarStatus == DonationboxSolarStatus.pending && isOnline)
           Padding(
               padding: EdgeInsets.only(top: width * 0.07),
               child: Text("Warten auf Solaranlage ...")),
-        if (box.solarStatus == DonationboxSolarStatus.error)
+        if (box.solarStatus == DonationboxSolarStatus.error && isOnline)
           Padding(
               padding: EdgeInsets.only(top: width * 0.07),
               child: Text(

@@ -17,11 +17,6 @@ void main() {
       // TODO
     });
 
-    // DateTime createdAt
-    test('to test the property `createdAt`', () async {
-      // TODO
-    });
-
     // String payoutType
     test('to test the property `payoutType`', () async {
       // TODO
@@ -29,6 +24,11 @@ void main() {
 
     // DateTime payoutTimestamp
     test('to test the property `payoutTimestamp`', () async {
+      // TODO
+    });
+
+    // int workingTimeInSeconds
+    test('to test the property `workingTimeInSeconds`', () async {
       // TODO
     });
 

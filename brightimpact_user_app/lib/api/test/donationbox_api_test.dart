@@ -17,5 +17,15 @@ void main() {
       // TODO
     });
 
+    //Future sendConfig(DonationboxSendConfigDto donationboxSendConfigDto) async
+    test('test sendConfig', () async {
+      // TODO
+    });
+
+    //Future sendStatusUpdateRequest(SendStatusUpdateRequestRequestDto sendStatusUpdateRequestRequestDto) async
+    test('test sendStatusUpdateRequest', () async {
+      // TODO
+    });
+
   });
 }

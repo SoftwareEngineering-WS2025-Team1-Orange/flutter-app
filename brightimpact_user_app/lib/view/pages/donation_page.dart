@@ -99,10 +99,12 @@ class _DonationPageState extends State<DonationPage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: Center(
-                        child: DonationWalletWidget(
-                      amount: appState.donator?.balance ?? 0.0,
-                      darkLayout: true,
-                    )),
+                        child: SizedBox(
+                            width: screenWidth * 0.6,
+                            child: DonationWalletWidget(
+                              amount: appState.donator?.balance ?? 0.0,
+                              darkLayout: true,
+                            ))),
                   ),
                   Spacer(),
                   Padding(

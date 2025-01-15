@@ -25,6 +25,7 @@ class _MyApp extends State<MyApp> {
 
     return MaterialApp(
       title: 'Bright Impact',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         scaffoldBackgroundColor: const Color(0xFF1A2A39),
         primaryColor: primaryColor,

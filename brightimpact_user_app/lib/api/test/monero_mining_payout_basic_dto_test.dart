@@ -12,8 +12,8 @@ void main() {
       // TODO
     });
 
-    // DateTime lastPayoutTimestamp
-    test('to test the property `lastPayoutTimestamp`', () async {
+    // DateTime periodStart
+    test('to test the property `periodStart`', () async {
       // TODO
     });
 

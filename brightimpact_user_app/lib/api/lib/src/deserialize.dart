@@ -1,3 +1,4 @@
+import 'package:openapi/src/model/config_dto.dart';
 import 'package:openapi/src/model/donate_to_ngo201_response_all_of_project_dto.dart';
 import 'package:openapi/src/model/donate_to_ngo201_response_dto.dart';
 import 'package:openapi/src/model/donate_to_ngo_request_dto.dart';
@@ -8,6 +9,7 @@ import 'package:openapi/src/model/donation_response_dto.dart';
 import 'package:openapi/src/model/donationbox_basic_dto.dart';
 import 'package:openapi/src/model/donationbox_dto.dart';
 import 'package:openapi/src/model/donationbox_register_dto.dart';
+import 'package:openapi/src/model/donationbox_send_config_dto.dart';
 import 'package:openapi/src/model/donator_dto.dart';
 import 'package:openapi/src/model/donator_register_dto.dart';
 import 'package:openapi/src/model/donator_update_dto.dart';
@@ -16,6 +18,9 @@ import 'package:openapi/src/model/favorite_project_request_dto.dart';
 import 'package:openapi/src/model/get_ngo_list200_response_dto.dart';
 import 'package:openapi/src/model/get_project_list200_response_dto.dart';
 import 'package:openapi/src/model/get_transaction_list200_response_dto.dart';
+import 'package:openapi/src/model/last_solar_data_consumption_dto.dart';
+import 'package:openapi/src/model/last_solar_data_dto.dart';
+import 'package:openapi/src/model/last_solar_data_production_dto.dart';
 import 'package:openapi/src/model/monero_mining_payout_basic_dto.dart';
 import 'package:openapi/src/model/ngo_basic_dto.dart';
 import 'package:openapi/src/model/ngo_dto.dart';
@@ -26,6 +31,7 @@ import 'package:openapi/src/model/project_basic_dto.dart';
 import 'package:openapi/src/model/project_dto.dart';
 import 'package:openapi/src/model/request_token_dto.dart';
 import 'package:openapi/src/model/response_token_dto.dart';
+import 'package:openapi/src/model/send_status_update_request_request_dto.dart';
 
 final _regList = RegExp(r'^List<(.*)>$');
 final _regSet = RegExp(r'^Set<(.*)>$');
@@ -45,6 +51,8 @@ final _regMap = RegExp(r'^Map<String,(.*)>$');
           return (valueString == 'true' || valueString == '1') as ReturnType;
         case 'double':
           return (value is double ? value : double.parse('$value')) as ReturnType;
+        case 'ConfigDto':
+          return ConfigDto.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'DonateToNgo201ResponseAllOfProjectDto':
           return DonateToNgo201ResponseAllOfProjectDto.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'DonateToNgo201ResponseDto':
@@ -65,6 +73,8 @@ final _regMap = RegExp(r'^Map<String,(.*)>$');
           return DonationboxDto.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'DonationboxRegisterDto':
           return DonationboxRegisterDto.fromJson(value as Map<String, dynamic>) as ReturnType;
+        case 'DonationboxSendConfigDto':
+          return DonationboxSendConfigDto.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'DonatorDto':
           return DonatorDto.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'DonatorRegisterDto':
@@ -81,6 +91,12 @@ final _regMap = RegExp(r'^Map<String,(.*)>$');
           return GetProjectList200ResponseDto.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'GetTransactionList200ResponseDto':
           return GetTransactionList200ResponseDto.fromJson(value as Map<String, dynamic>) as ReturnType;
+        case 'LastSolarDataConsumptionDto':
+          return LastSolarDataConsumptionDto.fromJson(value as Map<String, dynamic>) as ReturnType;
+        case 'LastSolarDataDto':
+          return LastSolarDataDto.fromJson(value as Map<String, dynamic>) as ReturnType;
+        case 'LastSolarDataProductionDto':
+          return LastSolarDataProductionDto.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'MoneroMiningPayoutBasicDto':
           return MoneroMiningPayoutBasicDto.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'NGOBasicDto':
@@ -104,6 +120,8 @@ final _regMap = RegExp(r'^Map<String,(.*)>$');
           return RequestTokenDto.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'ResponseTokenDto':
           return ResponseTokenDto.fromJson(value as Map<String, dynamic>) as ReturnType;
+        case 'SendStatusUpdateRequestRequestDto':
+          return SendStatusUpdateRequestRequestDto.fromJson(value as Map<String, dynamic>) as ReturnType;
         case 'SortTypeDto':
           
           

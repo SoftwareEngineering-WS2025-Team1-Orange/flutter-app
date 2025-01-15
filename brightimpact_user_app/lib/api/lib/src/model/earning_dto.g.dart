@@ -15,7 +15,6 @@ EarningDto _$EarningDtoFromJson(Map<String, dynamic> json) => $checkedCreate(
           requiredKeys: const [
             'id',
             'amountInCent',
-            'createdAt',
             'payoutType',
             'payoutTimestamp',
             'moneroMiningPayout',
@@ -26,12 +25,12 @@ EarningDto _$EarningDtoFromJson(Map<String, dynamic> json) => $checkedCreate(
           id: $checkedConvert('id', (v) => (v as num).toInt()),
           amountInCent:
               $checkedConvert('amountInCent', (v) => (v as num).toInt()),
-          createdAt:
-              $checkedConvert('createdAt', (v) => DateTime.parse(v as String)),
           payoutType: $checkedConvert('payoutType',
               (v) => $enumDecode(_$EarningDtoPayoutTypeEnumEnumMap, v)),
           payoutTimestamp: $checkedConvert(
               'payoutTimestamp', (v) => DateTime.parse(v as String)),
+          workingTimeInSeconds: $checkedConvert(
+              'workingTimeInSeconds', (v) => (v as num?)?.toInt()),
           moneroMiningPayout: $checkedConvert(
               'moneroMiningPayout',
               (v) => MoneroMiningPayoutBasicDto.fromJson(
@@ -47,9 +46,10 @@ Map<String, dynamic> _$EarningDtoToJson(EarningDto instance) =>
     <String, dynamic>{
       'id': instance.id,
       'amountInCent': instance.amountInCent,
-      'createdAt': instance.createdAt.toIso8601String(),
       'payoutType': _$EarningDtoPayoutTypeEnumEnumMap[instance.payoutType]!,
       'payoutTimestamp': instance.payoutTimestamp.toIso8601String(),
+      if (instance.workingTimeInSeconds case final value?)
+        'workingTimeInSeconds': value,
       'moneroMiningPayout': instance.moneroMiningPayout.toJson(),
       'donationBox': instance.donationBox.toJson(),
     };

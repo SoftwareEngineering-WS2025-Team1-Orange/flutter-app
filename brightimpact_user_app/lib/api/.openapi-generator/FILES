@@ -4,6 +4,7 @@ README.md
 analysis_options.yaml
 build.yaml
 doc/AuthApi.md
+doc/ConfigDto.md
 doc/DonateToNgo201ResponseAllOfProjectDto.md
 doc/DonateToNgo201ResponseDto.md
 doc/DonateToNgoRequestDto.md
@@ -16,6 +17,7 @@ doc/DonationboxApi.md
 doc/DonationboxBasicDto.md
 doc/DonationboxDto.md
 doc/DonationboxRegisterDto.md
+doc/DonationboxSendConfigDto.md
 doc/DonationsApi.md
 doc/DonatorApi.md
 doc/DonatorDto.md
@@ -26,6 +28,9 @@ doc/FavoriteProjectRequestDto.md
 doc/GetNgoList200ResponseDto.md
 doc/GetProjectList200ResponseDto.md
 doc/GetTransactionList200ResponseDto.md
+doc/LastSolarDataConsumptionDto.md
+doc/LastSolarDataDto.md
+doc/LastSolarDataProductionDto.md
 doc/MoneroMiningPayoutBasicDto.md
 doc/NGOApi.md
 doc/NGOBasicDto.md
@@ -40,6 +45,7 @@ doc/ProjectCategoryDto.md
 doc/ProjectDto.md
 doc/RequestTokenDto.md
 doc/ResponseTokenDto.md
+doc/SendStatusUpdateRequestRequestDto.md
 doc/SortTypeDto.md
 lib/openapi.dart
 lib/src/api.dart
@@ -57,6 +63,7 @@ lib/src/auth/basic_auth.dart
 lib/src/auth/bearer_auth.dart
 lib/src/auth/oauth.dart
 lib/src/deserialize.dart
+lib/src/model/config_dto.dart
 lib/src/model/donate_to_ngo201_response_all_of_project_dto.dart
 lib/src/model/donate_to_ngo201_response_dto.dart
 lib/src/model/donate_to_ngo_request_dto.dart
@@ -67,6 +74,7 @@ lib/src/model/donation_response_dto.dart
 lib/src/model/donationbox_basic_dto.dart
 lib/src/model/donationbox_dto.dart
 lib/src/model/donationbox_register_dto.dart
+lib/src/model/donationbox_send_config_dto.dart
 lib/src/model/donator_dto.dart
 lib/src/model/donator_register_dto.dart
 lib/src/model/donator_update_dto.dart
@@ -75,6 +83,9 @@ lib/src/model/favorite_project_request_dto.dart
 lib/src/model/get_ngo_list200_response_dto.dart
 lib/src/model/get_project_list200_response_dto.dart
 lib/src/model/get_transaction_list200_response_dto.dart
+lib/src/model/last_solar_data_consumption_dto.dart
+lib/src/model/last_solar_data_dto.dart
+lib/src/model/last_solar_data_production_dto.dart
 lib/src/model/monero_mining_payout_basic_dto.dart
 lib/src/model/ngo_basic_dto.dart
 lib/src/model/ngo_dto.dart
@@ -86,9 +97,11 @@ lib/src/model/project_category_dto.dart
 lib/src/model/project_dto.dart
 lib/src/model/request_token_dto.dart
 lib/src/model/response_token_dto.dart
+lib/src/model/send_status_update_request_request_dto.dart
 lib/src/model/sort_type_dto.dart
 pubspec.yaml
 test/auth_api_test.dart
+test/config_dto_test.dart
 test/donate_to_ngo201_response_all_of_project_dto_test.dart
 test/donate_to_ngo201_response_dto_test.dart
 test/donate_to_ngo_request_dto_test.dart
@@ -101,6 +114,7 @@ test/donationbox_api_test.dart
 test/donationbox_basic_dto_test.dart
 test/donationbox_dto_test.dart
 test/donationbox_register_dto_test.dart
+test/donationbox_send_config_dto_test.dart
 test/donations_api_test.dart
 test/donator_api_test.dart
 test/donator_dto_test.dart
@@ -111,6 +125,9 @@ test/favorite_project_request_dto_test.dart
 test/get_ngo_list200_response_dto_test.dart
 test/get_project_list200_response_dto_test.dart
 test/get_transaction_list200_response_dto_test.dart
+test/last_solar_data_consumption_dto_test.dart
+test/last_solar_data_dto_test.dart
+test/last_solar_data_production_dto_test.dart
 test/monero_mining_payout_basic_dto_test.dart
 test/ngo_api_test.dart
 test/ngo_basic_dto_test.dart
@@ -125,4 +142,5 @@ test/project_category_dto_test.dart
 test/project_dto_test.dart
 test/request_token_dto_test.dart
 test/response_token_dto_test.dart
+test/send_status_update_request_request_dto_test.dart
 test/sort_type_dto_test.dart

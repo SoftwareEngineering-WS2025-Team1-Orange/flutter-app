@@ -14,7 +14,7 @@ class Donator {
       : firstname = dto.firstName,
         lastname = dto.lastName,
         id = dto.id,
-        balance = dto.balance.toDouble(),
+        balance = dto.balance.toDouble() / 100.0,
         email = dto.email;
 
   // Serialisieren in JSON

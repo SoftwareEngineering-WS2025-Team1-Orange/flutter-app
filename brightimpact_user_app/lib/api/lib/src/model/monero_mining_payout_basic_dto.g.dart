@@ -14,13 +14,13 @@ MoneroMiningPayoutBasicDto _$MoneroMiningPayoutBasicDtoFromJson(
       ($checkedConvert) {
         $checkKeys(
           json,
-          requiredKeys: const ['timestamp', 'lastPayoutTimestamp'],
+          requiredKeys: const ['timestamp', 'periodStart'],
         );
         final val = MoneroMiningPayoutBasicDto(
           timestamp:
               $checkedConvert('timestamp', (v) => DateTime.parse(v as String)),
-          lastPayoutTimestamp: $checkedConvert(
-              'lastPayoutTimestamp', (v) => DateTime.parse(v as String)),
+          periodStart: $checkedConvert(
+              'periodStart', (v) => DateTime.parse(v as String)),
         );
         return val;
       },
@@ -30,5 +30,5 @@ Map<String, dynamic> _$MoneroMiningPayoutBasicDtoToJson(
         MoneroMiningPayoutBasicDto instance) =>
     <String, dynamic>{
       'timestamp': instance.timestamp.toIso8601String(),
-      'lastPayoutTimestamp': instance.lastPayoutTimestamp.toIso8601String(),
+      'periodStart': instance.periodStart.toIso8601String(),
     };

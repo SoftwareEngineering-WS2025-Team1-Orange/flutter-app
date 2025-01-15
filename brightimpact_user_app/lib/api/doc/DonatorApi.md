@@ -239,7 +239,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **registerDonator**
-> int registerDonator(donatorRegisterDto)
+> DonatorDto registerDonator(donatorRegisterDto)
 
 
 
@@ -268,7 +268,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-**int**
+[**DonatorDto**](DonatorDto.md)
 
 ### Authorization
 

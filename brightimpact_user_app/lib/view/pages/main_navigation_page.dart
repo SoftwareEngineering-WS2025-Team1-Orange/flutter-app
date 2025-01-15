@@ -1,4 +1,6 @@
+import 'package:bright_impact/model/project.dart';
 import 'package:bright_impact/state/app_state.dart';
+import 'package:bright_impact/state/list_provider/list_provider.dart';
 import 'package:bright_impact/view/custom_widgets/donation_wallet_widget.dart';
 import 'package:bright_impact/view/pages/home_page.dart';
 import 'package:bright_impact/view/pages/input_pages/others/edit_donator_profile_page.dart';
@@ -53,6 +55,7 @@ class _MainNavigationPageState extends State<MainNavigationPage>
     // When app gets active again
     if (state == AppLifecycleState.resumed) {
       appState.donatorProvider.refetch();
+      ListProvider.refreshAllListPages<Project>();
     }
   }
 

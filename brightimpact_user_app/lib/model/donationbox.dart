@@ -7,7 +7,7 @@ class Donationbox {
   final String name;
   final DonationboxStatus status;
   final DonationboxSolarStatus solarStatus;
-  final double? powerSurplusWatt;
+  final double? powerSurplusKiloWatt;
   final double? activeTimeEachDaySec;
   final double earningsAvgDayCent;
 
@@ -19,25 +19,59 @@ class Donationbox {
     this.solarStatus,
     this.activeTimeEachDaySec,
     this.earningsAvgDayCent,
-    this.powerSurplusWatt,
+    this.powerSurplusKiloWatt,
   );
 
   Donationbox.fromDto(DonationboxDto dto)
       : id = dto.id,
         cuid = dto.cuid,
         name = dto.name,
-        status = DonationboxStatus.working,
-        solarStatus = DonationboxSolarStatus.ok,
-        powerSurplusWatt = dto.powerConsumption?.toDouble(),
-        activeTimeEachDaySec = 20439,
-        earningsAvgDayCent = 6;
+        status = DonationboxStatus.fromDto(dto.status),
+        solarStatus = DonationboxSolarStatus.fromDto(dto.solarStatus),
+        powerSurplusKiloWatt = dto.lastSolarData?.production.grid == null ? null : -dto.lastSolarData!.production.grid!/1000.0,
+        activeTimeEachDaySec =
+            dto.averageWorkingTimePerDayInSeconds?.toDouble(),
+        earningsAvgDayCent = dto.averageIncomePerDayInCent?.toDouble() ?? 0;
 }
 
 enum DonationboxSolarStatus {
   noConfig,
   pending,
   error,
-  ok,
+  ok;
+
+  factory DonationboxSolarStatus.fromDto(DonationboxDtoSolarStatusEnum dto) {
+    switch (dto) {
+      case DonationboxDtoSolarStatusEnum.ok:
+        return DonationboxSolarStatus.ok;
+      case DonationboxDtoSolarStatusEnum.error:
+        return DonationboxSolarStatus.error;
+      case DonationboxDtoSolarStatusEnum.pending:
+        return DonationboxSolarStatus.pending;
+      case DonationboxDtoSolarStatusEnum.uninitialized:
+        return DonationboxSolarStatus.noConfig;
+    }
+  }
 }
 
-enum DonationboxStatus { connected, working, disconnected }
+enum DonationboxStatus {
+  connected,
+  working,
+  disconnected,
+  uninitialized,
+  unknownStatusCode;
+
+  factory DonationboxStatus.fromDto(DonationboxDtoStatusEnum dto) {
+    switch (dto) {
+      case DonationboxDtoStatusEnum.connected:
+        return DonationboxStatus.connected;
+      case DonationboxDtoStatusEnum.working:
+        return DonationboxStatus.working;
+      case DonationboxDtoStatusEnum.unknownStatusCode:
+      case DonationboxDtoStatusEnum.disconnected:
+        return DonationboxStatus.disconnected;
+      case DonationboxDtoStatusEnum.uninitialized:
+        return DonationboxStatus.uninitialized;
+    }
+  }
+}

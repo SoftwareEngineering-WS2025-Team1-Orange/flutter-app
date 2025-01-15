@@ -20,7 +20,7 @@ class MoneroMiningPayoutBasicDto {
 
     required  this.timestamp,
 
-    required  this.lastPayoutTimestamp,
+    required  this.periodStart,
   });
 
   @JsonKey(
@@ -37,13 +37,13 @@ class MoneroMiningPayoutBasicDto {
 
   @JsonKey(
     
-    name: r'lastPayoutTimestamp',
+    name: r'periodStart',
     required: true,
     includeIfNull: false,
   )
 
 
-  final DateTime lastPayoutTimestamp;
+  final DateTime periodStart;
 
 
 
@@ -52,12 +52,12 @@ class MoneroMiningPayoutBasicDto {
     @override
     bool operator ==(Object other) => identical(this, other) || other is MoneroMiningPayoutBasicDto &&
       other.timestamp == timestamp &&
-      other.lastPayoutTimestamp == lastPayoutTimestamp;
+      other.periodStart == periodStart;
 
     @override
     int get hashCode =>
         timestamp.hashCode +
-        lastPayoutTimestamp.hashCode;
+        periodStart.hashCode;
 
   factory MoneroMiningPayoutBasicDto.fromJson(Map<String, dynamic> json) => _$MoneroMiningPayoutBasicDtoFromJson(json);
 
