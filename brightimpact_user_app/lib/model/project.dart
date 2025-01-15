@@ -9,8 +9,8 @@ class Project {
   final int ngoId;
   final String ngoName;
   final bool isFavorite;
-  final num fundraisingGoal;
-  final num fundraisingCurrent;
+  final double fundraisingGoal;
+  final double fundraisingCurrent;
   final DateTime targetDate;
   final DateTime createdAt;
   final bool fundraisingClosed;
@@ -44,8 +44,8 @@ class Project {
         ngoId = dto.ngo.id,
         ngoName = dto.ngo.name,
         isFavorite = dto.isFavorite,
-        fundraisingGoal = dto.fundraisingGoal,
-        fundraisingCurrent = dto.fundraisingCurrent,
+        fundraisingGoal = dto.fundraisingGoal.toDouble() / 100.0,
+        fundraisingCurrent = dto.fundraisingCurrent.toDouble() / 100.0,
         targetDate = dto.targetDate,
         createdAt = dto.createdAt,
         fundraisingClosed = dto.fundraisingClosed,
